@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  accountName: {
+  user: {
     type: String,
     require: true,
     unique: true,
   },
   typeofUser: {
     type: String,
-    enum: ["Admin", "Employee", "Customer"],
-    default: "Employee",
+    enum: ["Admin", "User"],
+    default: "User",
   },
   gender: {
     type: String,
@@ -26,10 +26,13 @@ const userSchema = new Schema({
     type: String,
     require: true,
   },
-  lastName: { type: String, maxlength: 100 },
-  firstName: { type: String, maxlength: 100 },
+  name: { type: String, maxlength: 100 },
   birthDate: { type: Date },
   images: { type: String, maxlength: 255 },
+  createAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 module.exports = mongoose.model("Users", userSchema);
