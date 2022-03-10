@@ -11,9 +11,6 @@ const dbConnect = async () => {
 
     console.log("mongodb connected!");
 
-
-
-    
   } catch (error) {
     console.log(error.message);
     process.exit(1);
@@ -31,8 +28,10 @@ app.use(express.json());
 app.use(bodyParser.json()); // parse application/json
 app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
 
+
+
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Đồ án tốt nghiệp !");
 });
 
 app.listen(5000, () => {
