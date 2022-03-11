@@ -18,7 +18,7 @@ router.post("/register", async (req, res) => {
 
   try {
     const userName = await Users.findOne({ user });
-
+    console.log(userName);
     if (userName)
         return res.status(400).json({
             success: false,
@@ -37,17 +37,64 @@ router.post("/register", async (req, res) => {
                             });
 
     await newUser.save();
-    const accessToken = jwt.sign({userId: newUser._id}, process.env.ACCESS_TOKEN_SECRET)
+    const accessToken = jwt.sign({userId: newUser._id}, process.env.ACCESS_TOKEN_SECRET);
 
     res.json({
         success: true,
         message: " user created successfully ",
         accessToken
-    })
+    });
   } catch (error) {
-    console.log('error')
+    console.log(error)
+    res.status(500).json({
+      success: false,
+      message: "error!!!!"
+    })
   }
 });
+
+//login
+router.post('/login', async(req, res) => {
+  const {user, pass} = req.body;
+  if (!user || !pass)
+    return res.status(400).json({
+      success: false,
+      message: "user or pass trong ",
+    });
+
+  try {
+    const userName = await Users.findOne({user});
+    
+    if(!userName)
+      return res.status(400).json({
+        success: false,
+        message: "tai khoan khong co ton tai"
+      })
+    
+    const passValid = await argon2.verify(userName.pass, pass);
+    if(!passValid)
+      return res.status(400).json({
+        success: false,
+        message: "mat khau or tai khoan k dung"
+      })
+
+    //all good -> return token
+    const accessToken = jwt.sign({userId: userName._id}, process.env.ACCESS_TOKEN_SECRET);
+
+    res.json({
+        success: true,
+        message: " login successfully ",
+        accessToken
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "error"
+    })
+  }
+})
 
 
 module.exports = router
