@@ -6,11 +6,15 @@ const videoSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Users",
   },
-  videoTitleName: { type: String, maxlength: 255 },
+  playlistID: {
+    type: Schema.Types.ObjectId,
+    ref: "Playlists"
+  },
+  nameVideo: { type: String, maxlength: 255 },
   linkVideo: { type: String, maxlength: 255 },
-  comment: {
-      type: Schema.Types.ObjectId,
-      ref:"Comments"
+  createAt: {
+    type: Date,
+    default: Date.now
   }
 });
 
