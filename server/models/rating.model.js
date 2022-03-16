@@ -10,7 +10,11 @@ const ratingSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Playlists",
   },
-  ratingList: { type: Number },
+  rating: { type: Number },
+  createAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("Ratings", videoSchema);
