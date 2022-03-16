@@ -29,6 +29,11 @@ const userSchema = new Schema({
   name: { type: String, maxlength: 100 },
   birthDate: { type: Date },
   images: { type: String, maxlength: 255 },
+  status: {
+    type: String,
+    enum: ["Normal", "Blocked"],
+    default: "Normal",
+  },
   createAt: {
     type: Date,
     default: Date.now
