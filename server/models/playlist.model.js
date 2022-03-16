@@ -7,13 +7,15 @@ const playlistSchema = new Schema({
     ref: "Users",
   },
   playlistName: { type: String, maxlength: 255 },
-  video: {
-      type: Schema.Types.ObjectId,
-      ref: "Videos"
+  preview: { type: String, maxlength: 255 },
+  status: {
+    type: String,
+    enum: ["Pending", "Accept", "Refuse"],
+    default: "Pending",
   },
-  rating:{
-    type: Schema.Types.ObjectId,
-    ref: "Rating"
+  createAt: {
+    type: Date,
+    default: Date.now
   }
 });
 
