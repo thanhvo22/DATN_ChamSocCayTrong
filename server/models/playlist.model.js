@@ -13,10 +13,15 @@ const playlistSchema = new Schema({
     enum: ["Pending", "Accept", "Refuse"],
     default: "Pending",
   },
+  videos: [
+    {
+      video_id: { type: schema.Types.ObjectId, ref: "Videos" },
+    },
+  ],
   createAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-module.exports = mongoose.model('Playlists', playlistSchema);
+module.exports = mongoose.model("Playlists", playlistSchema);
