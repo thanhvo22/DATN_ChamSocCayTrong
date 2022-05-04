@@ -10,6 +10,7 @@ const cookieMiddleWare = require ("./middlewares/cookie.middleware");
 const authRoute = require("./routes/auth.route");
 const userRoute = require("./routes/user.route");
 const categoryRoute = require("./routes/category.route");
+const playlistRoute = require("./routes/playlist.route");
 
 const app = express();
 db.connect();
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/category", categoryRoute);
+app.use("/api/v1/playlist", playlistRoute);
 
 app.listen(5000, () => {
   console.log(`Example app listening on http://localhost:5000`);

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const playlistSchema = new Schema({
   userID: {
@@ -15,7 +15,7 @@ const playlistSchema = new Schema({
   },
   videos: [
     {
-      video_id: { type: schema.Types.ObjectId, ref: "Videos" },
+      video_id: { type: Schema.Types.ObjectId, ref: "Videos" },
     },
   ],
   createAt: {
