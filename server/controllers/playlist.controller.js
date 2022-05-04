@@ -1,6 +1,12 @@
 import playlistModel from "../models/playlist.model";
 
 export const playlistController = {
+    getPlayListForSharer: async(req, res) => {
+        const userID = req.signedCookies.cookie_id;
+        const playList = await playlistModel.findById(userID);
+        res.json(playList);
+    },
+
   getAllPlayList: async (req, res) => {
     try {
       const playLists = await playlistModel.find();
@@ -42,34 +48,34 @@ export const playlistController = {
         playlist,
       });
     } catch (error) {
-        res.json({
-            message: error
-        })
+      res.json({
+        message: error,
+      });
     }
   },
   putPlayList: async (req, res) => {
-      try {
-          const id = req.params.id;
-          const {playlistName, preview} = req.body;
-          const playlist = await playlistModel.findByIdAndUpdate(id,{
-              playlistName,
-              preview
-          });
-          return res.json({
-              message: "edit play list successfully",
-              playlist
-          })
-      } catch (error) {
-          res.json({
-              message: error
-          })
-      }
-  },
-  deletePlayList: async(req, res) => {
+    try {
       const id = req.params.id;
-      await playlistModel.findByIdAndRemove(id);
+      const { playlistName, preview } = req.body;
+      const playlist = await playlistModel.findByIdAndUpdate(id, {
+        playlistName,
+        preview,
+      });
       return res.json({
-          message: "delete playlist success fully"
-      })
+        message: "edit play list successfully",
+        playlist,
+      });
+    } catch (error) {
+      res.json({
+        message: error,
+      });
+    }
+  },
+  deletePlayList: async (req, res) => {
+    const id = req.params.id;
+    await playlistModel.findByIdAndRemove(id);
+    return res.json({
+      message: "delete playlist success fully",
+    });
   },
 };

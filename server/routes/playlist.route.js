@@ -3,6 +3,7 @@ const router = express.Router();
 import { playlistController } from '../controllers/playlist.controller';
 
 router.get("/", playlistController.getAllPlayList);
+router.get("/for-you", playlistController.getPlayListForSharer);
 router.get("/:id", playlistController.getPlayListID);
 router.post("/create", playlistController.postCreatePlayList);
 router.put("/edit/:id", playlistController.putPlayList);
