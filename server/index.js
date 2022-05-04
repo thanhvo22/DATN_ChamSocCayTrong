@@ -1,11 +1,12 @@
 require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const db = require("./connect");
-const cookieMiddleWare = require("./middlewares/cookie.middleware");
+const cookieMiddleWare = require ("./middlewares/cookie.middleware");
 const authRoute = require("./routes/auth.route");
 const userRoute = require("./routes/user.route");
 const categoryRoute = require("./routes/category.route");
@@ -24,8 +25,8 @@ app.get("/", (req, res) => {
   res.send("Đồ án tốt nghiệp !");
 });
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/user", cookieMiddleWare, userRoute);
-app.use("/api/v1/category", cookieMiddleWare, categoryRoute);
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/category", categoryRoute);
 
 app.listen(5000, () => {
   console.log(`Example app listening on http://localhost:5000`);

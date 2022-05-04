@@ -1,11 +1,11 @@
 import playlistModel from "../models/playlist.model";
 
 export const playlistController = {
-    getPlayListForSharer: async(req, res) => {
-        const userID = req.signedCookies.cookie_id;
-        const playList = await playlistModel.findById(userID);
-        res.json(playList);
-    },
+  getPlayListForSharer: async (req, res) => {
+    const userID = req.signedCookies.cookie_id;
+    const playList = await playlistModel.findById(userID);
+    res.json(playList);
+  },
 
   getAllPlayList: async (req, res) => {
     try {
