@@ -8,7 +8,7 @@ module.exports.getPlayListForSharer = async (req, res) => {
 
 module.exports.getAllPlayList = async (req, res) => {
   try {
-    const playLists = await playlistModel.find();
+    const playLists = await playlistModel.find().populate("videos.video_id");
     return res.json({
       message: "get All play list",
       playLists,
