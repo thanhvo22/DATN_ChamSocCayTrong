@@ -8,6 +8,9 @@ const authRoute = require("./routes/v1/auth.route");
 const userRoute = require("./routes/v1/user.route");
 const categoryRoute = require("./routes/v1/category.route");
 const playlistRoute = require("./routes/v1/playlist.route");
+const videoRoute = require("./routes/v1/video.route");
+const commentRoute = require("./routes/v1/comment.route");
+const rateRoute = require("./routes/v1/rate.route")
 
 const app = express();
 
@@ -22,6 +25,9 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/category", categoryRoute);
-app.use("/api/v1/playlist", playlistRoute);
+app.use("/api/v1/playlists", playlistRoute);
+app.use("/api/v1/videos", videoRoute);
+app.use("/api/v1/comments", commentRoute);
+app.use("/api/v1/rates", rateRoute);
 
 module.exports = app;
