@@ -6,9 +6,9 @@ const commentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Users",
   },
-  videoID: {
+  playlistID: {
     type: Schema.Types.ObjectId,
-    ref: "Videos"
+    ref: "Playlists"
   },
   comment: { type: String, maxlength: 255 },
   createAt: {
