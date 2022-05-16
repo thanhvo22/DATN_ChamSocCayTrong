@@ -10,7 +10,7 @@ const categoryRoute = require("./routes/v1/category.route");
 const playlistRoute = require("./routes/v1/playlist.route");
 const videoRoute = require("./routes/v1/video.route");
 const commentRoute = require("./routes/v1/comment.route");
-const rateRoute = require("./routes/v1/rate.route")
+const rateRoute = require("./routes/v1/rating.route");
 
 const app = express();
 
