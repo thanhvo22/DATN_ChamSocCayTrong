@@ -11,6 +11,7 @@ const playlistRoute = require("./routes/v1/playlist.route");
 const videoRoute = require("./routes/v1/video.route");
 const commentRoute = require("./routes/v1/comment.route");
 const rateRoute = require("./routes/v1/rating.route");
+const savedListRoute = require("./routes/v1/savedList.route");
 
 const app = express();
 
@@ -29,5 +30,6 @@ app.use("/api/v1/playlists", playlistRoute);
 app.use("/api/v1/videos", videoRoute);
 app.use("/api/v1/comments", commentRoute);
 app.use("/api/v1/rates", rateRoute);
+app.use("/api/v1/savedlist", savedListRoute);
 
 module.exports = app;

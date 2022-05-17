@@ -18,6 +18,7 @@ const playlistSchema = new Schema({
       video_id: { type: Schema.Types.ObjectId, ref: "Videos" },
     },
   ],
+  rating: {type:Number},
   createAt: {
     type: Date,
     default: Date.now,
