@@ -6,7 +6,7 @@ const cookieMiddleWare = function (req, res, next) {
   }
   // return res.json("cookie k ton tai, vui long dang nhap lai ");
   //   return res.redirect("auth/login");
-  return res.json({ message: "chuaw cos cookie, dang nhap di :))" });
+  return res.json({ message: "Login di bro :))" });
 };
 
-exports = {cookieMiddleWare}
+module.exports = cookieMiddleWare

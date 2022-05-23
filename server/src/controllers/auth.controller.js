@@ -96,3 +96,9 @@ module.exports.postLogin = async (req, res) => {
     });
   }
 };
+
+module.exports.deleteLogin = (req, res) => {
+  res.clearCookie("cookie_id");
+  // res.redirect("/auth/login");
+  res.json({message:`logout successfully`})
+};

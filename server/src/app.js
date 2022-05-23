@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
-const cookieMiddleWare = require ("./middlewares/cookie.middleware");
+const cookieMiddleWare = require("./middlewares/cookie.middleware");
 const authRoute = require("./routes/v1/auth.route");
 const userRoute = require("./routes/v1/user.route");
 const categoryRoute = require("./routes/v1/category.route");
@@ -24,12 +24,12 @@ app.get("/", (req, res) => {
   res.send("Đồ án tốt nghiệp !");
 });
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/user", userRoute);
+app.use("/api/v1/user", cookieMiddleWare, userRoute);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/playlists", playlistRoute);
 app.use("/api/v1/videos", videoRoute);
-app.use("/api/v1/comments", commentRoute);
-app.use("/api/v1/rates", rateRoute);
-app.use("/api/v1/savedlist", savedListRoute);
+app.use("/api/v1/comments", cookieMiddleWare, commentRoute);
+app.use("/api/v1/rates", cookieMiddleWare, rateRoute);
+app.use("/api/v1/savedlist", cookieMiddleWare, savedListRoute);
 
 module.exports = app;
