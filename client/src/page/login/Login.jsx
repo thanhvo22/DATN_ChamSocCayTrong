@@ -1,41 +1,64 @@
-import { useContext, useRef } from "react";
 import "./login.css";
-import { CircularProgress } from "@material-ui/core";
+
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+
+import axios from "axios";
 
 export default function Login() {
+  const [user, setUser] = useState("");
+  const [pass, setPass] = useState("");
+  let navigate = useNavigate();
+  const onFormSubmit = async (event) => {
+    event.preventDefault();
+    await axios
+      .post("http://localhost:5000/api/v1/auth/login", {
+        user,
+        pass,
+      })
+      .then((res) => {
+        // console.log(res);
+        navigate("/");
+        localStorage.setItem("user", res.data.userName._id);
+      });
+  };
   return (
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
           <h3 className="loginLogo">V.V.T Web</h3>
           <span className="loginDesc">
-          Đăng nhập để xem các khóa học hướng dẫn chăm sóc cây trồng, hoặc chia sẻ khóa học chăm sóc cây trồng cho mọi người nào!!
+            Đăng nhập để xem các khóa học hướng dẫn chăm sóc cây trồng, hoặc
+            chia sẻ khóa học chăm sóc cây trồng cho mọi người nào!!
           </span>
         </div>
         <div className="loginRight">
-          <form className="loginBox">
+          <form className="loginBox" onSubmit={onFormSubmit}>
             <input
-              placeholder="Email"
-              type="email"
+              placeholder="User"
+              type="user"
               required
               className="loginInput"
+              onChange={(e) => setUser(e.target.value)}
             />
             <input
               placeholder="Password"
               type="password"
               required
-              minLength="6"
+              minLength="4"
               className="loginInput"
+              onChange={(e) => setPass(e.target.value)}
             />
             <button className="loginButton" type="submit">
-              <CircularProgress color="white" size="20px" />
-              "Log In"
+              Log In
             </button>
             <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton">
-              <CircularProgress color="white" size="20px" />
-              "Create a New Account"
-            </button>
+            <Link to="/register">
+              <button className="loginRegisterButton">
+                Create a New Account
+              </button>
+            </Link>
           </form>
         </div>
       </div>
