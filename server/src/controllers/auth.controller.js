@@ -4,7 +4,7 @@ require("dotenv").config();
 const Users = require("../models/user.model");
 
 module.exports.postRegister = async (req, res) => {
-  const { user, pass, gender, email, birthDate, name } = req.body;
+  const { user, pass, passAgain, gender, email, birthDate, name } = req.body;
 
   if (!user || !pass)
     return res.status(400).json({
@@ -20,7 +20,11 @@ module.exports.postRegister = async (req, res) => {
         success: false,
         message: "user da ton tai",
       });
-
+    if(passAgain!=pass){
+      return res.status(403).json({
+        message: "pass nhap lai chua dung, vui long thu lai"
+      })
+    }
     const hashedPass = await argon2.hash(pass);
     const newUser = new Users({
       user,
@@ -41,6 +45,7 @@ module.exports.postRegister = async (req, res) => {
       success: true,
       message: " user created successfully ",
       accessToken,
+      newUser
     });
   } catch (error) {
     console.log(error);
