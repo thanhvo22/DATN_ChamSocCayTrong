@@ -1,16 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React from "react";
-import Topbar from "../../components/topbar/Topbar";
+// import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
-// import Login from "./pages/login/Login";
-// import Register from "./pages/register/Register";
-// import DashboardApp from "./pages/dashboard/DashboardApp";
+
+import "../../App.css";
+import Topbar from "../../components/topbar/Topbar";
+// import UserList from "../userList/UserList";
 
 export default function DashboardApp() {
   return (
     <div>
+      <Topbar />
       <div className="container">
         <Sidebar />
+        <h1>Welcome to admin home page</h1>
       </div>
     </div>
   );
