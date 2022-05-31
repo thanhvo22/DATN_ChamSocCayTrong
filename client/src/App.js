@@ -7,6 +7,7 @@ import User from "./pages/user/User";
 import "./App.css";
 import Home from './pages/home/Home';
 import NewUser from './pages/newUser/NewUser';
+import AdminPlayLists from "./pages/adminPlayLists/AdminPlayLists";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/admin/users" element={<UserList />} />
         <Route exact path="/admin/user/:userId" element={<User />} />
         <Route exact path="/admin/users/newUser" element={<NewUser />} />
+        <Route exact path="/admin/playlists" element={<AdminPlayLists />} />
       </Routes>
       {/* <div className="others">other pages</div> */}
     </Router>
