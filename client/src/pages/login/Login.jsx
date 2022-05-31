@@ -3,6 +3,7 @@ import "./login.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+// import {Cookie} from "js-cookie";
 
 import axios from "axios";
 
@@ -18,9 +19,10 @@ export default function Login() {
         pass,
       })
       .then((res) => {
-        // console.log(res);
-        navigate("/");
-        localStorage.setItem("user", res.data.userName._id);
+        // console.log(res.data);
+        navigate("/admin");
+        localStorage.setItem("userId", res.data.accessToken);
+        
       });
   };
   return (
