@@ -6,6 +6,8 @@ const userSchema = new Schema({
     type: String,
     require: true,
     unique: true,
+    min: 6,
+    max: 20
   },
   typeofUser: {
     type: String,
@@ -21,12 +23,16 @@ const userSchema = new Schema({
     type: String,
     require: true,
     unique: true,
+    min: 24,
+    max: 40
   },
   pass: {
     type: String,
     require: true,
+    min: 6,
+    max: 30
   },
-  name: { type: String, maxlength: 100 },
+  name: { type: String, maxlength: 100, min: 7 },
   birthDate: { type: Date },
   images: { type: String, maxlength: 255 },
   status: {
