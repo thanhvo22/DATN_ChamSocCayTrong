@@ -1,5 +1,5 @@
 const rateModel = require("../models/rating.model");
-const playListModel = require("../models/playlist.model");
+const playListModel = require("../models/playlists.model");
 
 module.exports.getRates = async (req, res) => {
   const rates = await rateModel.find();

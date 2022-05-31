@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const playlistController = require("../../controllers/playlist.controller");
+const playlistController = require("../../controllers/playlists.controller");
 
 //getplaylist for sharers
 router.get("/for-you", playlistController.getPlayListForSharer);

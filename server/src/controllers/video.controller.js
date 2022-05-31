@@ -1,5 +1,5 @@
 const videoModel = require("../models/video.model");
-const playlistModel = require("../models/playlist.model");
+const playlistModel = require("../models/playlists.model");
 
 module.exports.getVideos = async (req, res) => {
   //   const userID = req.signedCookies.cookie_id;

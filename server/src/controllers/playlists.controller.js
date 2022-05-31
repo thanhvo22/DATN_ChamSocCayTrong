@@ -1,4 +1,4 @@
-const playlistModel = require("../models/playlist.model");
+const playlistModel = require("../models/playlists.model");
 
 module.exports.getPlayListForSharer = async (req, res) => {
   const userID = req.signedCookies.cookie_id;
@@ -8,7 +8,7 @@ module.exports.getPlayListForSharer = async (req, res) => {
 
 module.exports.getAllPlayList = async (req, res) => {
   try {
-    const playLists = await playlistModel.find().populate("videos.video_id");
+    const playLists = await playlistModel.find().populate("userID");
     return res.json({
       message: "get All play list",
       playLists,
