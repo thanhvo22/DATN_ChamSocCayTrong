@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
   res.send("Đồ án tốt nghiệp !");
 });
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/user", cookieMiddleWare, userRoute);
+app.use("/api/v1/users", userRoute);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/playlists", playlistRoute);
 app.use("/api/v1/videos", videoRoute);
