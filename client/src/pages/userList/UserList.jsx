@@ -14,15 +14,12 @@ export default function UserList() {
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/users`).then((res) => {
       setUsers(res.data.data);
-      console.log("res", res);
     });
   }, []);
 
   const handleDelete = (id) => {
     setUsers(users.filter((item) => item._id !== id));
   };
-  console.log(`user `, users);
-
   const columns = [
     { field: "_id", headerName: "ID", width: 100 },
     {

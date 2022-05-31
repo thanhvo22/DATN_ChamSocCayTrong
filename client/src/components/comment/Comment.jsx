@@ -1,9 +1,5 @@
-import React from 'react'
-import "./comment.css"
+import React from "react";
+import "./comment.css";
 export default function Comment() {
-  return (
-    <div>
-      Comment day bro!
-    </div>
-  )
+  return <div>Comment day bro!</div>;
 }
