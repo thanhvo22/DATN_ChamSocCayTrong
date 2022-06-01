@@ -11,9 +11,9 @@ const savedListController = {
   },
   
   getAllSavedListsForUser: async (req,res) => {
-    const userID = req.signedCookies.cookie_id;
+    const userId = req.signedCookies.cookie_id;
     try {
-      const allSavedLists = await savedListModel.find({userID}).populate(["userID","playlistID"]);
+      const allSavedLists = await savedListModel.find({userId}).populate(["userId","playlistId"]);
       res.json(allSavedLists);
     } catch (error) {
       res.json({ error });
@@ -23,7 +23,7 @@ const savedListController = {
   getSavedListByUser: async (req, res) => {
     try {
       const user_id = req.signedCookies.cookie_id;
-      const savedList = await savedListModel.findOne({ userID: user_id }).populate(["userID","playlistID"]);
+      const savedList = await savedListModel.findOne({ userId: user_id }).populate(["userId","playlistId"]);
       res.json({ message: `SavedList for User: `, savedList });
     } catch (error) {
       res.json({ error });
@@ -32,12 +32,12 @@ const savedListController = {
 
   createSavedListByUser: async (req, res) => {
     try {
-      const playlistID = req.params.id;
-      const userID = req.signedCookies.cookie_id;
+      const playlistId = req.params.id;
+      const userId = req.signedCookies.cookie_id;
       
       const savedList = await savedListModel.create({
-        userID,
-        playlistID,
+        userId,
+        playlistId,
       });
       res.json({
         message: `savedList created successfully`,

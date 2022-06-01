@@ -13,8 +13,8 @@ module.exports.getRateForPlayList = async (req, res) => {
 };
 
 module.exports.getRateForUser = async (req, res) => {
-  const userID = req.signedCookies.cookie_id;
-  const rateForUser = await rateModel.find({ userID });
+  const userId = req.signedCookies.cookie_id;
+  const rateForUser = await rateModel.find({ userId });
   res.json(rateForUser);
 };
 
@@ -36,18 +36,18 @@ async function updateRating(playlist_ID) {
 module.exports.postCreateRate = async (req, res) => {
   try {
     const playlist_ID = req.signedCookies.playlist_id;
-    const userID = req.signedCookies.cookie_id;
+    const userId = req.signedCookies.cookie_id;
     const { rating } = req.body;
     //check if the user has rated it
     const checkRate = await rateModel.findOne({
-      userID,
+      userId,
       playlist_ID,
     });
     console.log(`check rate: ${checkRate}`);
     if (!checkRate) {
       const rate = await rateModel.create({
         playListRating: playlist_ID,
-        userID,
+        userId,
         rating,
       });
       console.log(`rate: ${rate}`);
@@ -62,7 +62,7 @@ module.exports.postCreateRate = async (req, res) => {
     const rate = await rateModel.findOneAndUpdate(
       {
         playListRating: playlist_ID,
-        userID,
+        userId,
       },
       {rating}
     );

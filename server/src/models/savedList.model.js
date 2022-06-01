@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const savedListSchema = new Schema({
-  userID: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "Users",
   },
-  playlistID: {
+  playlistId: {
     type: Schema.Types.ObjectId,
     ref: "Playlists"
   },

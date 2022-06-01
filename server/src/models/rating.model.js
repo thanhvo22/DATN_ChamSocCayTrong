@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ratingSchema = new Schema({
-  userID: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "Users",
   },
@@ -10,7 +10,7 @@ const ratingSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Playlists",
   },
-  rating: { type: Number },
+  rating: { type: Number, min: 0, max:10 },
   createAt: {
     type: Date,
     default: Date.now,
