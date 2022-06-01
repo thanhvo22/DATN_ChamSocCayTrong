@@ -5,6 +5,13 @@ import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
 export default function Topbar() {
+  const logOut = async () => {
+    await fetch("http://localhost:9000/auth/logout", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      credentials: "include",
+    });
+  };
   return (
     <div className="topbar">
       <div className="topbarWrapper">
