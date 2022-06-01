@@ -8,13 +8,13 @@ module.exports.getComments = async (req, res) => {
 module.exports.postCreateCmt = async (req, res) => {
   console.log("created new comment");
   try {
-    const userID = req.signedCookies.cookie_id;
-    console.log("test ", userID);
-    const playlistID = req.signedCookies.playlist_id;
+    const userId = req.signedCookies.cookie_id;
+    console.log("test ", userId);
+    const playlistId = req.signedCookies.playlist_id;
     const { comment } = req.body;
     const newComment = await commentModel.create({
-      userID,
-      playlistID,
+      userId,
+      playlistId,
       comment,
     });
     console.log("Comment created", newComment);
