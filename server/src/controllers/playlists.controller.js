@@ -1,14 +1,14 @@
 const playlistModel = require("../models/playlists.model");
 
 module.exports.getPlayListForSharer = async (req, res) => {
-  const userID = req.signedCookies.cookie_id;
-  const playList = await playlistModel.findById(userID);
+  const userId = req.signedCookies.cookie_id;
+  const playList = await playlistModel.findById(userId);
   res.json(playList);
 };
 
 module.exports.getAllPlayList = async (req, res) => {
   try {
-    const playLists = await playlistModel.find().populate("userID");
+    const playLists = await playlistModel.find().populate("userId");
     return res.json({
       message: "get All play list",
       playLists,
@@ -40,10 +40,10 @@ module.exports.getPlayListID = async (req, res) => {
 
 module.exports.postCreatePlayList = async (req, res) => {
   try {
-    const userID = req.signedCookies.cookie_id;
+    const userId = req.signedCookies.cookie_id;
     const { playlistName, preview } = req.body;
     const playlist = await playlistModel.create({
-      userID,
+      userId,
       playlistName,
       preview,
     });
