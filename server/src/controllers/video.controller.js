@@ -2,26 +2,26 @@ const videoModel = require("../models/video.model");
 const playlistModel = require("../models/playlists.model");
 
 module.exports.getVideos = async (req, res) => {
-  //   const userID = req.signedCookies.cookie_id;
-  //   const playList = await videoModel.findById(userID);
+  //   const userId = req.signedCookies.cookie_id;
+  //   const playList = await videoModel.findById(userId);
   const videos = await videoModel.find();
   res.json(videos);
 };
 
 module.exports.postCreateVideo = async (req, res) => {
   try {
-    const userID = req.signedCookies.cookie_id;
-    const playlistID = req.params.playlistID;
+    const userId = req.signedCookies.cookie_id;
+    const playlistId = req.params.playlistID;
 
     const { nameVideo, linkVideo } = req.body;
     const video = await videoModel.create({
-      userID,
-      playlistID,
+      userId,
+      playlistId,
       nameVideo,
       linkVideo,
     });
     await playlistModel.findOneAndUpdate(
-      { id: playlistID },
+      { id: playlistId },
       {
         $push: {
           videos: {
@@ -52,7 +52,7 @@ module.exports.putVideo = async (req, res) => {
     });
 
     await playlistModel.findOneAndUpdate(
-      { id: playlistID, "videos.video_id": id },
+      { id: playlistId, "videos.video_id": id },
       {
         video_id: video.id,
       }

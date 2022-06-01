@@ -10,7 +10,7 @@ const adminSchema = new Schema({
   typeofUser: {
     type: String,
     enum: ["Admin", "CTV"],
-    default: "Admin",
+    default: "CTV",
   },
   gender: {
     type: String,
