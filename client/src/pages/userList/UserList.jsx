@@ -21,7 +21,7 @@ export default function UserList() {
     setUsers(users.filter((item) => item._id !== id));
   };
   const columns = [
-    { field: "_id", headerName: "ID", width: 100 },
+    { field: "_id", headerName: "ID", width: 260 },
     {
       field: "user",
       headerName: "User",

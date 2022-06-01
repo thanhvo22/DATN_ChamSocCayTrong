@@ -1,4 +1,4 @@
-import "./newUser.css";
+import "./newPlayList.css"
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ export default function NewPlayList() {
   const onFormSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .post("http://localhost:5000/api/v1/users/create", {
+      .post("http://localhost:5000/api/v1/playlists/create", {
         userID,
         playlistName,
         preview,
@@ -31,7 +31,7 @@ export default function NewPlayList() {
       <div className="container">
         <Sidebar />
         <div className="newUser">
-          <h1 className="newUserTitle">New User</h1>
+          <h1 className="newUserTitle">New PlayList</h1>
           <form className="newUserForm" onSubmit={onFormSubmit}>
             <div className="newUserItem">
               <label>UserID</label>
