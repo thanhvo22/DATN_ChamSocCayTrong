@@ -2,23 +2,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const playlistSchema = new Schema({
-  userID: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "Users",
   },
-  playlistName: { type: String, maxlength: 255 },
-  preview: { type: String, maxlength: 255 },
+  playlistName: { type: String, maxlength: 255, min:5 },
+  preview: { type: String, maxlength: 255, min:5 },
   status: {
     type: String,
     enum: ["Pending", "Accept", "Refuse"],
     default: "Pending",
   },
-  videos: [
-    {
-      video_id: { type: Schema.Types.ObjectId, ref: "Videos" },
-    },
-  ],
-  rating: {type:Number},
+  rating: {type:Number, min:0, max:10},
   createAt: {
     type: Date,
     default: Date.now,
