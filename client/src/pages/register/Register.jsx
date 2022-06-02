@@ -35,7 +35,7 @@ export default function Register() {
         typeofUser,
       })
       .then((res) => {
-        console.log(res);
+        console.log( "register", res);
         navigate("/login");
         // localStorage.setItem("user", res.data.emailName._id);
       });
@@ -128,6 +128,7 @@ export default function Register() {
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="row-radio-buttons-group"
+                onChange={(e) => setTypeofUser(e.target.value)}
               >
                 <FormControlLabel
                   value="User"
