@@ -1,11 +1,8 @@
-import "./login.css"
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-// import {Cookie} from "js-cookie";
-
 import axios from "axios";
+import "./login.css";
 
 export default function Login() {
   const [user, setUser] = useState("");
@@ -22,7 +19,6 @@ export default function Login() {
         // console.log(res.data);
         navigate("/admin");
         localStorage.setItem("userId", res.data.accessToken);
-        
       });
   };
   return (
@@ -53,13 +49,11 @@ export default function Login() {
               onChange={(e) => setPass(e.target.value)}
             />
             <button className="loginButton" type="submit">
-              Log In
+              Đăng nhập
             </button>
-            <span className="loginForgot">Forgot Password?</span>
+            <span className="loginForgot">Quên Mật Khẩu?</span>
             <Link to="/register">
-              <button className="loginRegisterButton">
-                Create a New Account
-              </button>
+              <button className="loginRegisterButton">Tạo Tài Khoản</button>
             </Link>
           </form>
         </div>

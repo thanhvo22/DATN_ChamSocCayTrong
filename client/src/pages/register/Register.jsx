@@ -1,15 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
+import "./register.css"
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import {
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
-} from "@material-ui/core";
-import "./register.css";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
 export default function Register() {
   // user, pass, gender, email, birthDate, name
@@ -20,6 +18,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [name, setName] = useState("");
+  const [typeofUser, setTypeofUser] = useState("");
 
   let navigate = useNavigate();
   const onFormSubmit = async (event) => {
@@ -33,6 +32,7 @@ export default function Register() {
         email,
         birthDate,
         name,
+        typeofUser,
       })
       .then((res) => {
         console.log(res);
@@ -42,67 +42,69 @@ export default function Register() {
   };
 
   return (
-    <div className="login">
-      <div className="loginWrapper">
-        <div className="loginLeft">
-          <h3 className="loginLogo">V.V.T Web</h3>
-          <span className="loginDesc">
+    <div className="register">
+      <div className="registerWrapper">
+        <div className="registerLeft">
+          <h3 className="registerLogo">V.V.T Web</h3>
+          <span className="registerDesc">
             Đăng nhập để xem các khóa học hướng dẫn chăm sóc cây trồng, hoặc
             chia sẻ khóa học chăm sóc cây trồng cho mọi người nào!!
           </span>
         </div>
-        <div className="loginRight">
-          <form className="loginBox" onSubmit={onFormSubmit}>
+        <div className="registerRight">
+          <form className="registerBox" onSubmit={onFormSubmit}>
             <input
               placeholder="Tên Tài Khoản"
               required
-              className="loginInput"
+              className="registerInput"
               onChange={(e) => setUser(e.target.value)}
+            />
+            <input
+              placeholder="Họ và Tên?"
+              required
+              className="registerInput"
+              type="text"
+              onChange={(e) => setName(e.target.value)}
             />
             <input
               placeholder="Email"
               required
               onChange={(e) => setEmail(e.target.value)}
-              className="loginInput"
+              className="registerInput"
               type="email"
             />
             <input
               placeholder="Mật khẩu"
               required
               onChange={(e) => setPass(e.target.value)}
-              className="loginInput"
+              className="registerInput"
               type="password"
               minLength="4"
             />
             <input
               placeholder="Nhập Lại Mật khẩu"
               required
-              className="loginInput"
+              className="registerInput"
               type="password"
               onChange={(e) => setPassAgain(e.target.value)}
-            />
-
-            <input
-              placeholder="Họ và Tên?"
-              required
-              className="loginInput"
-              type="text"
-              onChange={(e) => setName(e.target.value)}
             />
             <input
               placeholder="Birth day?"
               required
-              className="loginInput"
+              className="registerInput"
               type="date"
               onChange={(e) => setBirthDate(e.target.value)}
             />
-            <FormControl>
-              <p></p>
-              <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+            {/* setGender */}
+
+            <FormControl >
+              <p className="form_gender"></p>
+              <FormLabel id="demo-row-radio-buttons-group-label" />
+              Giới Tính
               <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="female"
-                name="radio-buttons-group"
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
               >
                 <FormControlLabel
                   value="Nam"
@@ -118,11 +120,34 @@ export default function Register() {
                 />
               </RadioGroup>
             </FormControl>
-            <button className="loginButton" type="submit">
-              Sign Up
+            {/* setTypeofUser */}
+            <FormControl>
+              <FormLabel id="demo-row-radio-buttons-group-label" /> Loại Tài
+              Khoản
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+              >
+                <FormControlLabel
+                  value="User"
+                  control={<Radio />}
+                  label="Người dùng"
+                  onChange={(e) => setTypeofUser(e.target.value)}
+                />
+                <FormControlLabel
+                  value="Sharers"
+                  control={<Radio />}
+                  label="Người Chia Sẻ"
+                  onChange={(e) => setTypeofUser(e.target.value)}
+                />
+              </RadioGroup>
+            </FormControl>
+            <button className="registerButton" type="submit">
+              Đăng Ký
             </button>
             <Link to="/login">
-              <button className="loginRegisterButton">Log into Account</button>
+              <button className="registerRegisterButton">Đăng Nhập</button>
             </Link>
           </form>
         </div>
