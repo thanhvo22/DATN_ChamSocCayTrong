@@ -47,8 +47,8 @@ export default function AdminVideos() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">Watch</Button>
-                <Button size="small">Learn More</Button>
+                <Button size="small">Accept Video</Button>
+                <Button size="small">Delete Video</Button>
               </CardActions>
             </Card>
           ))}
