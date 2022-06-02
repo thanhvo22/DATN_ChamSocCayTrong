@@ -13,6 +13,7 @@ export default function UserList() {
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/users`).then((res) => {
+      console.log(`res`, res)
       setUsers(res.data.data);
     });
   }, []);

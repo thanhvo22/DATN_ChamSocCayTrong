@@ -22,7 +22,7 @@ export default function AdminPlayLists() {
   const columns = [
     { field: "_id", headerName: "ID", width: 100 },
     {
-      field: "userID.name",
+      field: "userId",
       headerName: "ID Sharers",
       width: 200,
       // renderCell: (params) => {
