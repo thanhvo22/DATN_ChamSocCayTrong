@@ -1,11 +1,11 @@
 import "./newUser.css";
-import Topbar from "../../components/topbar/Topbar";
-import Sidebar from "../../components/sidebar/Sidebar";
+import Topbar from "../../../components/topbar/Topbar";
+import Sidebar from "../../../components/sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {useState } from "react";
 
-export default function NewUser() {
+export default function AdminNewUser() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [passAgain, setPassAgain] = useState("");

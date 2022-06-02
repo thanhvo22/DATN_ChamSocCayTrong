@@ -1,31 +1,29 @@
-import "./userList.css";
+import Topbar from "../../../components/topbar/Topbar";
+import Sidebar from "../../../components/sidebar/Sidebar";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-// import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Topbar from "../../components/topbar/Topbar";
 import axios from "axios";
 
-export default function UserList() {
-  const [users, setUsers] = useState([]);
+export default function AdminPlayLists() {
+  const [playlists, setPlayLists] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/users`).then((res) => {
-      console.log(`res`, res)
-      setUsers(res.data.data);
+    axios.get(`http://localhost:5000/api/v1/playlists`).then((res) => {
+      console.log("res laylists", res);
+      setPlayLists(res.data.playLists);
     });
   }, []);
 
   const handleDelete = (id) => {
-    setUsers(users.filter((item) => item._id !== id));
+    setPlayLists(playlists.filter((item) => item._id !== id));
   };
   const columns = [
-    { field: "_id", headerName: "ID", width: 260 },
+    { field: "_id", headerName: "ID", width: 100 },
     {
-      field: "user",
-      headerName: "User",
+      field: "userId",
+      headerName: "ID Sharers",
       width: 200,
       // renderCell: (params) => {
       //   return (
@@ -36,15 +34,20 @@ export default function UserList() {
       //   );
       // },
     },
-    { field: "email", headerName: "Email", width: 200 },
+    { field: "playlistName", headerName: "Name Play Lists", width: 200 },
+    {
+      field: "preview",
+      headerName: "Preview Play lists",
+      width: 220,
+    },
     {
       field: "status",
       headerName: "Status",
-      width: 120,
+      width: 160,
     },
     {
-      field: "name",
-      headerName: "Your Name",
+      field: "rating",
+      headerName: "Rating",
       width: 160,
     },
     {
@@ -52,12 +55,14 @@ export default function UserList() {
       headerName: "Action",
       width: 150,
       renderCell: (params) => {
-        const userId = params.row._id
-        
+        const userId = params.row._id;
+
         return (
           <>
-            <Link to={"/admin/user/" + userId} >
-              <button className="userListEdit" userId={userId} >Edit</button>
+            <Link to={"/admin/playlists/" + userId}>
+              <button className="userListEdit" userId={userId}>
+                Edit
+              </button>
             </Link>
             <DeleteOutline
               className="userListDelete"
@@ -73,11 +78,11 @@ export default function UserList() {
     <div>
       <Topbar />
       <div className="container">
-        <Sidebar />
+        <Sidebar/>
         <div className="userList">
-          <h1>Danh sach Users</h1>
-          <DataGrid 
-            rows={users}
+          <h1>Danh sach playlists</h1>
+          <DataGrid
+            rows={playlists}
             disableSelectionOnClick
             columns={columns}
             getRowId={(row) => row._id}

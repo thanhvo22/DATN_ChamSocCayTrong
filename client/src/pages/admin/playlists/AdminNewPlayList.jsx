@@ -1,11 +1,11 @@
 import "./newPlayList.css"
-import Topbar from "../../components/topbar/Topbar";
-import Sidebar from "../../components/sidebar/Sidebar";
+import Topbar from "../../../components/topbar/Topbar";
+import Sidebar from "../../../components/sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
-export default function NewPlayList() {
+export default function AdminNewPlayList() {
   const [userID, setUserID] = useState("");
   const [playlistName, setPlaylistName] = useState("");
   const [preview, setPreview] = useState("");
