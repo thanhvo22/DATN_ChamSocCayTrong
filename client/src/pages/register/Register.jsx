@@ -67,7 +67,7 @@ export default function Register() {
               type="email"
             />
             <input
-              placeholder="Password"
+              placeholder="Mật khẩu"
               required
               onChange={(e) => setPass(e.target.value)}
               className="loginInput"
@@ -75,7 +75,7 @@ export default function Register() {
               minLength="4"
             />
             <input
-              placeholder="Password Again"
+              placeholder="Nhập Lại Mật khẩu"
               required
               className="loginInput"
               type="password"
