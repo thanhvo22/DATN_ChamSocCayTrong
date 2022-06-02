@@ -2,7 +2,7 @@ import "./sidebar.css";
 import {
   LineStyle,
   Timeline,
-  TrendingUp,
+  
   PermIdentity,
   Storefront,
   AttachMoney,
@@ -34,12 +34,7 @@ export default function Sidebar() {
                 Profile
               </li>
             </Link>
-            <Link to="/admin/employees" className="link" >
-              <li className="sidebarListItem">
-                <TrendingUp className="sidebarIcon" />
-                CTV
-              </li>
-            </Link>
+            
           </ul>
         </div>
         <div className="sidebarMenu">

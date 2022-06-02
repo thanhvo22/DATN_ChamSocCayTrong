@@ -14,7 +14,7 @@ export default function Profile() {
   return (
     <div className="user">
       <div className="userTitleContainer">
-        <h1 className="userTitle">Edit User</h1>
+        <h1 className="userTitle">Profile</h1>
         <Link to="/admin/users/newUser">
           <button className="userAddButton">Create</button>
         </Link>
