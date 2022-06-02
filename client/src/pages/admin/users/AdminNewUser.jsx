@@ -1,4 +1,4 @@
-import "./newUser.css";
+import "./css/newUser.css";
 import Topbar from "../../../components/topbar/Topbar";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
