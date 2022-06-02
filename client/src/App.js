@@ -10,6 +10,7 @@ import NewUser from './pages/newUser/NewUser';
 import AdminPlayLists from "./pages/adminPlayLists/AdminPlayLists";
 import NewPlayList from "./pages/newPlayList/NewPlayList";
 import AdminViewPlayList from "./pages/adminViewPlayList/AdminViewPlayList";
+import AdminVideos from "./pages/adminVideos/AdminVideos";
 function App() {
   return (
     <Router>
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/admin/users/newUser" element={<NewUser />} />
         <Route exact path="/admin/playlists" element={<AdminPlayLists />} />
         <Route exact path="/admin/playlists/:id" element={<AdminViewPlayList />} />
+        <Route exact path="/admin/videos" element={<AdminVideos />} />
       </Routes>
       {/* <div className="others">other pages</div> */}
     </Router>
