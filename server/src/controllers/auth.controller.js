@@ -4,7 +4,7 @@ require("dotenv").config();
 const Users = require("../models/user.model");
 
 module.exports.postRegister = async (req, res) => {
-  const { user, pass, passAgain, gender, email, birthDate, name } = req.body;
+  const { user, pass, passAgain, gender, email, birthDate, name, typeofUser } = req.body;
 
   if (!user || !pass)
     return res.status(400).json({
@@ -14,7 +14,6 @@ module.exports.postRegister = async (req, res) => {
 
   try {
     const userName = await Users.findOne({ user });
-    console.log(userName);
     if (userName)
       return res.status(400).json({
         success: false,
@@ -33,6 +32,7 @@ module.exports.postRegister = async (req, res) => {
       email,
       birthDate,
       name,
+      typeofUser
     });
 
     await newUser.save();
