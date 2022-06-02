@@ -5,7 +5,7 @@ import DashboardApp from "./pages/dashboard/Dashboard";
 
 import "./App.css";
 import Home from './pages/home/Home';
-
+import PlayListsAll from "./pages/sharers/playlists/PlayListsAll";
 import NewPlayList from "./pages/sharers/playlists/NewPlayList";
 import AdminProfile from "./pages/admin/AdminProfile";
 import AdminPlayLists from "./pages/admin/playlists/AdminPlayLists";
@@ -24,8 +24,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<DashboardApp />} />
         {/* sharers */}
+        <Route path="/sharer/playlists" element={<PlayListsAll />} />
         <Route path="/sharer/playlists/create" element={<NewPlayList />} />
-        <Route path="/sharer//playlists/:id" element={<AdminViewPlayList />} />
+        <Route path="/sharer/playlists/:id" element={<AdminViewPlayList />} />
         {/* admin */}
         <Route exact path="/admin/profile" element={<AdminProfile />} />
         <Route exact path="/admin/users" element={<AdminUserList />} />
