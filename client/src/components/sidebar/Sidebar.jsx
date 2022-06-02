@@ -2,7 +2,6 @@ import "./sidebar.css";
 import {
   LineStyle,
   Timeline,
-  
   PermIdentity,
   Storefront,
   AttachMoney,
