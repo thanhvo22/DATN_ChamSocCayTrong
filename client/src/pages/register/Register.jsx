@@ -56,12 +56,14 @@ export default function Register() {
             <input
               placeholder="Tên Tài Khoản"
               required
+              minLength={5}
               className="registerInput"
               onChange={(e) => setUser(e.target.value)}
             />
             <input
               placeholder="Họ và Tên?"
               required
+              minLength={5}
               className="registerInput"
               type="text"
               onChange={(e) => setName(e.target.value)}
@@ -93,6 +95,8 @@ export default function Register() {
               required
               className="registerInput"
               type="date"
+              max="date.now()"
+              min="01/01/1950"
               onChange={(e) => setBirthDate(e.target.value)}
             />
             {/* setGender */}

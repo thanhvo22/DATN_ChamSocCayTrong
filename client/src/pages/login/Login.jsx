@@ -37,6 +37,7 @@ export default function Login() {
               placeholder="User"
               type="user"
               required
+              minLength="5"
               className="loginInput"
               onChange={(e) => setUser(e.target.value)}
             />
