@@ -5,15 +5,15 @@ import "./home.css";
 // import WidgetSm from "../../components/widgetSm/WidgetSm";
 // import WidgetLg from "../../components/widgetLg/WidgetLg";
 import Topbar from "../../components/topbar/Topbar";
-import Sidebar from "../../components/sidebar/Sidebar";
+import SidebarUser from "../../components/sidebarUser/SidebarUser";
 
 export default function Home() {
   return (
     <div className="home">
-      Home Admin
       <Topbar />
       <div className="container">
-        <Sidebar />
+        <SidebarUser />
+        Home page
       </div>
     </div>
   );

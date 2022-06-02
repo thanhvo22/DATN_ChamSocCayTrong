@@ -11,9 +11,10 @@ export default function Topbar() {
       <div className="topbarWrapper">
         <div className="topLeft">
           <Link to="/" className="link">
-            <span className="logo">V.V.T</span>
+            <span className="logo">V.V.T Web</span>
           </Link>
         </div>
+        <div>Key search</div>
         <div className="topRight">
           <div className="topbarIconContainer">
             <NotificationsNone />

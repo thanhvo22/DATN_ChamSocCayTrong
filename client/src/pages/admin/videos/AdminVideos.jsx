@@ -1,7 +1,6 @@
 import * as React from "react";
 import Topbar from "../../../components/topbar/Topbar";
 import Sidebar from "../../../components/sidebar/Sidebar";
-
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -17,12 +16,14 @@ export default function AdminVideos() {
       setVideos(res.data);
     });
   }, []);
+
   return (
     <div>
       <Topbar />
       <div className="container">
         <Sidebar />
-        <div>
+
+        <div className="container">
           {videos.map((v) => (
             <Card sx={{ maxWidth: 500 }}>
               <iframe
@@ -51,6 +52,7 @@ export default function AdminVideos() {
                 <Button size="small">Delete Video</Button>
               </CardActions>
             </Card>
+            
           ))}
         </div>
       </div>
