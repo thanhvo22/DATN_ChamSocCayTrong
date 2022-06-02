@@ -13,6 +13,7 @@ const videoRoute = require("./routes/v1/video.route");
 const commentRoute = require("./routes/v1/comment.route");
 const rateRoute = require("./routes/v1/rating.route");
 const savedListRoute = require("./routes/v1/savedList.route");
+const verifyToken = require("./middlewares/auth.middleware");
 
 const app = express();
 
@@ -29,7 +30,7 @@ app.get("/", (req, res) => {
   res.send("Đồ án tốt nghiệp !");
 });
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/users", cookieMiddleWare,userRoute);
+app.use("/api/v1/users", verifyToken,userRoute);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/playlists", playlistRoute);
 app.use("/api/v1/videos", videoRoute);

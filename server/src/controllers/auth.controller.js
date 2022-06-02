@@ -20,10 +20,10 @@ module.exports.postRegister = async (req, res) => {
         success: false,
         message: "user da ton tai",
       });
-    if(passAgain!=pass){
+    if (passAgain != pass) {
       return res.status(403).json({
-        message: "pass nhap lai chua dung, vui long thu lai"
-      })
+        message: "pass nhap lai chua dung, vui long thu lai",
+      });
     }
     const hashedPass = await argon2.hash(pass);
     const newUser = new Users({
@@ -45,7 +45,7 @@ module.exports.postRegister = async (req, res) => {
       success: true,
       message: " user created successfully ",
       accessToken,
-      newUser
+      newUser,
     });
   } catch (error) {
     console.log(error);
@@ -78,12 +78,13 @@ module.exports.postLogin = async (req, res) => {
         success: false,
         message: "mat khau or tai khoan k dung",
       });
-
+    
     //all good -> return token
     const accessToken = jwt.sign(
-      { userId: userName._id },
+      { userId: userName._id, role: userName.typeofUser },
       process.env.ACCESS_TOKEN_SECRET
     );
+    
     res.cookie("cookie_id", userName.id, {
       signed: true,
     });
@@ -91,7 +92,7 @@ module.exports.postLogin = async (req, res) => {
     res.json({
       success: true,
       message: " login successfully ",
-      accessToken,      
+      accessToken,
     });
   } catch (error) {
     console.log(error);
@@ -105,5 +106,5 @@ module.exports.postLogin = async (req, res) => {
 module.exports.deleteLogin = (req, res) => {
   res.clearCookie("cookie_id");
   // res.redirect("/auth/login");
-  res.json({message:`logout successfully`})
+  res.json({ message: `logout successfully` });
 };

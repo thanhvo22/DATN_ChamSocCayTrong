@@ -11,7 +11,7 @@ const userSchema = new Schema({
   },
   typeofUser: {
     type: String,
-    enum: ["User", "Sharers"],
+    enum: ["User", "Sharers", "Admin", "CTV"],
     default: "User",
   },
   gender: {
