@@ -14,6 +14,7 @@ import AdminVideos from "./pages/admin/videos/AdminVideos";
 import AdminUserList from './pages/admin/users/AdminUserList';
 import AdminNewUser from "./pages/admin/users/AdminNewUser";
 import UserProfile from "./pages/admin/users/UserProfile";
+import UserPlayList from './pages/users/playlists/UserPlayList';
 function App() {
   return (
     <Router>
@@ -23,6 +24,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<DashboardApp />} />
+        {/* users */}
+        <Route path="/playlists/:id" element={<UserPlayList />} />
         {/* sharers */}
         <Route path="/sharer/playlists" element={<PlayListsAll />} />
         <Route path="/sharer/playlists/create" element={<NewPlayList />} />
