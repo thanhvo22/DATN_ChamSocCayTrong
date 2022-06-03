@@ -1,4 +1,4 @@
-.top {
+.topUser {
   width: 100%;
   height: 50px;
   background-color: white;
@@ -7,29 +7,35 @@
   display: flex;
   align-items: center;
   z-index: 999;
-  font-family: "Josefin Sans", sans-serif;
+  
+}
+.logo {
+  font-weight: bold;
+  font-size: 35px;
+  color: darkblue;
+  cursor: pointer;
 }
 
-.topLeft,
-.topRight {
+.topUserLeft,
+.topUserRight {
   flex: 3;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.topIcon {
+.topUserIcon {
   font-size: 20px;
   margin-right: 10px;
   color: #444;
   cursor: pointer;
 }
 
-.topCenter {
+.topUserCenter {
   flex: 6;
 }
 
-.topList {
+.topUserList {
   display: flex;
   justify-content: center;
   margin: 0;
@@ -37,18 +43,18 @@
   list-style: none;
 }
 
-.topListItem {
+.topUserListItem {
   margin-right: 20px;
   font-size: 18px;
   font-weight: 300;
   cursor: pointer;
 }
 
-.topListItem:hover{
+.topUserListItem:hover{
     color: gray;
 }
 
-.topImg {
+.topUserImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -57,7 +63,7 @@
   cursor: pointer;
 }
 
-.topSearchIcon {
+.topUserSearchIcon {
   font-size: 18px;
   color: #666;
   cursor: pointer;

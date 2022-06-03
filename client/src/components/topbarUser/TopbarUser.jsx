@@ -1,57 +1,58 @@
 import { Link } from "react-router-dom";
 import "./topbarUser.css";
 
-export default function Topbar() {
+export default function TopbarUser() {
   const user = true;
   return (
-    <div className="top">
-      <div className="topLeft">
-        <i className="topIcon fab fa-facebook-square"></i>
-        <i className="topIcon fab fa-instagram-square"></i>
-        <i className="topIcon fab fa-pinterest-square"></i>
-        <i className="topIcon fab fa-twitter-square"></i>
+    <div className="topUser">
+      <div className="topUserLeft">
+        <Link to="/" className="link">
+          <span className="logo">V.V.T Web</span>
+        </Link>
       </div>
-      <div className="topCenter">
-        <ul className="topList">
-          <li className="topListItem">
+      <div className="topUserCenter">
+        <ul className="topUserList">
+          <li className="topUserListItem">
             <Link className="link" to="/">
-              HOME
+              Trang Chủ
             </Link>
           </li>
-          <li className="topListItem">ABOUT</li>
-          <li className="topListItem">CONTACT</li>
-          <li className="topListItem">
+          <li className="topUserListItem">Khóa Học Đã Lưu</li>
+          <li className="topUserListItem">Hướng Dẫn</li>
+          <li className="topUserListItem">
             <Link className="link" to="/write">
-              WRITE
+              Viết bài
             </Link>
           </li>
-          {user && <li className="topListItem">LOGOUT</li>}
         </ul>
       </div>
-      <div className="topRight">
+      <div className="topUserRight">
         {user ? (
           <Link className="link" to="/settings">
             <img
-              className="topImg"
-              src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              className="topUserImg"
+              src="https://res.cloudinary.com/dhxlhkgog/image/upload/v1651658129/brjrs5g50pigukp8oe7y.jpg"
               alt=""
             />
           </Link>
         ) : (
-          <ul className="topList">
-            <li className="topListItem">
+          <ul className="topUserList">
+            <li className="topUserListItem">
               <Link className="link" to="/login">
                 LOGIN
               </Link>
             </li>
-            <li className="topListItem">
+            <li className="topUserListItem">
               <Link className="link" to="/register">
                 REGISTER
               </Link>
             </li>
           </ul>
         )}
-        <i className="topSearchIcon fas fa-search"></i>
+        <ul className="topUserList">
+          <li className="topUserListItem">Đăng Xuất</li>
+        </ul>
+        <i className="topUserSearchIcon fas fa-search"></i>
       </div>
     </div>
   );
