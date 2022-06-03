@@ -15,6 +15,7 @@ import AdminUserList from './pages/admin/users/AdminUserList';
 import AdminNewUser from "./pages/admin/users/AdminNewUser";
 import UserProfile from "./pages/admin/users/UserProfile";
 import UserPlayList from './pages/users/playlists/UserPlayList';
+import ListSaved from "./pages/users/playlistSaved/ListSaved";
 function App() {
   return (
     <Router>
@@ -26,6 +27,7 @@ function App() {
         <Route path="/admin" element={<DashboardApp />} />
         {/* users */}
         <Route path="/playlists/:id" element={<UserPlayList />} />
+        <Route path="/savedlist" element={<ListSaved />} />
         {/* sharers */}
         <Route path="/sharer/playlists" element={<PlayListsAll />} />
         <Route path="/sharer/playlists/create" element={<NewPlayList />} />

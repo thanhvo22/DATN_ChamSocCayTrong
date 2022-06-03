@@ -17,7 +17,9 @@ export default function TopbarUser() {
               Trang Chủ
             </Link>
           </li>
-          <li className="topUserListItem">Khóa Học Đã Lưu</li>
+          <Link to="/savedlist" className="link">
+            <li className="topUserListItem">Khóa Học Đã Lưu</li>
+          </Link>
           <li className="topUserListItem">Hướng Dẫn</li>
           <li className="topUserListItem">
             <Link className="link" to="/write">
