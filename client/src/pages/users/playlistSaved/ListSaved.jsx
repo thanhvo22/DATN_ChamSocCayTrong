@@ -1,7 +1,7 @@
 import React from "react";
 import TopbarUser from "../../../components/topbarUser/TopbarUser";
 import HeaderUser from "../../../components/headerUser/HeaderUser";
-import Post from "../../../components/post/Post";
+import Posts from "../../../components/posts/Posts";
 export default function ListSaved() {
   return (
     <div>
@@ -9,7 +9,7 @@ export default function ListSaved() {
       <HeaderUser />
       <div>
       <h2>Khóa học đã lưu của bạn</h2>
-        <Post />
+        <Posts  />
       </div>
     </div>
   );

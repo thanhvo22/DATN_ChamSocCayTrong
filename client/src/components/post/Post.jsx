@@ -6,7 +6,7 @@ export default function Post({ list }) {
   return (
     <div className="post">
       <Link to={"/playlists/"+list._id} className="link">
-        <img className="postImg" src={list.userId} alt="" />
+        <img className="postImg" src={list.images} alt="" />
         <div className="postInfo">
           <div className="postCats">
             <span className="postCat">
