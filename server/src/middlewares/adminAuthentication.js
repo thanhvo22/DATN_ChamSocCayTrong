@@ -19,4 +19,4 @@ const adminAuthentication = async (req, res, next) => {
   next();
 };
 
-module.exports = { adminAuthentication };
+module.exports = adminAuthentication;

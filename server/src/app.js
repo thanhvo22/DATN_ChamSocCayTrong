@@ -14,7 +14,7 @@ const commentRoute = require("./routes/v1/comment.route");
 const rateRoute = require("./routes/v1/rating.route");
 const savedListRoute = require("./routes/v1/savedList.route");
 const verifyToken = require("./middlewares/auth.middleware");
-const {adminAuthentication} = require("./middlewares/adminAuthentication");
+const adminAuthentication = require("./middlewares/adminAuthentication");
 
 const app = express();
 
