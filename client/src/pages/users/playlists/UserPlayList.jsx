@@ -14,6 +14,7 @@ import Videos from "../../../components/videos/Videos";
 //rating
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import Messenger from "../../messenger/Messenger";
 export default function UserPlayList() {
   return (
     <div>
@@ -65,6 +66,10 @@ export default function UserPlayList() {
               <Link to="/rating/add">
                 <button className="userAddButton">Đánh Giá</button>
               </Link>
+            </div>
+            <div>
+              <h4>Thảo Luận</h4>
+              <Messenger />
             </div>
           </div>
           {/* edit */}
