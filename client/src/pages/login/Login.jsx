@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { useJwt } from "react-jwt";
 import axios from "axios";
 import "./login.css";
 
 export default function Login() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
+
   let navigate = useNavigate();
   const onFormSubmit = async (event) => {
     event.preventDefault();
@@ -16,11 +18,14 @@ export default function Login() {
         pass,
       })
       .then((res) => {
-        // console.log(res.data);
-        navigate("/admin");
-        localStorage.setItem("userId", res.data.accessToken);
+        localStorage.setItem("userId", JSON.stringify(res.data.accessToken));
+        if (res.data.userName.typeofUser === "Admin") {
+          return navigate("/admin");
+        }
+        navigate("/");
       });
   };
+
   return (
     <div className="login">
       <div className="loginWrapper">
