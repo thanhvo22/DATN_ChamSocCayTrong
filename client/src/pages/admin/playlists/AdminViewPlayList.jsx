@@ -8,7 +8,7 @@ import axios from "axios";
 export default function AdminViewPlayList() {
   const id = localStorage.getItem("_id");
   const [user, setUser] = useState("");
-  const [playlist, setPlayList] = useState();
+  const [playlist, setPlayList] = useState("");
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
@@ -17,20 +17,19 @@ export default function AdminViewPlayList() {
   }, []);
 
   let { playlistId } = useParams();
-  console.log("playlistId: ", playlistId)
+  console.log("playlistId: " + playlistId);
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/playlists/${playlistId}`).then((res) => {
-      console.log("playlistId", res);
-      setPlayList(res.data.data);
+      console.log("res laylist", res)
+      setPlayList(res.data.playList);
     });
-  },[]);
-
+  });
   return (
     <div>
         <Topbar admin={user}/>
         <div class="container">
             <Sidebar />
-            <ViewPlayList />
+            <ViewPlayList list={playlist} />
         </div>
       
     </div>

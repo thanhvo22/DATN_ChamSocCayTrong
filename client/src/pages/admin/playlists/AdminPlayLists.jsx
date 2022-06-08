@@ -14,7 +14,7 @@ export default function AdminPlayLists() {
     axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
       setUser(res.data.data);
     });
-  });
+  }, []);
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/playlists`).then((res) => {
