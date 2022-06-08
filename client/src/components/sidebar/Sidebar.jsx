@@ -13,8 +13,14 @@ import {
   Report,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 export default function Sidebar() {
+  let navigate = useNavigate();
+  const logOut = () => {
+    localStorage.removeItem("userId");
+    navigate("/");
+    window.location.reload();
+  };
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -93,7 +99,7 @@ export default function Sidebar() {
                 Login
               </li>
             </Link>
-            <Link to="/logout" className="link">
+            <Link to="/logout" className="link" onClick={logOut}>
               <li className="sidebarListItem">
                 <Timeline className="sidebarIcon" />
                 LogOut

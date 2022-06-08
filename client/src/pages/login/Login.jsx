@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { useJwt } from "react-jwt";
 import axios from "axios";
 import "./login.css";
 
@@ -19,10 +18,11 @@ export default function Login() {
       })
       .then((res) => {
         localStorage.setItem("userId", JSON.stringify(res.data.accessToken));
+        localStorage.setItem("_id", res.data.userName._id);
         if (res.data.userName.typeofUser === "Admin") {
           return navigate("/admin");
         }
-        navigate("/");
+        navigate("/home");
       });
   };
 

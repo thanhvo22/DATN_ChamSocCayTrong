@@ -1,12 +1,12 @@
 import "./home.css";
-import TopbarUser from "../../components/topbarUser/TopbarUser";
+import TopbarUserFinal from "../../components/topbarUser/TopbarUserFinal";
 import HeaderUser from "../../components/headerUser/HeaderUser";
 import Posts from "../../components/posts/Posts";
-export default function Home() {
+export default function HomeLogin() {
   
   return (
     <div>
-      <TopbarUser />
+      <TopbarUserFinal />
       <HeaderUser />
       <div className="home">
         <Posts />

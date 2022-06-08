@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useJwt } from "react-jwt";
 import { Link } from "react-router-dom";
 import "./topbarUser.css";
+import axios from "axios";
 
-
-export default function TopbarUser() {
-  
+export default function TopbarUserFinal() {
+  const [user, setUser] = useState("");
 
   const token = localStorage.getItem("userId");
   const { decodedToken, isExpired } = useJwt(
@@ -22,14 +22,14 @@ export default function TopbarUser() {
   return (
     <div className="topUser">
       <div className="topUserLeft">
-        <Link to="/" className="link">
+        <Link to="/home" className="link">
           <span className="logo">V.V.T Web</span>
         </Link>
       </div>
       <div className="topUserCenter">
         <ul className="topUserList">
           <li className="topUserListItem">
-            <Link className="link" to="/">
+            <Link className="link" to="/home">
               Trang Chủ
             </Link>
           </li>

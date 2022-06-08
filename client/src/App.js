@@ -4,6 +4,7 @@ import Register from "./pages/register/Register";
 import DashboardApp from "./pages/dashboard/Dashboard";
 
 import "./App.css";
+import HomeLogin from "./pages/home/HomeLogin";
 import Home from './pages/home/Home';
 import PlayListsAll from "./pages/sharers/playlists/PlayListsAll";
 import NewPlayList from "./pages/sharers/playlists/NewPlayList";
@@ -15,7 +16,7 @@ import AdminUserList from './pages/admin/users/AdminUserList';
 import AdminNewUser from "./pages/admin/users/AdminNewUser";
 import UserProfile from "./pages/admin/users/UserProfile";
 import UserPlayList from './pages/users/playlists/UserPlayList';
-
+import Index from "./pages/Index";
 import ListSaved from './pages/users/playlistSaved/ListSaved';
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
       {/* <Sidebar/> */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/home" element={<HomeLogin />} />
+        <Route path="/index" element={<Index />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<DashboardApp />} />
