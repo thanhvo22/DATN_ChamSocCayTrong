@@ -7,7 +7,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function AdminPlayLists() {
+  const id = localStorage.getItem("_id");
+  const [user, setUser] = useState("");
   const [playlists, setPlayLists] = useState([]);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
+      setUser(res.data.data);
+    });
+  });
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/playlists`).then((res) => {
@@ -76,9 +83,9 @@ export default function AdminPlayLists() {
 
   return (
     <div>
-      <Topbar />
+      <Topbar admin={user}/>
       <div className="container">
-        <Sidebar/>
+        <Sidebar />
         <div className="userList">
           <h1>Danh sach playlists</h1>
           <DataGrid

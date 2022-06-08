@@ -12,8 +12,8 @@ import { useState, useEffect } from "react";
 
 export default function AdminNewUser() {
   const id = localStorage.getItem("_id");
-
   const [user, setUser] = useState("");
+  const [admin, setAdmin] = useState("");
   const [pass, setPass] = useState("");
   const [passAgain, setPassAgain] = useState("");
   const [gender, setGender] = useState("");
@@ -25,7 +25,7 @@ export default function AdminNewUser() {
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
       //   console.log(`res`, res.data.data.images);
-      setUser(res.data.data);
+      setAdmin(res.data.data);
     });
   });
 
@@ -52,7 +52,7 @@ export default function AdminNewUser() {
 
   return (
     <div>
-      <Topbar admin={user} />
+      <Topbar admin={admin} />
       <div className="container">
         <Sidebar />
         <div className="newUser">
