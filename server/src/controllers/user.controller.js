@@ -79,9 +79,8 @@ module.exports.postCreateUser = async (req, res) => {
 module.exports.putUser = async (req, res) => {
   try {
     const _id = req.params.id;
-    let user_cloud = await accountModel.findById(_id);
-    console.log("user_cloud", user_cloud);
-    if (user_cloud.cloudinary !== null) {
+    let user_cloud = await userModel.findById(_id);
+    if (user_cloud.cloudinary_id !== undefined) {
       await cloudinary.uploader.destroy(user_cloud?.cloudinary_id);
     }
     let path = req.file;
@@ -89,7 +88,20 @@ module.exports.putUser = async (req, res) => {
     if (path) {
       newAvatar = await cloudinary.uploader.upload(path.path);
     }
-
+    const { gender, email, birthDate, name, typeofUser } = req.body;
+    const user = await userModel.findByIdAndUpdate(_id, {
+      gender,
+      email,
+      birthDate,
+      name,
+      typeofUser,
+      images: newAvatar.secure_url || user_cloud?.cloudinary_id,
+      cloudinary_id: newAvatar.public_id || user_cloud?.cloudinary_id,
+    });
+    res.json({
+      message:"update user successfully",
+      user
+    })
   } catch (error) {
     res.status(500).send(error);
   }
