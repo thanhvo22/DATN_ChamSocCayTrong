@@ -29,7 +29,10 @@ module.exports.postCreateUser = async (req, res) => {
     req.body;
   let path = req.file;
   console.log("path", path);
-  const result = await cloudinary.uploader.upload(path?.path);
+  let result;
+  if (path) {
+    result = await cloudinary.uploader.upload(path?.path);
+  }
   console.log("result: ", result);
   if (!user || !pass)
     return res.status(400).json({
@@ -58,8 +61,8 @@ module.exports.postCreateUser = async (req, res) => {
       birthDate,
       name,
       typeofUser,
-      images: result.secure_url,
-      cloudinary_id: result.public_id,
+      images: result?.secure_url || undefined,
+      cloudinary_id: result?.public_id || undefined,
     });
     await newUser.save();
     res.json({
@@ -99,9 +102,9 @@ module.exports.putUser = async (req, res) => {
       cloudinary_id: newAvatar.public_id || user_cloud?.cloudinary_id,
     });
     res.json({
-      message:"update user successfully",
-      user
-    })
+      message: "update user successfully",
+      user,
+    });
   } catch (error) {
     res.status(500).send(error);
   }
