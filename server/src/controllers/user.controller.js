@@ -22,9 +22,50 @@ module.exports.getUserID = async (req, res) => {
   });
 };
 
-module.exports.postCreateUser = async function (req, res) {
-  let user = await userModel.create(req.body);
-  res.json(user);
+module.exports.postCreateUser = async (req, res) => {
+  const { user, pass, passAgain, gender, email, birthDate, name, typeofUser } = req.body;
+
+  if (!user || !pass)
+    return res.status(400).json({
+      success: false,
+      message: "user or pass trong ",
+    });
+
+  try {
+    const userName = await Users.findOne({ user });
+    if (userName)
+      return res.status(400).json({
+        success: false,
+        message: "user da ton tai",
+      });
+    if (passAgain != pass) {
+      return res.status(403).json({
+        message: "pass nhap lai chua dung, vui long thu lai",
+      });
+    }
+    const hashedPass = await argon2.hash(pass);
+    const newUser = new Users({
+      user,
+      pass: hashedPass,
+      gender,
+      email,
+      birthDate,
+      name,
+      typeofUser
+    });
+    await newUser.save();
+    res.json({
+      success: true,
+      message: " user created successfully ",
+      newUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "error!!!!",
+    });
+  }
 };
 
 module.exports.putUser = async (req, res) => {

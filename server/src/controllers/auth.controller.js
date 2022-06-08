@@ -93,6 +93,7 @@ module.exports.postLogin = async (req, res) => {
       success: true,
       message: " login successfully ",
       accessToken,
+      userName
     });
   } catch (error) {
     console.log(error);
