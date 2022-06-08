@@ -26,7 +26,7 @@ module.exports.getPlayListID = async (req, res) => {
     res.cookie("playlist_id", id, {
       signed: true,
     });
-    const playList = await playlistModel.findById(id);
+    const playList = await playlistModel.findById(id).populate("userId");
     return res.json({
       message: "get play list",
       playList,

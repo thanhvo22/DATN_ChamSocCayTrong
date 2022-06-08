@@ -8,6 +8,15 @@ module.exports.getVideos = async (req, res) => {
   res.json(videos);
 };
 
+module.exports.getVideoByPlayListId = async (req, res) => {
+  const playlistId = req.params.playlistId;
+  const videos = await videoModel.find({playlistId:playlistId});
+  res.json({
+    message: "get all videos by playlist id successfully",
+    videos
+  });
+}
+
 module.exports.postCreateVideo = async (req, res) => {
   try {
     const userId = req.signedCookies.cookie_id;
