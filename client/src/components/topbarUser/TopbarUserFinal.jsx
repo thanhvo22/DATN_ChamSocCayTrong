@@ -2,23 +2,24 @@ import React, { useState, useEffect } from "react";
 import { useJwt } from "react-jwt";
 import { Link } from "react-router-dom";
 import "./topbarUser.css";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function TopbarUserFinal() {
-  const [user, setUser] = useState("");
-
+export default function TopbarUserFinal(img) {
+//   console.log("img", img);
   const token = localStorage.getItem("userId");
+  const navigate = useNavigate();
   const { decodedToken, isExpired } = useJwt(
     token,
     process.env.ACCESS_TOKEN_SECRET
   );
   console.log("decodedToken", decodedToken);
+  
   const logOut = () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("_id");
-    window.location.reload();
+    navigate("/");
   };
-  
+
   return (
     <div className="topUser">
       <div className="topUserLeft">
@@ -58,13 +59,9 @@ export default function TopbarUserFinal() {
         {decodedToken ? (
           <div className="container">
             <Link className="link" to="/settings">
-              <img
-                className="topUserImg"
-                src="https://res.cloudinary.com/dhxlhkgog/image/upload/v1651658129/brjrs5g50pigukp8oe7y.jpg"
-                alt=""
-              />
+              <img className="topUserImg" src={img.img.images} alt="null" />
             </Link>
-            <Link to="/logout" className="link" onClick={logOut}>
+            <Link to="/" className="link" onClick={logOut}>
               <ul className="topUserList">
                 <li className="topUserListItem">Đăng Xuất</li>
               </ul>
