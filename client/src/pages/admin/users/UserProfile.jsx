@@ -1,17 +1,8 @@
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Topbar from "../../../components/topbar/Topbar";
-import {
-  CalendarToday,
-  LocationSearching,
-  MailOutline,
-  PermIdentity,
-  PhoneAndroid,
-  Publish,
-} from "@material-ui/icons";
-import { Link } from "react-router-dom";
-import "./css/userProfile.css";
+import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
-import {useEffect, useState} from "react";
+import "./css/userProfile.css";
 import axios from "axios";
 import Profile from "../../../components/profile/Profile";
 export default function User() {

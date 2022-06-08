@@ -5,7 +5,6 @@ import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
 export default function Topbar(admin) {
-  
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -29,12 +28,14 @@ export default function Topbar(admin) {
           </div>
           <Link className="link" to="/admin/profile">
             <img
-              src={admin.admin.img}
+              src={admin.admin.images}
               alt="null"
               className="topAvatar"
-              
             />
           </Link>
+          <div className="topbarIconContainer">
+            <p>Hello, {admin.admin.name}</p>
+          </div>
         </div>
       </div>
     </div>

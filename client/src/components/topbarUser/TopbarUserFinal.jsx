@@ -58,9 +58,13 @@ export default function TopbarUserFinal(img) {
       <div className="topUserRight">
         {decodedToken ? (
           <div className="container">
-            <Link className="link" to="/settings">
+            <Link className="link" to="/profile">
               <img className="topUserImg" src={img.img.images} alt="null" />
             </Link>
+            <ul className="topUserList">
+                <li className="topUserListItem">Hello, {img.img.name}</li>
+              </ul>
+            
             <Link to="/" className="link" onClick={logOut}>
               <ul className="topUserList">
                 <li className="topUserListItem">Đăng Xuất</li>

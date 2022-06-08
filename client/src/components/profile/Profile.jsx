@@ -9,28 +9,43 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import "./profile.css";
+import { useJwt } from "react-jwt";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile(user) {
-  
+  const token = localStorage.getItem("userId");
+  const navigate = useNavigate();
+  const { decodedToken, isExpired } = useJwt(
+    token,
+    process.env.ACCESS_TOKEN_SECRET
+  );
+  console.log("decodedToken", decodedToken);
   return (
     <div className="user">
-      <div className="userTitleContainer">
-        <h1 className="userTitle">Admin Profile </h1>
-        <Link to="/admin/users/newUser">
-          <button className="userAddButton">Create</button>
-        </Link>
-      </div>
+      {decodedToken === null ? (
+        <div className="userTitleContainer">
+          <h1 className="userTitle">Thông Tin Cá Nhân</h1>
+          
+        </div>
+      ) : decodedToken.role === "Admin" ? (
+        <div className="userTitleContainer">
+          <h1 className="userTitle">Admin Profile </h1>
+          <Link to="/admin/users/newUser">
+            <button className="userAddButton">Create</button>
+          </Link>
+        </div>
+      ) : (
+        <div className="userTitleContainer">
+          <h1 className="userTitle">Thông Tin Cá Nhân </h1>
+          
+        </div>
+      )}
       <div className="userContainer">
         <div className="userShow">
           <div className="userShowTop">
-            <img
-              src={user.user.images}
-              alt=""
-              className="userShowImg"
-            />
+            <img src={user.user.images} alt="" className="userShowImg" />
             <div className="userShowTopTitle">
               <span className="userShowUsername">{user.user.name}</span>
-              
             </div>
           </div>
           <div className="userShowBottom">
@@ -62,14 +77,12 @@ export default function Profile(user) {
           <span className="userUpdateTitle">Edit</span>
           <form className="userUpdateForm">
             <div className="userUpdateLeft">
-              
               <div className="userUpdateItem">
                 <label>Full Name</label>
                 <input
                   type="text"
                   placeholder={user.user.name}
                   className="userUpdateInput"
-                  
                 />
               </div>
               <div className="userUpdateItem">

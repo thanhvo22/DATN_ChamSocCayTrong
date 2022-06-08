@@ -1,5 +1,5 @@
 import React from "react";
-import TopbarUser from "../../../components/topbarUser/TopbarUser";
+
 import HeaderUser from "../../../components/headerUser/HeaderUser";
 import {
   CalendarToday,
@@ -15,10 +15,11 @@ import Videos from "../../../components/videos/Videos";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Messenger from "../../messenger/Messenger";
+import TopbarUserFinal from '../../../components/topbarUser/TopbarUserFinal';
 export default function UserPlayList() {
   return (
     <div>
-      <TopbarUser />
+      <TopbarUserFinal />
       <HeaderUser />
       <div className="user">
         <div className="userTitleContainer">

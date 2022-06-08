@@ -18,6 +18,7 @@ import UserProfile from "./pages/admin/users/UserProfile";
 import UserPlayList from './pages/users/playlists/UserPlayList';
 import Index from "./pages/Index";
 import ListSaved from './pages/users/playlistSaved/ListSaved';
+import ProfileUser from './pages/ProfileUser';
 function App() {
   return (
     <Router>
@@ -32,6 +33,7 @@ function App() {
         {/* users */}
         <Route path="/playlists/:id" element={<UserPlayList />} />
         <Route path="/savedlist" element={<ListSaved />} />
+        <Route path="/profile" element={<ProfileUser />} />
         {/* sharers */}
         <Route path="/sharer/playlists" element={<PlayListsAll />} />
         <Route path="/sharer/playlists/create" element={<NewPlayList />} />
