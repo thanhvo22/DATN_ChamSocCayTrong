@@ -31,7 +31,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<DashboardApp />} />
         {/* users */}
-        <Route path="/playlists/:id" element={<UserPlayList />} />
+        <Route path="/playlists/:playlistId" element={<UserPlayList />} />
         <Route path="/savedlist" element={<ListSaved />} />
         <Route path="/profile" element={<ProfileUser />} />
         {/* sharers */}
@@ -44,7 +44,7 @@ function App() {
         <Route exact path="/admin/user/:userId" element={<UserProfile />} />
         <Route exact path="/admin/users/newUser" element={<AdminNewUser />} />
         <Route exact path="/admin/playlists" element={<AdminPlayLists />} />
-        <Route exact path="/admin/playlists/:id" element={<AdminViewPlayList />} />
+        <Route exact path="/admin/playlists/:playlistId" element={<AdminViewPlayList />} />
         <Route exact path="/admin/videos" element={<AdminVideos />} />
       </Routes>
       {/* <div className="others">other pages</div> */}
