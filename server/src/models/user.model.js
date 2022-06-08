@@ -43,7 +43,8 @@ const userSchema = new Schema({
   createAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  cloudinary_id: {type: String}
 });
 
 module.exports = mongoose.model("Users", userSchema);

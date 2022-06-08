@@ -1,4 +1,6 @@
 const userModel = require("../models/user.model");
+const cloudinary = require("../utils/cloudinary");
+const argon2 = require("argon2");
 
 module.exports.getAllUsers = async (req, res) => {
   try {
@@ -23,8 +25,12 @@ module.exports.getUserID = async (req, res) => {
 };
 
 module.exports.postCreateUser = async (req, res) => {
-  const { user, pass, passAgain, gender, email, birthDate, name, typeofUser } = req.body;
-
+  const { user, pass, passAgain, gender, email, birthDate, name, typeofUser } =
+    req.body;
+  let path = req.file;
+  console.log("path", path);
+  const result = await cloudinary.uploader.upload(path?.path);
+  console.log("result: ", result);
   if (!user || !pass)
     return res.status(400).json({
       success: false,
@@ -32,7 +38,7 @@ module.exports.postCreateUser = async (req, res) => {
     });
 
   try {
-    const userName = await Users.findOne({ user });
+    const userName = await userModel.findOne({ user });
     if (userName)
       return res.status(400).json({
         success: false,
@@ -44,14 +50,16 @@ module.exports.postCreateUser = async (req, res) => {
       });
     }
     const hashedPass = await argon2.hash(pass);
-    const newUser = new Users({
+    const newUser = new userModel({
       user,
       pass: hashedPass,
       gender,
       email,
       birthDate,
       name,
-      typeofUser
+      typeofUser,
+      images: result.secure_url,
+      cloudinary_id: result.public_id,
     });
     await newUser.save();
     res.json({
@@ -70,10 +78,18 @@ module.exports.postCreateUser = async (req, res) => {
 
 module.exports.putUser = async (req, res) => {
   try {
-    let updateUser = await userModel.findById(req.params.id).exec();
-    updateCustomer.set(req.body);
-    let result = await updateUser.save();
-    res.send(result);
+    const _id = req.params.id;
+    let user_cloud = await accountModel.findById(_id);
+    console.log("user_cloud", user_cloud);
+    if (user_cloud.cloudinary !== null) {
+      await cloudinary.uploader.destroy(user_cloud?.cloudinary_id);
+    }
+    let path = req.file;
+    let newAvatar;
+    if (path) {
+      newAvatar = await cloudinary.uploader.upload(path.path);
+    }
+
   } catch (error) {
     res.status(500).send(error);
   }
