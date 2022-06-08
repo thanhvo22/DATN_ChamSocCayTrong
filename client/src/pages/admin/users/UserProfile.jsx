@@ -14,13 +14,13 @@ export default function User() {
     //   console.log(`res`, res.data.data.images);
       setUser(res.data.data);
     });
-  });
+  }, []);
   let { userId } = useParams();
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/users/${userId}`).then((res) => {
       setViewUser(res.data.data);
     });
-  });
+  },[]);
   return (
     <div>
       <Topbar admin={user} />
