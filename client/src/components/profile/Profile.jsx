@@ -5,16 +5,17 @@ import {
   PermIdentity,
   PhoneAndroid,
   Publish,
+  StarRate,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import "./profile.css";
 
-export default function Profile() {
+export default function Profile(user) {
   
   return (
     <div className="user">
       <div className="userTitleContainer">
-        <h1 className="userTitle">Profile without id </h1>
+        <h1 className="userTitle">Admin Profile </h1>
         <Link to="/admin/users/newUser">
           <button className="userAddButton">Create</button>
         </Link>
@@ -23,37 +24,37 @@ export default function Profile() {
         <div className="userShow">
           <div className="userShowTop">
             <img
-              src="https://res.cloudinary.com/dhxlhkgog/image/upload/v1651658129/brjrs5g50pigukp8oe7y.jpg"
+              src={user.user.images}
               alt=""
               className="userShowImg"
             />
             <div className="userShowTopTitle">
-              <span className="userShowUsername">Anna Becker</span>
-              <span className="userShowUserTitle">Software Engineer</span>
+              <span className="userShowUsername">{user.user.name}</span>
+              
             </div>
           </div>
           <div className="userShowBottom">
             <span className="userShowTitle">Account Details</span>
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99</span>
+              <span className="userShowInfoTitle">{user.user.user}</span>
             </div>
             <div className="userShowInfo">
               <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">10.12.1999</span>
+              <span className="userShowInfoTitle">{user.user.birthDate}</span>
             </div>
             <span className="userShowTitle">Contact Details</span>
             <div className="userShowInfo">
-              <PhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">+1 123 456 67</span>
+              <StarRate className="userShowIcon" />
+              <span className="userShowInfoTitle">{user.user.typeofUser}</span>
             </div>
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99@gmail.com</span>
+              <span className="userShowInfoTitle">{user.user.email}</span>
             </div>
             <div className="userShowInfo">
               <LocationSearching className="userShowIcon" />
-              <span className="userShowInfoTitle">New York | USA</span>
+              <span className="userShowInfoTitle">{user.user.gender}</span>
             </div>
           </div>
         </div>
@@ -61,40 +62,34 @@ export default function Profile() {
           <span className="userUpdateTitle">Edit</span>
           <form className="userUpdateForm">
             <div className="userUpdateLeft">
-              <div className="userUpdateItem">
-                <label>Username</label>
-                <input
-                  type="text"
-                  placeholder="annabeck99"
-                  className="userUpdateInput"
-                />
-              </div>
+              
               <div className="userUpdateItem">
                 <label>Full Name</label>
                 <input
                   type="text"
-                  placeholder="Anna Becker"
+                  placeholder={user.user.name}
                   className="userUpdateInput"
+                  
                 />
               </div>
               <div className="userUpdateItem">
                 <label>Email</label>
                 <input
                   type="text"
-                  placeholder="annabeck99@gmail.com"
+                  placeholder={user.user.email}
                   className="userUpdateInput"
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Phone</label>
+                <label>Date of Birth</label>
                 <input
-                  type="text"
-                  placeholder="+1 123 456 67"
+                  type="date"
+                  placeholder={user.user.birthDate}
                   className="userUpdateInput"
                 />
               </div>
               <div className="userUpdateItem">
-                <label>Address</label>
+                <label>Gender</label>
                 <input
                   type="text"
                   placeholder="New York | USA"

@@ -1,4 +1,4 @@
-import "./css/userList.css"
+import "./css/userList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 // import { userRows } from "../../dummyData";
@@ -9,11 +9,19 @@ import Topbar from "../../../components/topbar/Topbar";
 import axios from "axios";
 
 export default function AdminUserList() {
+  const id = localStorage.getItem("_id");
+  const [user, setUser] = useState("");
   const [users, setUsers] = useState([]);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
+      //   console.log(`res`, res.data.data.images);
+      setUser(res.data.data);
+    });
+  });
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/users`).then((res) => {
-      console.log(`res`, res)
+      console.log(`res`, res);
       setUsers(res.data.data);
     });
   }, []);
@@ -52,12 +60,14 @@ export default function AdminUserList() {
       headerName: "Action",
       width: 150,
       renderCell: (params) => {
-        const userId = params.row._id
-        
+        const userId = params.row._id;
+
         return (
           <>
-            <Link to={"/admin/user/" + userId} >
-              <button className="userListEdit" userId={userId} >Edit</button>
+            <Link to={"/admin/user/" + userId}>
+              <button className="userListEdit" userId={userId}>
+                Edit
+              </button>
             </Link>
             <DeleteOutline
               className="userListDelete"
@@ -71,12 +81,12 @@ export default function AdminUserList() {
 
   return (
     <div>
-      <Topbar />
+      <Topbar admin={user}/>
       <div className="container">
         <Sidebar />
         <div className="userList">
           <h1>Danh sach Users</h1>
-          <DataGrid 
+          <DataGrid
             rows={users}
             disableSelectionOnClick
             columns={columns}

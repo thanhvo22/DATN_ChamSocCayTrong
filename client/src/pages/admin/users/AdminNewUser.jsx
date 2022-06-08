@@ -1,11 +1,18 @@
 import "./css/newUser.css";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 import Topbar from "../../../components/topbar/Topbar";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function AdminNewUser() {
+  const id = localStorage.getItem("_id");
+
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [passAgain, setPassAgain] = useState("");
@@ -14,6 +21,13 @@ export default function AdminNewUser() {
   const [birthDate, setBirthDate] = useState("");
   const [name, setName] = useState("");
   const [typeofUser, setTypeOfUser] = useState("");
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
+      //   console.log(`res`, res.data.data.images);
+      setUser(res.data.data);
+    });
+  });
 
   let navigate = useNavigate();
   const onFormSubmit = async (event) => {
@@ -38,7 +52,7 @@ export default function AdminNewUser() {
 
   return (
     <div>
-      <Topbar />
+      <Topbar admin={user} />
       <div className="container">
         <Sidebar />
         <div className="newUser">
@@ -50,6 +64,7 @@ export default function AdminNewUser() {
                 type="text"
                 placeholder="thanhvo"
                 onChange={(e) => setUser(e.target.value)}
+                minLength="5"
               />
             </div>
             <div className="newUserItem">
@@ -58,6 +73,8 @@ export default function AdminNewUser() {
                 type="text"
                 placeholder="Vo Van Thanh"
                 onChange={(e) => setName(e.target.value)}
+                minLength="5"
+                maxLength="40"
               />
             </div>
             <div className="newUserItem">
@@ -66,6 +83,8 @@ export default function AdminNewUser() {
                 type="password"
                 placeholder="password"
                 onChange={(e) => setPass(e.target.value)}
+                minLength="6"
+                maxLength="20"
               />
             </div>
             <div className="newUserItem">
@@ -74,6 +93,8 @@ export default function AdminNewUser() {
                 type="email"
                 placeholder="thanhvp2707@gmail.com"
                 onChange={(e) => setEmail(e.target.value)}
+                minLength="6"
+                maxLength="40"
               />
             </div>
             <div className="newUserItem">
@@ -82,6 +103,8 @@ export default function AdminNewUser() {
                 type="password"
                 placeholder="password"
                 onChange={(e) => setPassAgain(e.target.value)}
+                minLength="6"
+                maxLength="20"
               />
             </div>
             <div className="newUserItem">
@@ -92,30 +115,32 @@ export default function AdminNewUser() {
                 onChange={(e) => setBirthDate(e.target.value)}
               />
             </div>
+            
             <div className="newUserItem">
-              <label>Address</label>
-              <input type="text" placeholder="Gia Lai" />
-            </div>
-            <div className="newUserItem">
-              <label>Gender</label>
-              <div className="newUserGender">
-                <input
-                  type="radio"
-                  name="Nam"
-                  id="male"
-                  value="Nam"
-                  onChange={(e) => setGender(e.target.value)}
-                />
-                <label for="male">Male</label>
-                <input
-                  type="radio"
-                  name="Nữ"
-                  id="female"
-                  value="Nữ"
-                  onChange={(e) => setGender(e.target.value)}
-                />
-                <label for="female">Female</label>
-              </div>
+              <FormControl>
+                <FormLabel id="demo-row-radio-buttons-group-label">
+                  Gender
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel
+                    control={<Radio />}
+                    label="Nữ"
+                    name="Nữ"
+                    value="Nữ"
+                    onChange={(e) => setGender(e.target.value)}
+                  />
+                  <FormControlLabel
+                    control={<Radio />}
+                    label="Nam"
+                    value="Nam"
+                    onChange={(e) => setGender(e.target.value)}
+                  />
+                </RadioGroup>
+              </FormControl>
             </div>
             <div className="newUserItem">
               <label>Type Of User</label>
@@ -136,6 +161,12 @@ export default function AdminNewUser() {
                   onChange={(e) => setTypeOfUser(e.target.value)}
                 >
                   Sharers
+                </option>
+                <option
+                  value="Admin"
+                  onChange={(e) => setTypeOfUser(e.target.value)}
+                >
+                  Admin
                 </option>
               </select>
             </div>
