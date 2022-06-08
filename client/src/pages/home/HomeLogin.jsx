@@ -12,7 +12,7 @@ export default function HomeLogin() {
     //   console.log(`res`, res.data.data.images);
       setUser(res.data.data);
     });
-  }, []);
+  });
   return (
     <div>
       <TopbarUserFinal  img ={user}/>

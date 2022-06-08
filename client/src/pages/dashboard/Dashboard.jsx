@@ -1,15 +1,21 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
-// import { useJwt } from "react-jwt";
 import "../../App.css";
 import Topbar from "../../components/topbar/Topbar";
-// const token = localStorage.getItem("userId");
+import axios from "axios";
 
 export default function DashboardApp() {
-  // const { decodedToken, isExpired } = useJwt(token, "asdfsfso7asdfas01123");
+  const id = localStorage.getItem("_id");
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
+    //   console.log(`res`, res.data.data.images);
+      setUser(res.data.data);
+    });
+  });
   return (
     <div>
-      <Topbar />
+      <Topbar admin={user} />
       <div className="container">
         <Sidebar />
       </div>
