@@ -18,6 +18,7 @@ export default function Sidebar() {
   let navigate = useNavigate();
   const logOut = () => {
     localStorage.removeItem("userId");
+    localStorage.removeItem("_id");
     navigate("/");
     window.location.reload();
   };

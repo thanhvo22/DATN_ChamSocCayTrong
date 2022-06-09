@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Topbar from "../../../components/topbar/Topbar";
 import axios from "axios";
+import authHeader from '../../../services/auth-header';
 
 export default function AdminUserList() {
   const id = localStorage.getItem("_id");
@@ -17,10 +18,10 @@ export default function AdminUserList() {
       //   console.log(`res`, res.data.data.images);
       setUser(res.data.data);
     });
-  });
+  },[]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/users`).then((res) => {
+    axios.get(`http://localhost:5000/api/v1/users`, {headers:authHeader()}).then((res) => {
       console.log(`res`, res);
       setUsers(res.data.data);
     });
