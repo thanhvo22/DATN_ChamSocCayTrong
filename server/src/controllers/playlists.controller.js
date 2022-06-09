@@ -22,7 +22,7 @@ module.exports.getAllPlayList = async (req, res) => {
 
 module.exports.getPlayListID = async (req, res) => {
   try {
-    const id = req.params.id; 
+    const id = req.params.playlistId; 
     res.cookie("playlist_id", id, {
       signed: true,
     });

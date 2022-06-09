@@ -7,6 +7,11 @@ module.exports.getVideos = async (req, res) => {
   const videos = await videoModel.find();
   res.json(videos);
 };
+module.exports.getVideo  = async (req, res) => {
+  const id = req.params.id;
+  const video = await videoModel.findById(id).populate(['userId', 'playlistId']);
+  res.json(video);
+}
 
 module.exports.getVideoByPlayListId = async (req, res) => {
   const playlistId = req.params.playlistId;
