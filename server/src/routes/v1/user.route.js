@@ -5,7 +5,8 @@ const upload = require("../../utils/multer");
 const adminAuthentication = require("../../middlewares/adminAuthentication");
 
 router.get("/", adminAuthentication,userController.getAllUsers);
-
+router.put("/edit/blocked/:id", userController.blockUser);
+router.put("/edit/active/:id", userController.activeUser);
 router.get("/:id", userController.getUserID);
 
 router.post("/create", adminAuthentication,upload.single("images"),userController.postCreateUser);

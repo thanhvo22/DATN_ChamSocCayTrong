@@ -38,6 +38,22 @@ module.exports.getPlayListID = async (req, res) => {
   }
 };
 
+module.exports.acceptPlaylist = async (req, res) => {
+  const id = req.params.id;
+  const playlist = await playlistModel.findByIdAndUpdate(id, {
+    status: "Accept"
+  })
+  res.json(playlist);
+}
+
+module.exports.refusePlaylist = async (req, res) => {
+  const id = req.params.id;
+  const playlist = await playlistModel.findByIdAndUpdate(id, {
+    status: "Refuse"
+  })
+  res.json(playlist);
+}
+
 module.exports.postCreatePlayList = async (req, res) => {
   try {
     const userId = req.signedCookies.cookie_id;
@@ -61,10 +77,11 @@ module.exports.postCreatePlayList = async (req, res) => {
 module.exports.putPlayList = async (req, res) => {
   try {
     const id = req.params.id;
-    const { playlistName, preview } = req.body;
+    const { playlistName, preview, status } = req.body;
     const playlist = await playlistModel.findByIdAndUpdate(id, {
       playlistName,
       preview,
+      status
     });
     return res.json({
       message: "edit play list successfully",

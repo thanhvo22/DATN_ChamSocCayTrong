@@ -5,7 +5,7 @@ const userAuthentication = async (req, res, next) => {
   // const authHeader = req.header("Authorization");
   // const token = authHeader && authHeader.split(" ")[1];
   const token = req.header("x-auth-token");
-  console.log("token_server:", token);
+  // console.log("token_server:", token);
   if (!token) {
     res.status(401).json({
       errors: [

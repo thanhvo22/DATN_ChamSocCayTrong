@@ -83,13 +83,7 @@ module.exports.putVideo = async (req, res) => {
 };
 module.exports.deleteVideo = async (req, res) => {
   const id = req.params.id;
-  await videoModel.findByIdAndRemove(id);
-  await playlistModel.findOneAndRemove(
-    { id},
-    { $pull: { videos: { video_id: id } } },
-    false, // Upsert
-    true // Multi
-  );
+  await videoModel.findByIdAndDelete(id);
 
   return res.json({
     message: "delete playlist success fully",
