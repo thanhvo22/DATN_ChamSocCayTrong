@@ -12,13 +12,13 @@ import axios from "axios";
 import React, {useState, useEffect} from "react";
 
 export default function ViewPlayList(playlist) {
+  console.log("playlist", playlist);
   const [videos, setVideos] = useState("");
-  // useEffect(() => {
-  //   axios.get(`http://localhost:5000/api/v1/videos/${playlist.playlist._id}`).then((res) => {
-  //   console.log("res videos", res);  
-  //   setVideos(res.data.data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/v1/videos/playlist/${playlist.playlist._id}`).then((res) => {
+    setVideos(res.data.videos);
+    });
+  }, []);
   
   return (
     <div className="user">
@@ -40,7 +40,7 @@ export default function ViewPlayList(playlist) {
             />
             <div className="userShowTopTitle">
               <span className="userShowUsername">{playlist.playlist.playlistName}</span>
-              <span className="userShowUserTitle">{playlist.playlist?.userId?.name}</span>
+              <span className="userShowUserTitle">{playlist.playlist?.userId?.name}nay ak ha?</span>
             </div>
           </div>
           <div className="userShowBottom">
@@ -79,10 +79,9 @@ export default function ViewPlayList(playlist) {
         {/* edit */}
         <div className="userUpdate">
           <span className="userUpdateTitle">Video</span>
-          {/* {videos.map ((v)=> (
+          {videos && videos.map ((v)=> (
             <Videos v={v} />
-          ))} */}
-          <Videos />
+          ))}
           
         </div>
       </div>

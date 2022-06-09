@@ -10,11 +10,11 @@ import {useEffect, useState} from "react";
 
 export default function Videos(v) {
   console.log("video_id", v);
-  const [video, setVideo] =useState([]);
+  const [video, setVideo] =useState("");
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/video/${v._id}`).then((res) => {
+    axios.get(`http://localhost:5000/api/v1/videos/${v.v._id}`).then((res) => {
       console.log("video", res);
-      setVideo(res.data.data);
+      setVideo(res.data);
     });
   }, []);
   return (
@@ -28,10 +28,13 @@ export default function Videos(v) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Bai 1, chon giong cay trong 
+          {video.nameVideo}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Chon cay dung voi dat cua ban
+          {video.playlistId}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {video.userId}
         </Typography>
       </CardContent>
       <CardActions>
