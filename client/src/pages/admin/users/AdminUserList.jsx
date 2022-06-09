@@ -1,13 +1,13 @@
 import "./css/userList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-// import { userRows } from "../../dummyData";
+import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Topbar from "../../../components/topbar/Topbar";
 import axios from "axios";
-import authHeader from '../../../services/auth-header';
+import authHeader from "../../../services/auth-header";
 
 export default function AdminUserList() {
   const id = localStorage.getItem("_id");
@@ -18,24 +18,51 @@ export default function AdminUserList() {
       //   console.log(`res`, res.data.data.images);
       setUser(res.data.data);
     });
-  },[]);
-
-  useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/users`, {headers:authHeader()}).then((res) => {
-      console.log(`res`, res);
-      setUsers(res.data.data);
-    });
   }, []);
 
-  const handleDelete = (id) => {
-    setUsers(users.filter((item) => item._id !== id));
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/v1/users`, { headers: authHeader() })
+      .then((res) => {
+        console.log(`res`, res);
+        setUsers(res.data.data);
+      });
+  }, []);
+
+  const handleActive = async (id) => {
+    await axios
+      .put(`http://localhost:5000/api/v1/users/edit/active/${id}`,{
+        headers: authHeader(),
+      })
+      .then((res) => {
+        window.location.reload();
+      });
+  };
+  const handleBlocked = async (id) => {
+    await axios
+      .put(`http://localhost:5000/api/v1/users/edit/blocked/${id}`, {
+        headers: authHeader(),
+      })
+      .then((res) => {
+        window.location.reload();
+      });
+  };
+
+  const handleDelete = async (id) => {
+    await axios
+      .delete(`http://localhost:5000/api/v1/users/delete/${id}`, {
+        headers: authHeader(),
+      })
+      .then((res) => {
+        window.location.reload();
+      });
   };
   const columns = [
-    { field: "_id", headerName: "ID", width: 260 },
+    { field: "_id", headerName: "ID", width: 220 },
     {
       field: "user",
       headerName: "User",
-      width: 200,
+      width: 130,
       // renderCell: (params) => {
       //   return (
       //     <div className="userListUser">
@@ -59,7 +86,7 @@ export default function AdminUserList() {
     {
       field: "action",
       headerName: "Action",
-      width: 150,
+      width: 260,
       renderCell: (params) => {
         const userId = params.row._id;
 
@@ -70,6 +97,19 @@ export default function AdminUserList() {
                 Edit
               </button>
             </Link>
+            <button
+              onClick={() => handleActive(userId)}
+              className="userListEdit"
+            >
+              Active
+            </button>
+            <button
+              onClick={() => handleBlocked(userId)}
+              className="userListBlocked"
+            >
+              Blocked
+            </button>
+
             <DeleteOutline
               className="userListDelete"
               onClick={() => handleDelete(userId)}
@@ -82,11 +122,14 @@ export default function AdminUserList() {
 
   return (
     <div>
-      <Topbar admin={user}/>
+      <Topbar admin={user} />
       <div className="container">
         <Sidebar />
         <div className="userList">
-          <h1>Danh sach Users</h1>
+          <h1>Danh sách người dùng</h1>
+          <Link to="/admin/users/newUser">
+            <button className="userAddButton">Create User</button>
+          </Link>
           <DataGrid
             rows={users}
             disableSelectionOnClick

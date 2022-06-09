@@ -24,6 +24,14 @@ export default function AdminVideos() {
       setVideos(res.data);
     });
   }, []);
+  const handleDelete = async (id) => {
+    await axios
+      .delete(`http://localhost:5000/api/v1/videos/delete/${id}`)
+      .then((res) => {
+        window.location.reload();
+      });
+    
+  };
 
   return (
     <div>
@@ -34,7 +42,7 @@ export default function AdminVideos() {
         <div>
           {videos.map((v) => (
             <div>
-              <Card sx={{ maxWidth: 500 }}>
+              <Card sx={{ maxWidth: 500 }} >
                 <iframe
                   width="500"
                   height="300"
@@ -58,7 +66,7 @@ export default function AdminVideos() {
                 </CardContent>
                 <CardActions>
                   <Button size="small">Accept Video</Button>
-                  <Button size="small">Delete Video</Button>
+                  <Button onClick={() => handleDelete(v._id)} size="small">Delete Video</Button>
                 </CardActions>
               </Card>
             

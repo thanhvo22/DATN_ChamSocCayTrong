@@ -18,6 +18,7 @@ export default function AdminProfile() {
       <Topbar admin={user}/>
       <div className="container">
         <Sidebar />
+        
         <Profile  user={user}/>
       </div>
     </div>

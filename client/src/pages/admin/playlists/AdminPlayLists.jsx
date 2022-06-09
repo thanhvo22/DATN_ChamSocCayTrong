@@ -10,6 +10,7 @@ export default function AdminPlayLists() {
   const id = localStorage.getItem("_id");
   const [user, setUser] = useState("");
   const [playlists, setPlayLists] = useState([]);
+  
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
       setUser(res.data.data);
@@ -23,24 +24,37 @@ export default function AdminPlayLists() {
     });
   }, []);
 
-  const handleDelete = (id) => {
-    setPlayLists(playlists.filter((item) => item._id !== id));
-  };
+  const handleAccept = async(id) => {
+    await axios.put(`http://localhost:5000/api/v1/playlists/edit/accept/${id}`).then((res) => {
+      window.location.reload();
+    });
+  }
+  const handleRefuse = async(id) => {
+    await axios.put(`http://localhost:5000/api/v1/playlists/edit/refuse/${id}`).then((res) => {
+      window.location.reload();
+    });
+  }
+  
+  const handleDelete = async(id) => {
+    await axios.put(`http://localhost:5000/api/v1/playlists/delete/${id}`).then((res) => {
+      window.location.reload();
+    });
+  }
   const columns = [
-    { field: "_id", headerName: "ID", width: 100 },
-    {
-      field: "userId",
-      headerName: "ID Sharers",
-      width: 200,
-      // renderCell: (params) => {
-      //   return (
-      //     <div className="userListUser">
-      //       <img className="userListImg" src={params.row.avatar} alt="" />
-      //       {params.row.username}
-      //     </div>
-      //   );
-      // },
-    },
+    { field: "_id", headerName: "ID", width: 120 },
+    // {
+    //   field: "userId",
+    //   headerName: "ID Sharers",
+    //   width: 200,
+    //   // renderCell: (params) => {
+    //   //   return (
+    //   //     <div className="userListUser">
+    //   //       <img className="userListImg" src={params.row.avatar} alt="" />
+    //   //       {params.row.username}
+    //   //     </div>
+    //   //   );
+    //   // },
+    // },
     { field: "playlistName", headerName: "Name Play Lists", width: 200 },
     {
       field: "preview",
@@ -55,12 +69,12 @@ export default function AdminPlayLists() {
     {
       field: "rating",
       headerName: "Rating",
-      width: 160,
+      width: 120,
     },
     {
       field: "action",
       headerName: "Action",
-      width: 150,
+      width: 260,
       renderCell: (params) => {
         const userId = params.row._id;
 
@@ -71,6 +85,8 @@ export default function AdminPlayLists() {
                 Edit
               </button>
             </Link>
+            <button onClick={() => handleAccept(userId)} className="userListEdit">Accept</button>
+            <button onClick={() => handleRefuse(userId)} className="userListBlocked">Refuse</button>
             <DeleteOutline
               className="userListDelete"
               onClick={() => handleDelete(userId)}
@@ -83,11 +99,11 @@ export default function AdminPlayLists() {
 
   return (
     <div>
-      <Topbar admin={user}/>
+      <Topbar admin={user} />
       <div className="container">
         <Sidebar />
         <div className="userList">
-          <h1>Danh sach playlists</h1>
+          <h1>Danh sách khóa học được chia sẻ</h1>
           <DataGrid
             rows={playlists}
             disableSelectionOnClick

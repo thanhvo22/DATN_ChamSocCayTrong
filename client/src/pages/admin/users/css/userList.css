@@ -35,6 +35,15 @@
   cursor: pointer;
   margin-right: 20px;
 }
+.userListBlocked{
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #cc0f0f;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
 
 .userListDelete {
   color: red;

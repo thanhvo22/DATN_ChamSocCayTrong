@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useEffect, useState } from "react";
 
 import HeaderUser from "../../../components/headerUser/HeaderUser";
 import {
@@ -16,10 +16,19 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Messenger from "../../messenger/Messenger";
 import TopbarUserFinal from '../../../components/topbarUser/TopbarUserFinal';
+import axios from "axios";
 export default function UserPlayList() {
+  const id = localStorage.getItem("_id");
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
+      console.log(`res`, res.data.data);
+      setUser(res.data.data);
+    });
+  });
   return (
     <div>
-      <TopbarUserFinal />
+      { user && (<TopbarUserFinal img ={user} />)}
       <HeaderUser />
       <div className="user">
         <div className="userTitleContainer">
@@ -76,10 +85,7 @@ export default function UserPlayList() {
           {/* edit */}
           <div className="userUpdate">
             <span className="userUpdateTitle">Video</span>
-            <Videos />
-            <Videos />
-            <Videos />
-            <Videos />
+           
           </div>
         </div>
       </div>

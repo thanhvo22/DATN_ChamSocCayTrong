@@ -3,18 +3,14 @@ import {
   LocationSearching,
   MailOutline,
   PermIdentity,
-  PhoneAndroid,
   Publish,
   StarRate,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
 import "./profile.css";
 import { useJwt } from "react-jwt";
-import { useNavigate } from "react-router-dom";
 
 export default function Profile(user) {
   const token = localStorage.getItem("userId");
-  const navigate = useNavigate();
   const { decodedToken, isExpired } = useJwt(
     token,
     process.env.ACCESS_TOKEN_SECRET
@@ -29,10 +25,8 @@ export default function Profile(user) {
         </div>
       ) : decodedToken.role === "Admin" ? (
         <div className="userTitleContainer">
-          <h1 className="userTitle">Admin Profile </h1>
-          <Link to="/admin/users/newUser">
-            <button className="userAddButton">Create</button>
-          </Link>
+          <h1 className="userTitle">Profile </h1>
+          
         </div>
       ) : (
         <div className="userTitleContainer">
