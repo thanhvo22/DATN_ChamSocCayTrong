@@ -2,8 +2,19 @@ const userModel = require("../models/user.model");
 const {verifyJWT} = require("../utils/jwt.util");
 
 const sharerAuthentication = async (req, res, next) => {
-  const authHeader = req.header("Authorization");
-  const token = authHeader && authHeader.split(" ")[1];
+  // const authHeader = req.header("Authorization");
+  // const token = authHeader && authHeader.split(" ")[1];
+  const token = req.header("x-auth-token");
+  console.log("token_server:", token);
+  if (!token) {
+    res.status(401).json({
+      errors: [
+        {
+          msg: "Token not found",
+        },
+      ],
+    });
+  }
   const { userId, role } = verifyJWT(token);
   
   const user = await userModel.findById(userId);
