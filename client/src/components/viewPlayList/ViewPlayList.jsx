@@ -11,10 +11,10 @@ import Videos from "../videos/Videos";
 import axios from "axios";
 import React, {useState, useEffect} from "react";
 
-export default function ViewPlayList(list) {
+export default function ViewPlayList(playlist) {
   const [videos, setVideos] = useState("");
   // useEffect(() => {
-  //   axios.get(`http://localhost:5000/api/v1/videos/${list.list._id}`).then((res) => {
+  //   axios.get(`http://localhost:5000/api/v1/videos/${playlist.playlist._id}`).then((res) => {
   //   console.log("res videos", res);  
   //   setVideos(res.data.data);
   //   });
@@ -39,8 +39,8 @@ export default function ViewPlayList(list) {
               className="userShowImg"
             />
             <div className="userShowTopTitle">
-              <span className="userShowUsername">{list.list.playlistName}</span>
-              <span className="userShowUserTitle">{list.list.userId.name}</span>
+              <span className="userShowUsername">{playlist.playlist.playlistName}</span>
+              <span className="userShowUserTitle">{playlist.playlist?.userId?.name}</span>
             </div>
           </div>
           <div className="userShowBottom">
@@ -48,30 +48,30 @@ export default function ViewPlayList(list) {
             <div className="userShowInfo">
               <PermIdentity className="userShowIcon" />
               <span className="userShowInfoTitle">
-                {list.list.playlistName}
+                {playlist.playlist.playlistName}
               </span>
             </div>
             <div className="userShowInfo">
               <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">{list.list.preview}</span>
+              <span className="userShowInfoTitle">{playlist.playlist.preview}</span>
             </div>
             {/* <span className="userShowTitle">Contact Details</span> */}
             <div className="userShowInfo">
               <StarRate className="userShowIcon" />
               <span className="userShowInfoTitle">
-                Rating: {list.list.rating}{" "}
+                Rating: {playlist.playlist.rating}{" "}
               </span>
             </div>
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
               <span className="userShowInfoTitle">
-                create at: {list.list.createAt}
+                create at: {playlist.playlist.createAt}
               </span>
             </div>
             <div className="userShowInfo">
               <LocationSearching className="userShowIcon" />
               <span className="userShowInfoTitle">
-                Status | {list.list.status}
+                Status | {playlist.playlist.status}
               </span>
             </div>
           </div>
@@ -79,10 +79,11 @@ export default function ViewPlayList(list) {
         {/* edit */}
         <div className="userUpdate">
           <span className="userUpdateTitle">Video</span>
+          {/* {videos.map ((v)=> (
+            <Videos v={v} />
+          ))} */}
           <Videos />
-          <Videos />
-          <Videos />
-          <Videos />
+          
         </div>
       </div>
     </div>

@@ -5,8 +5,18 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import axios from "axios";
+import {useEffect, useState} from "react";
 
-export default function Videos() {
+export default function Videos(v) {
+  console.log("video_id", v);
+  const [video, setVideo] =useState([]);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/v1/video/${v._id}`).then((res) => {
+      console.log("video", res);
+      setVideo(res.data.data);
+    });
+  }, []);
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
