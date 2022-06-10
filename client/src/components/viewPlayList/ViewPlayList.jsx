@@ -18,7 +18,7 @@ export default function ViewPlayList(playlist) {
     token,
     process.env.ACCESS_TOKEN_SECRET
   );
-  const [videos, setVideos] = useState("");
+  const [videos, setVideos] = useState([]);
   useEffect(() => {
     axios
       .get(

@@ -19,13 +19,13 @@ import TopbarUserFinal from '../../../components/topbarUser/TopbarUserFinal';
 import axios from "axios";
 export default function UserPlayList() {
   const id = localStorage.getItem("_id");
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
       console.log(`res`, res.data.data);
       setUser(res.data.data);
     });
-  });
+  },[]);
   return (
     <div>
       { user && (<TopbarUserFinal img ={user} />)}

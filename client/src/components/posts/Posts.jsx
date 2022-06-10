@@ -11,10 +11,10 @@ export default function Posts() {
       console.log("res laylists", res);
       setPlayLists(res.data.playLists);
     });
-  }, []);
+  },[]);
   return (
     <div className="posts">
-      {playlists.map((lists) => (
+      {playlists && playlists.map((lists) => (
         
         <Post list={lists}/>
       ))}

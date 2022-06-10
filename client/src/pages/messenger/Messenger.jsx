@@ -11,7 +11,6 @@ export default function Messenger() {
           <>
             <div className="chatBoxTop">
               <Message />
-              <Message />
               
             </div>
             <div className="chatBoxBottom">

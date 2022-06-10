@@ -39,7 +39,7 @@ export default function TopbarUserFinal(img) {
               <li className="topUserListItem">Khóa Học Đã Lưu</li>
             </Link>
           ) : decodedToken.role === "Sharers" ? (
-            <Link to="/playlists" className="link">
+            <Link to="/sharer/playlists" className="link">
               <li className="topUserListItem">Khóa Học Của Bạn </li>
             </Link>
           ) : (
