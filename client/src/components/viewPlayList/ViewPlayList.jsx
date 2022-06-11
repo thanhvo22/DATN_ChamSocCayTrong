@@ -11,6 +11,9 @@ import Videos from "../videos/Videos";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useJwt } from "react-jwt";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
+import Messenger from "../../pages/messenger/Messenger";
 
 export default function ViewPlayList(playlist) {
   const token = localStorage.getItem("userId");
@@ -41,12 +44,16 @@ export default function ViewPlayList(playlist) {
             <button className="userAddButton">Refuse</button>
           </div>
         </div>
-      ) : (
+      ) : decodedToken?.role === "Sharers" ? (
         <div className="userTitleContainer">
           <h1 className="userTitle">Thông tin khóa học</h1>
           <Link to="/sharer/playlists/create">
             <button className="userAddButton">Create</button>
           </Link>
+        </div>
+      ) : (
+        <div className="userTitleContainer">
+          <h1 className="userTitle">Thông tin khóa học</h1>
         </div>
       )}
       <div className="userContainer">
@@ -101,11 +108,28 @@ export default function ViewPlayList(playlist) {
                 Status | {playlist.playlist.status}
               </span>
             </div>
+            {decodedToken?.role === "User" || "Sharers" || null ? (
+              <div>
+                <div>
+                  <Typography component="legend">Đánh Giá Khóa Học</Typography>
+                  <Rating name="customized-10" defaultValue={8} max={10} />
+                  <Link to="/rating/add">
+                    <button className="userAddButton">Đánh Giá</button>
+                  </Link>
+                </div>
+                <div>
+                  <h4>Thảo Luận</h4>
+                  <Messenger playlistId = {playlist.playlist._id} />
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
         {/* edit */}
         <div className="userUpdate">
-          <span className="userUpdateTitle">Video</span>
+          <span className="userUpdateTitle">
+            Video khóa chăm sóc cây trồng{" "}
+          </span>
           {videos && videos.map((v) => <Videos v={v} />)}
         </div>
       </div>

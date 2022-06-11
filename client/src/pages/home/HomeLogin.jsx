@@ -1,5 +1,6 @@
 import "./home.css";
 import TopbarUserFinal from "../../components/topbarUser/TopbarUserFinal";
+import TopbarUser from "../../components/topbarUser/TopbarUser";
 import HeaderUser from "../../components/headerUser/HeaderUser";
 import Posts from "../../components/posts/Posts";
 import axios from "axios";
@@ -15,7 +16,8 @@ export default function HomeLogin() {
   },[]);
   return (
     <div>
-      <TopbarUserFinal  img ={user}/>
+      {id? <TopbarUserFinal  img ={user}/> : <TopbarUser/> }
+      
       <HeaderUser />
       <div className="home">
         <Posts />
