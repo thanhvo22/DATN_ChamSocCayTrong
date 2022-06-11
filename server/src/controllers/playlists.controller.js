@@ -2,8 +2,8 @@ const playlistModel = require("../models/playlists.model");
 const cloudinary = require("../utils/cloudinary");
 
 module.exports.getPlayListForSharer = async (req, res) => {
-  const userId = req.header('userId');
-  const playList = await playlistModel.find({userId:userId});
+  const userId = req.header("userId");
+  const playList = await playlistModel.find({ userId: userId });
   res.json(playList);
 };
 
@@ -74,6 +74,7 @@ module.exports.refusePlaylist = async (req, res) => {
 
 module.exports.postCreatePlayList = async (req, res) => {
   try {
+    console.log("api running");
     const { userId, playlistName, preview, categoryId } = req.body;
     let path = req.file;
     console.log("path", path);
@@ -101,13 +102,22 @@ module.exports.postCreatePlayList = async (req, res) => {
 };
 
 module.exports.putPlayList = async (req, res) => {
+  console.log('API Running')
   try {
     const id = req.params.id;
+    let path = req.file;
+
+    console.log("path server", path);
+    if (path) {
+      result = await cloudinary.uploader.upload(path?.path);
+    }
     const { playlistName, preview, status } = req.body;
     const playlist = await playlistModel.findByIdAndUpdate(id, {
       playlistName,
       preview,
       status,
+      images: result?.secure_url || undefined,
+      cloudinary_id: result?.public_id || undefined,
     });
     return res.json({
       message: "edit play list successfully",
