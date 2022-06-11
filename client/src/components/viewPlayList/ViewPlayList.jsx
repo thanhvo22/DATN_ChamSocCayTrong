@@ -48,7 +48,9 @@ export default function ViewPlayList(playlist) {
         <div className="playListTitleContainer">
           <h1 className="playListTitle">Thông tin khóa học</h1>
           <Link to="/sharer/playlists/create">
-            <button className="playListAddButton">Thêm video cho khóa học</button>
+            <button className="playListAddButton">
+              Thêm video cho khóa học
+            </button>
           </Link>
         </div>
       ) : (
@@ -108,7 +110,8 @@ export default function ViewPlayList(playlist) {
                 Status | {playlist.playlist.status}
               </span>
             </div>
-            {decodedToken?.role === "Admin" ? null : (
+            {decodedToken?.role === "Admin" ? null : decodedToken?.role ===
+              "User" ? (
               <div>
                 <div>
                   <Typography component="legend">Đánh Giá Khóa Học</Typography>
@@ -122,7 +125,7 @@ export default function ViewPlayList(playlist) {
                   <Messenger playlistId={playlist.playlist._id} />
                 </div>
               </div>
-            )}
+            ) : null}
           </div>
         </div>
         {/* edit */}

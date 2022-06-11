@@ -66,6 +66,7 @@ export default function PlayListsAll() {
                   <span className="postDate">{lists.rating}</span>
                 </div>
                 <p className="postDesc">{lists.preview}</p>
+                <p className="postDesc">{lists.categoryId?.name}</p>
               </Link>
             </div>
           ))}

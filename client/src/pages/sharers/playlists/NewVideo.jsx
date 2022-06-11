@@ -1,13 +1,11 @@
 import "./newPlayList.css";
-import Topbar from "../../../components/topbar/Topbar";
-import Sidebar from "../../../components/sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import TopbarUserFinal from "../../../components/topbarUser/TopbarUserFinal";
-import SidebarUser from "../../../components/sidebarUser/SidebarUser";
+import SidebarUser from '../../../components/sidebarUser/SidebarUser';
 
-export default function NewPlayList() {
+export default function NewVideo() {
   const id = localStorage.getItem("_id");
   const [userId, setUserId] = useState("");
   const [playlistName, setPlaylistName] = useState("");
@@ -33,21 +31,17 @@ export default function NewPlayList() {
   const onFormSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .post(
-        "http://localhost:5000/api/v1/playlists/create",
-        {
-          userId: id,
-          playlistName,
-          preview,
-          categoryId,
-          images,
+      .post("http://localhost:5000/api/v1/playlists/create", {
+        userId: id,
+        playlistName,
+        preview,
+        categoryId,
+        images,
+      },{
+        headers: {
+          "content-type": "multipart/form-data",
         },
-        {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        }
-      )
+      })
       .then((res) => {
         console.log("create playlists: ", res);
         navigate("/sharer/playlists");
@@ -101,11 +95,19 @@ export default function NewPlayList() {
 
             <div className="newPlayListItem">
               <label>Danh Mục Giống Cây Trồng</label>
-              <select className="newPlayListSelect" id="active">
+              <select
+                className="newPlayListSelect"
+                id="active"
+                value={categoryId}
+                onChange={(e) => {
+                  console.log(setCategoryId(e.target.value));
+                  setCategoryId(e.target.value);
+                }}
+              >
                 {category.map((c) => (
                   <option
                     name="categoryId"
-                    value={c._id}
+                    value={categoryId}
                     onChange={(e) => {
                       console.log(setCategoryId(e.target.value));
                       setCategoryId(e.target.value);
