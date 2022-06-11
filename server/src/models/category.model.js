@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 const categorySchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
-    ref: "Admin",
+    ref: "Users",
   },
-  categoryName: { type: String, maxlength: 255 }
+  name: { type: String, maxlength: 255, min: 10 }
 });
 
-module.exports = mongoose.model('Category', categorySchema);
+module.exports = mongoose.model('Categories', categorySchema);
