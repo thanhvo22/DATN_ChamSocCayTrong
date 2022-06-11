@@ -34,7 +34,7 @@ const userSchema = new Schema({
   },
   name: { type: String, maxlength: 100, min: 7 },
   birthDate: { type: Date },
-  images: { type: String, maxlength: 255 },
+  images: { type: String, maxlength: 255, default: "https://res.cloudinary.com/dhxlhkgog/image/upload/v1654934504/avatar-trang-den-dep_015640236_vpldqx.png" },
   status: {
     type: String,
     enum: ["Normal", "Blocked"],

@@ -37,6 +37,6 @@ app.use("/api/v1/playlists", playlistRoute);
 app.use("/api/v1/videos", videoRoute);
 app.use("/api/v1/comments", commentRoute);
 app.use("/api/v1/rates",  rateRoute);
-app.use("/api/v1/savedlist", cookieMiddleWare, savedListRoute);
+app.use("/api/v1/savedlist", savedListRoute);
 
 module.exports = app;

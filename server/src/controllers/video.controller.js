@@ -24,26 +24,15 @@ module.exports.getVideoByPlayListId = async (req, res) => {
 
 module.exports.postCreateVideo = async (req, res) => {
   try {
-    const userId = req.signedCookies.cookie_id;
     const playlistId = req.params.playlistID;
 
-    const { nameVideo, linkVideo } = req.body;
+    const { userId,nameVideo, linkVideo } = req.body;
     const video = await videoModel.create({
       userId,
       playlistId,
       nameVideo,
       linkVideo,
     });
-    await playlistModel.findOneAndUpdate(
-      { id: playlistId },
-      {
-        $push: {
-          videos: {
-            video_id: video.id,
-          },
-        },
-      }
-    );
 
     return res.json({
       message: "create playlist successfully",

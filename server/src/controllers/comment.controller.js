@@ -5,6 +5,15 @@ module.exports.getComments = async (req, res) => {
   res.json(comments);
 };
 
+module.exports.getCommentsForPlaylist = async (req, res) => {
+  const playlistId = req.params.playlistId;
+  const comments = await commentModel.find({playlistId}).populate("userId");
+  res.json({
+    message: "comments for playlist",
+    comments
+  })
+}
+
 module.exports.postCreateCmt = async (req, res) => {
   console.log("created new comment");
   try {

@@ -56,12 +56,13 @@ module.exports.refusePlaylist = async (req, res) => {
 
 module.exports.postCreatePlayList = async (req, res) => {
   try {
-    const userId = req.signedCookies.cookie_id;
-    const { playlistName, preview } = req.body;
+    
+    const {userId, playlistName, preview, categoryId } = req.body;
     const playlist = await playlistModel.create({
       userId,
       playlistName,
       preview,
+      categoryId
     });
     return res.json({
       message: "create playlist successfully",

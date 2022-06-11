@@ -23,16 +23,17 @@ module.exports.getCategoryID = async (req, res) => {
 };
 
 module.exports.postCreateCategory = async function (req, res) {
-  let category = await Category.create(req.body);
+  const {name, userId} = req.body;
+  let category = await Category.create({name, userId});
   res.json(category);
 };
 
 module.exports.putCategory = async (req, res) => {
-  try {
-    let updateCategory = await Category.findById(req.params.id);
-    updateCategory.set(req.body);
-    let result = await updateCategory.save();
-    res.send(result);
+  try { 
+    const id = req.params.id;
+    const {name} = req.body;
+    const category = await Category.findByIdAndUpdate(id, {name});
+    res.json(category);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -40,7 +41,8 @@ module.exports.putCategory = async (req, res) => {
 
 module.exports.deleteCategory = async (req, res) => {
   try {
-    const category = await Category.findByIdAndDelete({ _id: req.params.id });
+    let id = req.params.id;
+    const category = await Category.findByIdAndDelete(id);
     res.status(201).json({
       success: true,
       data: category,
