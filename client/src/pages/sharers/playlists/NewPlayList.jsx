@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import TopbarUserFinal from "../../../components/topbarUser/TopbarUserFinal";
+import SidebarUser from '../../../components/sidebarUser/SidebarUser';
 
 export default function NewPlayList() {
   const id = localStorage.getItem("_id");
@@ -38,6 +39,10 @@ export default function NewPlayList() {
         preview,
         categoryId,
         images,
+      },{
+        headers: {
+          "content-type": "multipart/form-data",
+        },
       })
       .then((res) => {
         console.log("create playlists: ", res);
@@ -50,7 +55,7 @@ export default function NewPlayList() {
     <div>
       <TopbarUserFinal img={user} />
       <div className="container">
-        <Sidebar />
+        <SidebarUser />
         <div className="newPlayList">
           <h1 className="newPlayListTitle">Tạo mới khóa học</h1>
           <form className="newPlayListForm" onSubmit={onFormSubmit}>

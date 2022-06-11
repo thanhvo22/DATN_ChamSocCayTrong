@@ -29,15 +29,29 @@ export default function Profile(user) {
   const date = user.user.birthDate;
   const dateFormatted = Moment(date).format("DD-MM-YYYY");
   const [newUser, setNewUser] = useState(user.user);
-  
+
   //edit category
   const onSubmit = async (e) => {
     e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const file = data.get("file");
+    console.log(file);
     await axios
-      .put(`http://localhost:5000/api/v1/users/edit/${user.user._id}`, newUser)
+      .put(
+        `http://localhost:5000/api/v1/users/edit/${user.user._id}`,
+        {
+          ...newUser,
+          images: file,
+        },
+        {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
-        // window.location.reload();
+        window.location.reload();
       });
   };
   function handleChange(evt) {
@@ -107,7 +121,7 @@ export default function Profile(user) {
                   className="userUpdateInput"
                   name="name"
                   value={newUser.name}
-                  // placeholder={user.user.name}
+                  placeholder={user.user.name}
                   onChange={handleChange}
                 />
               </div>
@@ -116,7 +130,7 @@ export default function Profile(user) {
                 <input
                   type="text"
                   className="userUpdateInput"
-                  // placeholder={user.user.email}
+                  placeholder={user.user.email}
                   name="email"
                   value={newUser.email}
                   onChange={handleChange}
@@ -162,7 +176,11 @@ export default function Profile(user) {
             </div>
             <div className="userUpdateRight">
               <div className="userUpdateUpload">
-                <img className="userUpdateImg" src={newUser.images} alt="loi" />
+                <img
+                  className="userUpdateImg"
+                  src={user.user.images}
+                  alt="loi"
+                />
                 <label htmlFor="file">
                   <Publish className="userUpdateIcon" />
                 </label>
@@ -171,7 +189,7 @@ export default function Profile(user) {
                   id="file"
                   style={{ display: "none" }}
                   onChange={handleChange}
-                  name="images"
+                  name="file"
                 />
               </div>
               <button className="userUpdateButton">Update</button>
