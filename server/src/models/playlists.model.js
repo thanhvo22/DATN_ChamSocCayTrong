@@ -19,7 +19,7 @@ const playlistSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  image: { type: String, default: "https://res.cloudinary.com/dhxlhkgog/image/upload/v1654223802/header_itph8n.jpg" },
+  images: { type: String, default: "https://res.cloudinary.com/dhxlhkgog/image/upload/v1654223802/header_itph8n.jpg" },
   cloudinary_id: { type: String },
 });
 

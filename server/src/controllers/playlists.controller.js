@@ -1,8 +1,9 @@
 const playlistModel = require("../models/playlists.model");
+const cloudinary = require("../utils/cloudinary");
 
 module.exports.getPlayListForSharer = async (req, res) => {
-  const userId = req.signedCookies.cookie_id;
-  const playList = await playlistModel.findById(userId);
+  const userId = req.header('userId');
+  const playList = await playlistModel.find({userId:userId});
   res.json(playList);
 };
 
@@ -22,7 +23,7 @@ module.exports.getAllPlayList = async (req, res) => {
 
 module.exports.getPlayListID = async (req, res) => {
   try {
-    const id = req.params.playlistId; 
+    const id = req.params.playlistId;
     res.cookie("playlist_id", id, {
       signed: true,
     });
@@ -38,31 +39,55 @@ module.exports.getPlayListID = async (req, res) => {
   }
 };
 
+module.exports.playlistAccept = async (req, res) => {
+  try {
+    const playLists = await playlistModel
+      .find()
+      .where({ status: "Accept" })
+      .populate("userId");
+    return res.json({
+      message: "get All play list accept",
+      playLists,
+    });
+  } catch (error) {
+    res.json({
+      message: error,
+    });
+  }
+};
+
 module.exports.acceptPlaylist = async (req, res) => {
   const id = req.params.id;
   const playlist = await playlistModel.findByIdAndUpdate(id, {
-    status: "Accept"
-  })
+    status: "Accept",
+  });
   res.json(playlist);
-}
+};
 
 module.exports.refusePlaylist = async (req, res) => {
   const id = req.params.id;
   const playlist = await playlistModel.findByIdAndUpdate(id, {
-    status: "Refuse"
-  })
+    status: "Refuse",
+  });
   res.json(playlist);
-}
+};
 
 module.exports.postCreatePlayList = async (req, res) => {
   try {
-    
-    const {userId, playlistName, preview, categoryId } = req.body;
+    const { userId, playlistName, preview, categoryId } = req.body;
+    let path = req.file;
+    console.log("path", path);
+    let result;
+    if (path) {
+      result = await cloudinary.uploader.upload(path?.path);
+    }
     const playlist = await playlistModel.create({
       userId,
       playlistName,
       preview,
-      categoryId
+      categoryId,
+      images: result?.secure_url || undefined,
+      cloudinary_id: result?.public_id || undefined,
     });
     return res.json({
       message: "create playlist successfully",
@@ -82,7 +107,7 @@ module.exports.putPlayList = async (req, res) => {
     const playlist = await playlistModel.findByIdAndUpdate(id, {
       playlistName,
       preview,
-      status
+      status,
     });
     return res.json({
       message: "edit play list successfully",
