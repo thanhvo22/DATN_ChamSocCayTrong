@@ -31,7 +31,7 @@ export default function AdminUserList() {
 
   const handleActive = async (id) => {
     await axios
-      .put(`http://localhost:5000/api/v1/users/edit/active/${id}`,{
+      .put(`http://localhost:5000/api/v1/users/edit/active/${id}`, {
         headers: authHeader(),
       })
       .then((res) => {
@@ -60,23 +60,33 @@ export default function AdminUserList() {
   const columns = [
     { field: "_id", headerName: "ID", width: 220 },
     {
+      field: "images",
+      headerName: "Avt",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <div className="userListUser">
+            <img className="userListImg" src={params.row.images} alt="" />
+            {params.row.username}
+          </div>
+        );
+      },
+    },
+    {
       field: "user",
       headerName: "User",
       width: 130,
-      // renderCell: (params) => {
-      //   return (
-      //     <div className="userListUser">
-      //       <img className="userListImg" src={params.row.avatar} alt="" />
-      //       {params.row.username}
-      //     </div>
-      //   );
-      // },
     },
     { field: "email", headerName: "Email", width: 200 },
     {
       field: "status",
       headerName: "Status",
       width: 120,
+    },
+    {
+      field: "typeofUser",
+      headerName: "Role",
+      width: 105,
     },
     {
       field: "name",

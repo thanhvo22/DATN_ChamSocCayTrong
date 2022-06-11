@@ -1,96 +1,74 @@
-import Topbar from "../../../components/topbar/Topbar";
 import TopbarUserFinal from "../../../components/topbarUser/TopbarUserFinal";
-import Sidebar from "../../../components/sidebar/Sidebar";
-import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+import HeaderUser from "../../../components/headerUser/HeaderUser";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Button from "@mui/material/Button";
+import id_header from "../../../services/id_header";
 
 export default function PlayListsAll() {
   const [playlists, setPlayLists] = useState([]);
+  const id = localStorage.getItem("_id");
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    if (id !== null) {
+      axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
+        console.log(`res`, res.data.data);
+        setUser(res.data.data);
+      });
+    }
+  }, []);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/playlists/for-you`).then((res) => {
-      console.log("res laylists for sharers", res);
-      setPlayLists(res.data.playLists);
-    });
+    axios
+      .get(`http://localhost:5000/api/v1/playlists/for-you`, {
+        headers: id_header(),
+      })
+      .then((res) => {
+        console.log("res laylists for sharers", res.data);
+        setPlayLists(res.data);
+      });
   }, []);
 
   const handleDelete = (id) => {
     setPlayLists(playlists.filter((item) => item._id !== id));
   };
-  const columns = [
-    { field: "_id", headerName: "ID", width: 100 },
-    {
-      field: "userId",
-      headerName: "ID Sharers",
-      width: 200,
-      // renderCell: (params) => {
-      //   return (
-      //     <div className="userListUser">
-      //       <img className="userListImg" src={params.row.avatar} alt="" />
-      //       {params.row.username}
-      //     </div>
-      //   );
-      // },
-    },
-    { field: "playlistName", headerName: "Name Play Lists", width: 200 },
-    {
-      field: "preview",
-      headerName: "Preview Play lists",
-      width: 220,
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 160,
-    },
-    {
-      field: "rating",
-      headerName: "Rating",
-      width: 160,
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 150,
-      renderCell: (params) => {
-        const userId = params.row._id;
-
-        return (
-          <>
-            <Link to={"/admin/playlists/" + userId}>
-              <button className="userListEdit" userId={userId}>
-                Edit
-              </button>
-            </Link>
-            <DeleteOutline
-              className="userListDelete"
-              onClick={() => handleDelete(userId)}
-            />
-          </>
-        );
-      },
-    },
-  ];
 
   return (
     <div>
-      <Topbar />
-      <div className="container">
-        <Sidebar/>
-        <div className="userList">
-          <h1>Danh sach playlists</h1>
-          <DataGrid
-            rows={playlists}
-            disableSelectionOnClick
-            columns={columns}
-            getRowId={(row) => row._id}
-            pageSize={8}
-            checkboxSelection
-          />
-        </div>
+      <TopbarUserFinal img={user} />
+      <HeaderUser />
+      <h2>Danh sách khóa học của bạn đã chia sẻ</h2>
+      <Link to="/sharer/playlists/create" className="link">
+        <Button variant="contained">Thêm khóa học mới</Button>
+      </Link>
+      <div className="posts">
+        {playlists &&
+          playlists.map((lists) => (
+            <div className="post">
+              <Link to={"/playlists/" + lists._id} className="link">
+                <img className="postImg" src={lists.images} alt="" />
+                <div className="postInfo">
+                  <div className="postCats">
+                    <span className="postCat">
+                      <Link className="link" to="/posts?cat=Music">
+                        Music
+                      </Link>
+                    </span>
+                    <span className="postCat">
+                      <Link className="link" to="/posts?cat=Music">
+                        Life
+                      </Link>
+                    </span>
+                  </div>
+                  <span className="postTitle">{lists.playlistName}</span>
+                  <hr />
+                  <span className="postDate">{lists.rating}</span>
+                </div>
+                <p className="postDesc">{lists.preview}</p>
+              </Link>
+            </div>
+          ))}
       </div>
     </div>
   );

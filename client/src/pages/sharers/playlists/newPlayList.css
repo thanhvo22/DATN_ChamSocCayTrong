@@ -1,50 +1,53 @@
-.newUser {
+.newPlayList {
   flex: 4;
 }
 
-.newUserForm {
+.newPlayListForm {
   display: flex;
   flex-wrap: wrap;
 }
 
-.newUserItem {
+.newPlayListItem {
   width: 400px;
   display: flex;
   flex-direction: column;
   margin-top: 10px;
   margin-right: 20px;
+  font-size: 22px;
 }
 
-.newUserItem > label {
+.newPlayListItem > label {
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 22px;
   font-weight: 600;
   color: rgb(151, 150, 150);
 }
 
-.newUserItem > input {
+.newPlayListItem > input {
   height: 20px;
   padding: 10px;
   border: 1px solid gray;
   border-radius: 5px;
+  font-size: 20px;
 }
 
-.newUserGender > input {
+.newPlayListGender > input {
   margin-top: 15px;
 }
 
-.newUserGender > label {
+.newPlayListGender > label {
   margin: 10px;
-  font-size: 18px;
+  font-size: 22px;
   color: #555;
 }
 
-.newUserSelect {
+.newPlayListSelect {
   height: 40px;
   border-radius: 5px;
+  font-size: 19px;
 }
 
-.newUserButton {
+.newPlayListButton {
   width: 200px;
   border: none;
   background-color: darkblue;
@@ -54,4 +57,5 @@
   border-radius: 10px;
   margin-top: 30px;
   cursor: pointer;
+  font-size: 20px;
 }

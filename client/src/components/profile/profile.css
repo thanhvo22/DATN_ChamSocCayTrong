@@ -60,6 +60,7 @@
 
 .userShowUsername {
   font-weight: 600;
+  font-size: 30px
 }
 
 .userShowUserTitle {
@@ -68,11 +69,12 @@
 
 .userShowBottom {
   margin-top: 20px;
+  font-size: 20px;
 }
 
 .userShowTitle {
-  font-size: 14px;
   font-weight: 600;
+  font-size: 20px;
   color: rgb(175, 170, 170);
 }
 
@@ -84,11 +86,12 @@
 }
 
 .userShowIcon {
-  font-size: 16px !important;
+  font-size: 20px !important;
 }
 
 .userShowInfoTitle {
   margin-left: 10px;
+  font-size: 20px;
 }
 
 .userUpdateTitle {
@@ -106,11 +109,12 @@
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+  font-size: 22px;
 }
 
 .userUpdateItem > label {
   margin-bottom: 5px;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .userUpdateInput {
@@ -118,6 +122,7 @@
   width: 250px;
   height: 30px;
   border-bottom: 1px solid gray;
+  font-size: 20px;
 }
 
 .userUpdateRight {

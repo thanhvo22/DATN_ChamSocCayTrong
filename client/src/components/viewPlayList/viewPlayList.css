@@ -1,137 +1,137 @@
-.user {
+.playList {
   flex: 4;
   padding: 20px;
 }
 
-.userTitleContainer {
+.playListTitleContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.userAddButton {
-  width: 80px;
+.playListAddButton {
+  width: 180px;
   border: none;
   padding: 5px;
   background-color: teal;
   border-radius: 5px;
   cursor: pointer;
   color: white;
-  font-size: 16px;
+  font-size: 20px;
 }
 
-.userContainer {
+.playListContainer {
   display: flex;
   margin-top: 20px;
 }
 
-.userShow {
+.playListShow {
   flex: 1;
   padding: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-.userUpdate {
-  flex: 2;
+.playListUpdate {
+  width: 500px;
   padding: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   margin-left: 20px;
 }
 
-.userShowTop {
+.playListShowTop {
   display: flex;
   align-items: center;
 }
 
-.userShowImg {
+.playListShowImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.userShowTopTitle {
+.playListShowTopTitle {
   display: flex;
   flex-direction: column;
   margin-left: 20px;
 }
 
-.userShowUsername {
+.playListShowUsername {
   font-weight: 600;
 }
 
-.userShowUserTitle {
+.playListShowUserTitle {
   font-weight: 300;
 }
 
-.userShowBottom {
+.playListShowBottom {
   margin-top: 20px;
 }
 
-.userShowTitle {
+.playListShowTitle {
   font-size: 14px;
   font-weight: 600;
   color: rgb(175, 170, 170);
 }
 
-.userShowInfo {
+.playListShowInfo {
   display: flex;
   align-items: center;
   margin: 20px 0px;
   color: #444;
 }
 
-.userShowIcon {
+.playListShowIcon {
   font-size: 16px !important;
 }
 
-.userShowInfoTitle {
+.playListShowInfoTitle {
   margin-left: 10px;
 }
 
-.userUpdateTitle {
+.playListUpdateTitle {
   font-size: 24px;
   font-weight: 600;
 }
 
-.userUpdateForm {
+.playListUpdateForm {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
-.userUpdateItem {
+.playListUpdateItem {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
 }
 
-.userUpdateItem > label {
+.playListUpdateItem > label {
   margin-bottom: 5px;
   font-size: 14px;
 }
 
-.userUpdateInput {
+.playListUpdateInput {
   border: none;
   width: 250px;
   height: 30px;
   border-bottom: 1px solid gray;
 }
 
-.userUpdateRight {
+.playListUpdateRight {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.userUpdateUpload {
+.playListUpdateUpload {
   display: flex;
   align-items: center;
 }
 
-.userUpdateImg {
+.playListUpdateImg {
   width: 100px;
   height: 100px;
   border-radius: 10px;
@@ -139,11 +139,11 @@
   margin-right: 20px;
 }
 
-.userUpdateIcon {
+.playListUpdateIcon {
   cursor: pointer;
 }
 
-.userUpdateButton {
+.playListUpdateButton {
   border-radius: 5px;
   border: none;
   padding: 5px;

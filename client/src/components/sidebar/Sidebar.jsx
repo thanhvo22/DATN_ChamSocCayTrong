@@ -40,7 +40,6 @@ export default function Sidebar() {
                 Profile
               </li>
             </Link>
-            
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -64,10 +63,12 @@ export default function Sidebar() {
                 Videos
               </li>
             </Link>
-            <li className="sidebarListItem">
-              <BarChart className="sidebarIcon" />
-              Reports
-            </li>
+            <Link to="/admin/category" className="link">
+              <li className="sidebarListItem">
+                <BarChart className="sidebarIcon" />
+                Category
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">

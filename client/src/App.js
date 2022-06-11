@@ -19,6 +19,8 @@ import UserPlayList from './pages/users/playlists/UserPlayList';
 import Index from "./pages/Index";
 import ListSaved from './pages/users/playlistSaved/ListSaved';
 import ProfileUser from './pages/ProfileUser';
+import Category from './pages/admin/category/Category';
+import EditCategory from "./pages/admin/category/EditCategory";
 function App() {
   return (
     <Router>
@@ -46,6 +48,8 @@ function App() {
         <Route exact path="/admin/playlists" element={<AdminPlayLists />} />
         <Route exact path="/admin/playlists/:playlistId" element={<AdminViewPlayList />} />
         <Route exact path="/admin/videos" element={<AdminVideos />} />
+        <Route exact path="/admin/category" element={<Category />} />
+        <Route exact path="/admin/category/:categoryId" element={<EditCategory />} />
       </Routes>
       {/* <div className="others">other pages</div> */}
     </Router>

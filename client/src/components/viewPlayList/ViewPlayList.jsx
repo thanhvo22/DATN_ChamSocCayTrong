@@ -33,101 +33,101 @@ export default function ViewPlayList(playlist) {
   }, []);
 
   return (
-    <div className="user">
+    <div className="playList">
       {decodedToken?.role === "Admin" ? (
         <div>
-          <div className="userTitleContainer">
-            <h1 className="userTitle">Edit PlayList</h1>
+          <div className="playListTitleContainer">
+            <h1 className="playListTitle">Edit PlayList</h1>
           </div>
           <div>
-            <button className="userAddButton">Accept </button>
-            <button className="userAddButton">Refuse</button>
+            <button className="playListAddButton">Accept </button>
+            <button className="playListAddButton">Refuse</button>
           </div>
         </div>
       ) : decodedToken?.role === "Sharers" ? (
-        <div className="userTitleContainer">
-          <h1 className="userTitle">Thông tin khóa học</h1>
+        <div className="playListTitleContainer">
+          <h1 className="playListTitle">Thông tin khóa học</h1>
           <Link to="/sharer/playlists/create">
-            <button className="userAddButton">Create</button>
+            <button className="playListAddButton">Thêm video cho khóa học</button>
           </Link>
         </div>
       ) : (
-        <div className="userTitleContainer">
-          <h1 className="userTitle">Thông tin khóa học</h1>
+        <div className="playListTitleContainer">
+          <h1 className="playListTitle">Thông tin khóa học</h1>
         </div>
       )}
-      <div className="userContainer">
-        <div className="userShow">
-          <div className="userShowTop">
+      <div className="playListContainer">
+        <div className="playListShow">
+          <div className="playListShowTop">
             <img
               src={
                 "https://res.cloudinary.com/dhxlhkgog/image/upload/v1651658129/brjrs5g50pigukp8oe7y.jpg"
               }
               alt=""
-              className="userShowImg"
+              className="playListShowImg"
             />
-            <div className="userShowTopTitle">
-              <span className="userShowUsername">
+            <div className="playListShowTopTitle">
+              <span className="playListShowUsername">
                 {playlist.playlist.playlistName}
               </span>
-              <span className="userShowUserTitle">
-                {playlist.playlist?.userId?.name}nay ak ha?
+              <span className="playListShowUserTitle">
+                {playlist.playlist?.userId?.name}
               </span>
             </div>
           </div>
-          <div className="userShowBottom">
-            <span className="userShowTitle">PlayList Details</span>
-            <div className="userShowInfo">
-              <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">
+          <div className="playListShowBottom">
+            <span className="playListShowTitle">PlayList Details</span>
+            <div className="playListShowInfo">
+              <PermIdentity className="playListShowIcon" />
+              <span className="playListShowInfoTitle">
                 {playlist.playlist.playlistName}
               </span>
             </div>
-            <div className="userShowInfo">
-              <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">
+            <div className="playListShowInfo">
+              <CalendarToday className="playListShowIcon" />
+              <span className="playListShowInfoTitle">
                 {playlist.playlist.preview}
               </span>
             </div>
-            {/* <span className="userShowTitle">Contact Details</span> */}
-            <div className="userShowInfo">
-              <StarRate className="userShowIcon" />
-              <span className="userShowInfoTitle">
+            {/* <span className="playListShowTitle">Contact Details</span> */}
+            <div className="playListShowInfo">
+              <StarRate className="playListShowIcon" />
+              <span className="playListShowInfoTitle">
                 Rating: {playlist.playlist.rating}{" "}
               </span>
             </div>
-            <div className="userShowInfo">
-              <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">
+            <div className="playListShowInfo">
+              <MailOutline className="playListShowIcon" />
+              <span className="playListShowInfoTitle">
                 create at: {playlist.playlist.createAt}
               </span>
             </div>
-            <div className="userShowInfo">
-              <LocationSearching className="userShowIcon" />
-              <span className="userShowInfoTitle">
+            <div className="playListShowInfo">
+              <LocationSearching className="playListShowIcon" />
+              <span className="playListShowInfoTitle">
                 Status | {playlist.playlist.status}
               </span>
             </div>
-            {decodedToken?.role === "User" || "Sharers" || null ? (
+            {decodedToken?.role === "Admin" ? null : (
               <div>
                 <div>
                   <Typography component="legend">Đánh Giá Khóa Học</Typography>
                   <Rating name="customized-10" defaultValue={8} max={10} />
                   <Link to="/rating/add">
-                    <button className="userAddButton">Đánh Giá</button>
+                    <button className="playListAddButton">Đánh Giá</button>
                   </Link>
                 </div>
                 <div>
                   <h4>Thảo Luận</h4>
-                  <Messenger playlistId = {playlist.playlist._id} />
+                  <Messenger playlistId={playlist.playlist._id} />
                 </div>
               </div>
-            ) : null}
+            )}
           </div>
         </div>
         {/* edit */}
-        <div className="userUpdate">
-          <span className="userUpdateTitle">
+        <div className="playListUpdate">
+          <span className="playListUpdateTitle">
             Video khóa chăm sóc cây trồng{" "}
           </span>
           {videos && videos.map((v) => <Videos v={v} />)}

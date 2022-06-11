@@ -7,7 +7,7 @@ export default function Posts() {
   const [playlists, setPlayLists] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/playlists`).then((res) => {
+    axios.get(`http://localhost:5000/api/v1/playlists/accept`).then((res) => {
       console.log("res laylists", res);
       setPlayLists(res.data.playLists);
     });

@@ -9,6 +9,7 @@ import Sidebar from "../../../components/sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import authHeader from "../../../services/auth-header";
 
 export default function AdminNewUser() {
   const id = localStorage.getItem("_id");
@@ -33,16 +34,19 @@ export default function AdminNewUser() {
   const onFormSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .post("http://localhost:5000/api/v1/users/create", {
-        user,
-        pass,
-        passAgain,
-        gender,
-        email,
-        birthDate,
-        name,
-        typeofUser,
-      })
+      .post(
+        "http://localhost:5000/api/v1/users/create",
+        {
+          user,
+          pass,
+          passAgain,
+          gender,
+          email,
+          birthDate,
+          name,
+          typeofUser,
+        },{ headers: authHeader() }
+      )
       .then((res) => {
         console.log("create User: ", res);
         navigate("/admin/users");
@@ -115,7 +119,7 @@ export default function AdminNewUser() {
                 onChange={(e) => setBirthDate(e.target.value)}
               />
             </div>
-            
+
             <div className="newUserItem">
               <FormControl>
                 <FormLabel id="demo-row-radio-buttons-group-label">

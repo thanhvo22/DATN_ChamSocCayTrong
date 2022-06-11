@@ -6,16 +6,31 @@ import axios from "axios";
 export default function Messenger(playlistId) {
   console.log("playlistId: ", playlistId);
   const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState("");
   useEffect(() => {
     axios
       .get(
         `http://localhost:5000/api/v1/comments/playlist/${playlistId.playlistId}`
       )
       .then((res) => {
-        console.log("res comments: ", res.data)
+        console.log("res comments: ", res.data);
         setComments(res.data.comments);
       });
   }, []);
+
+  const onSend = async (event) => {
+    event.preventDefault();
+    await axios
+      .post("http://localhost:5000/api/v1/comments/create", {
+        comment,
+        userId: localStorage.getItem("_id"),
+        playlistId: playlistId.playlistId,
+      })
+      .then((res) => {
+        console.log("create User: ", res);
+        window.location.reload();
+      });
+  };
 
   return (
     <>
@@ -31,8 +46,10 @@ export default function Messenger(playlistId) {
               <textarea
                 className="chatMessageInput"
                 placeholder="write something..."
+                onChange={(e) => setComment(e.target.value)}
+                value={comment}
               ></textarea>
-              <button className="chatSubmitButton">Send</button>
+              <button className="chatSubmitButton" onClick={onSend}>Send</button>
             </div>
           </>
         </div>

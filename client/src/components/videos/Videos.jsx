@@ -17,10 +17,10 @@ export default function Videos(v) {
     });
   }, []);
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 450 }}>
       <iframe
-        width="300"
-        height="200"
+        width="450"
+        height="250"
         src={video.linkVideo}
         frameborder="0"
         allow="autoplay; encrypted-media"

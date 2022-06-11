@@ -18,6 +18,7 @@ export default function DashboardApp() {
       <Topbar admin={user} />
       <div className="container">
         <Sidebar />
+        <h1> Welcome to admin Home Page</h1>
       </div>
     </div>
   );
