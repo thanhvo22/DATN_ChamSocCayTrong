@@ -17,7 +17,7 @@ export default function Post({ list }) {
             </span>
           </div>
           <span className="postDate">Khóa chia sẻ {list.playlistName}</span>
-          <span className="postDate">Đánh Giá: {list.rating} đ</span>
+          <span className="postDesc">Đánh Giá: {list.rating} đ</span>
         </div>
         <p className="postDesc">{list.preview}</p>
       </Link>

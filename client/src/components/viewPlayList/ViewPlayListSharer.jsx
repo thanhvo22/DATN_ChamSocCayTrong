@@ -7,7 +7,6 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import "./viewPlayList.css";
-import Videos from "../videos/Videos";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useJwt } from "react-jwt";
@@ -16,8 +15,9 @@ import Typography from "@mui/material/Typography";
 import Messenger from "../../pages/messenger/Messenger";
 import Moment from "moment";
 import { useNavigate } from "react-router-dom";
+import SharerVideos from "../videos/SharerVideos";
 
-export default function ViewPlayList(playlist) {
+export default function ViewPlayListSharer(playlist) {
   const token = localStorage.getItem("userId");
   let navigate = useNavigate();
   const { decodedToken, isExpired } = useJwt(
@@ -58,7 +58,8 @@ export default function ViewPlayList(playlist) {
       ) : decodedToken?.role === "Sharers" ? (
         <div className="playListTitleContainer">
           <h1 className="playListTitle">Thông tin khóa học</h1>
-          {/* <Link to={"/sharer/videos/create/" + playlist.playlist._id}>
+
+          <Link to={"/sharer/videos/create/" + playlist.playlist._id}>
             <button className="playListAddButton">
               Thêm video cho khóa học
             </button>
@@ -66,7 +67,7 @@ export default function ViewPlayList(playlist) {
 
           <button className="playListAddButton" onClick={handleDelete}>
             Xóa Khóa Học Này
-          </button> */}
+          </button>
         </div>
       ) : (
         <div className="playListTitleContainer">
@@ -77,23 +78,21 @@ export default function ViewPlayList(playlist) {
         <div className="playListShow">
           <div className="playListShowTop">
             <img
-              src={
-                "https://res.cloudinary.com/dhxlhkgog/image/upload/v1651658129/brjrs5g50pigukp8oe7y.jpg"
-              }
+              src={playlist.playlist?.userId?.images}
               alt=""
               className="playListShowImg"
             />
             <div className="playListShowTopTitle">
               <span className="playListShowUsername">
-                {playlist.playlist.playlistName}
+              Khóa chia sẻ: {playlist.playlist.playlistName}
               </span>
               <span className="playListShowUserTitle">
-                {playlist.playlist?.userId?.name}
+                Tác giả: {playlist.playlist?.userId?.name}
               </span>
             </div>
           </div>
           <div className="playListShowBottom">
-            <span className="playListShowTitle">PlayList Details</span>
+            <span className="playListShowTitle">Chi tiết khóa học</span>
             <div className="playListShowInfo">
               <PermIdentity className="playListShowIcon" />
               <span className="playListShowInfoTitle">
@@ -110,23 +109,33 @@ export default function ViewPlayList(playlist) {
             <div className="playListShowInfo">
               <StarRate className="playListShowIcon" />
               <span className="playListShowInfoTitle">
-                Rating: {playlist.playlist.rating}{" "}
+                Đánh giá: {playlist.playlist.rating}{" "}
               </span>
             </div>
             <div className="playListShowInfo">
               <MailOutline className="playListShowIcon" />
               <span className="playListShowInfoTitle">
-                create at: {dateFormatted}
+                Ngày tạo: {dateFormatted}
               </span>
             </div>
             <div className="playListShowInfo">
               <LocationSearching className="playListShowIcon" />
               <span className="playListShowInfoTitle">
-                Status | {playlist.playlist.status}
+              Danh mục khóa học: | {playlist.playlist.categoryId?.name}
               </span>
             </div>
+            <div className="playListShowInfo">
+              <LocationSearching className="playListShowIcon" />
+              <span className="playListShowInfoTitle">
+                Trạng thái khóa học: | {playlist.playlist.status}
+              </span>
+            </div>
+            <Link to={`/sharer/playlists/edit/${playlist.playlist._id}`}>
+              <button className="playListAddButton">Sửa Khóa Học</button>
+            </Link>
+
             {decodedToken?.role === "Admin" ? null : decodedToken?.role ===
-              "User" || "Sharers" ? (
+              "User" ? (
               <div>
                 <div>
                   <Typography component="legend">Đánh Giá Khóa Học</Typography>
@@ -153,7 +162,7 @@ export default function ViewPlayList(playlist) {
           <span className="playListUpdateTitle">
             Video khóa chăm sóc cây trồng{" "}
           </span>
-          {videos && videos.map((v) => <Videos v={v} />)}
+          {videos && videos.map((v) => <SharerVideos v={v} />)}
         </div>
       </div>
     </div>

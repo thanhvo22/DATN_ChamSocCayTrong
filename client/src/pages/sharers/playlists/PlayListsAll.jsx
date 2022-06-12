@@ -1,3 +1,4 @@
+import "./css/playlistAll.css";
 import TopbarUserFinal from "../../../components/topbarUser/TopbarUserFinal";
 import HeaderUser from "../../../components/headerUser/HeaderUser";
 import { Link } from "react-router-dom";
@@ -5,7 +6,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import id_header from "../../../services/id_header";
-import "./newPlayList.css";
 
 export default function PlayListsAll() {
   const [playlists, setPlayLists] = useState([]);
@@ -48,28 +48,21 @@ export default function PlayListsAll() {
       <div className="posts">
         {playlists &&
           playlists.map((lists) => (
-            <div className="post">
-              <Link to={"/playlists/" + lists._id} className="link">
-                <img className="postImg" src={lists.images} alt="" />
-                <div className="postInfo">
-                  <div className="postCats">
-                    <span className="postCat">
-                      <Link className="link" to="/posts?cat=Music">
-                        Music
-                      </Link>
-                    </span>
-                    <span className="postCat">
-                      <Link className="link" to="/posts?cat=Music">
-                        Life
-                      </Link>
-                    </span>
+            <div className="listAll">
+              <Link to={"/sharer/playlists/" + lists._id} className="link">
+                <img className="listAllImg" src={lists.images} alt="" />
+                <div className="listAllInfo">
+                  <div className="listAllCats">
+                    <div className="postCats">
+                      <span className="postCat">Đời Sống</span>
+                      <span className="postCat">Cây Trồng</span>
+                    </div>
                   </div>
-                  <span className="postTitle">{lists.playlistName}</span>
-                  <hr />
-                  <span className="postDate">{lists.rating}</span>
+                  <span className="listAllDate">{lists.playlistName}</span>
+                  <span className="listAllDesc">{lists.rating}</span>
                 </div>
-                <p className="postDesc">{lists.preview}</p>
-                <p className="postDesc">{lists.categoryId?.name}</p>
+                <p className="listAllDesc">{lists.preview}</p>
+                <p className="listAllDesc">{lists.categoryId?.name}</p>
               </Link>
             </div>
           ))}

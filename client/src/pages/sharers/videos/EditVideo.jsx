@@ -9,11 +9,12 @@ import hd1 from "./img/hd1.jpg";
 import hd2 from "./img/hd2.jpg";
 import hd3 from "./img/hd3.jpg";
 
-export default function NewVideo() {
+export default function EditVideo() {
   const id = localStorage.getItem("_id");
-  let playlistId = useParams();
-  console.log("playlistId", playlistId);
+  let videoId = useParams();
+  console.log("videoId", videoId);
   const [user, setUser] = useState([]);
+  const [video, setVideo] = useState([]);
   const [nameVideo, setNameVideo] = useState("");
   const [linkVideo, setLinkVideo] = useState("");
   useEffect(() => {
@@ -23,24 +24,33 @@ export default function NewVideo() {
       });
     }
   }, []);
+  useEffect(()=>{
+    axios.get(`http://localhost:5000/api/v1/videos/${videoId.videoId}`).then((res) => {
+        console.log("res video: ",res.data);
+        setVideo(res.data);
+    })
+  },[])
 
   let navigate = useNavigate();
-  const onFormSubmit = async (event) => {
-    event.preventDefault();
+  function handleChange(evt) {
+    const value = evt.target.value;
+    console.log("value", value);
+    setVideo({
+      ...video,
+      [evt.target.name]: value,
+    });
+  }
+  const onSubmit = async (e) => {
+    e.preventDefault();
     await axios
-      .post(`http://localhost:5000/api/v1/videos/create/${playlistId.playlistId}`, {
-        userId: id,
-        nameVideo,
-        linkVideo,
-        playlistId: playlistId.playlistId,
+      .put(`http://localhost:5000/api/v1/videos/edit/${videoId.videoId}`, {
+        ...video,
       })
       .then((res) => {
-        console.log("create video: ", res);
         navigate("/sharer/playlists");
-        // localStorage.setItem("user", res.data.emailName._id);
+        window.location.reload();
       });
   };
-
   return (
     <div>
       <TopbarUserFinal img={user} />
@@ -55,17 +65,16 @@ export default function NewVideo() {
             link video để dán vào link video bên dưới
           </label>
 
-          <form className="newPlayListForm" onSubmit={onFormSubmit}>
+          <form className="newPlayListForm" onSubmit={onSubmit}>
             <div className="newPlayListItem">
               <label>Đường dẫn video sau khi nhúng</label>
               <input
                 type="text"
                 id="linkVideo"
                 name="linkVideo"
-                value={linkVideo}
-                onChange={(e) => {
-                  setLinkVideo(e.target.value);
-                }}
+                value={video.linkVideo}
+                placeholder={video.linkVideo}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -74,15 +83,13 @@ export default function NewVideo() {
               <input
                 type="text"
                 name="nameVideo"
-                value={nameVideo}
-                placeholder="cat ghep cay trong"
-                onChange={(e) => setNameVideo(e.target.value)}
+                value={video.nameVideo}
+                placeholder={video.nameVideo}
+                onChange={handleChange}
               />
             </div>
 
-            <button className="newPlayListButton">
-              Tạo Video Cho Khóa Học
-            </button>
+            <button className="newPlayListButton">Cập nhật video</button>
           </form>
           <p></p>
           <div>Hướng dẫn nhúng video</div>

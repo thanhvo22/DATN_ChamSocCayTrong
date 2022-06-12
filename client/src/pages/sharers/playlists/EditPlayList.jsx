@@ -1,15 +1,16 @@
 import "./newPlayList.css";
-import Topbar from "../../../components/topbar/Topbar";
-import Sidebar from "../../../components/sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import TopbarUserFinal from "../../../components/topbarUser/TopbarUserFinal";
 import SidebarUser from "../../../components/sidebarUser/SidebarUser";
+import { useParams } from "react-router-dom";
 
-export default function NewPlayList() {
+export default function EditPlayList() {
   const id = localStorage.getItem("_id");
-  const [userId, setUserId] = useState("");
+  const playlistId = useParams();
+  console.log("playlistId: ", playlistId);
+  const [playlist, setPlaylist] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
   const [preview, setPreview] = useState("");
   const [category, setCategory] = useState([]);
@@ -30,21 +31,35 @@ export default function NewPlayList() {
     });
   }, []);
   let navigate = useNavigate();
-  const onFormSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/v1/playlists/${playlistId.playlistId}`)
+      .then((res) => {
+        console.log("res playlists edit", res.data.playList);
+        setPlaylist(res.data.playList);
+      });
+  }, []);
+
+  function handleChange(evt) {
+    const value = evt.target.value;
+    console.log("value", value);
+    setPlaylist({
+      ...playlist,
+      [evt.target.name]: value,
+    });
+  }
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
     const file = data.get("file");
-    console.log("file loaded", file);
-    
+    console.log(file);
     await axios
-      .post(
-        "http://localhost:5000/api/v1/playlists/create",
+      .put(
+        `http://localhost:5000/api/v1/playlists/edit/${playlistId.playlistId}`,
         {
-          userId: id,
-          playlistName,
-          preview,
-          categoryId,
-          images:file,
+          ...playlist,
+          images: file,
         },
         {
           headers: {
@@ -53,41 +68,27 @@ export default function NewPlayList() {
         }
       )
       .then((res) => {
-        console.log("create playlists: ", res);
-        navigate("/sharer/playlists");
-        // localStorage.setItem("user", res.data.emailName._id);
+        navigate("/sharer/playlists")
+        window.location.reload();
       });
   };
 
-  const handleBackground =
-    (userId) =>
-    ({ target }) => {
-      let value = target.value;
-      console.log("value", value);
-      return value;
-      // you can use userId and value here.
-    };
   return (
     <div>
       <TopbarUserFinal img={user} />
       <div className="container">
         <SidebarUser />
         <div className="newPlayList">
-          <h1 className="newPlayListTitle">Tạo mới khóa học</h1>
-          <form className="newPlayListForm" onSubmit={onFormSubmit}>
+          <h1 className="newPlayListTitle">Chỉnh Sửa Khóa Học</h1>
+          <img src={playlist.images} width="300px"/>
+          <form className="newPlayListForm" onSubmit={onSubmit}>
             <div className="newPlayListItem">
               <label>Ảnh đại diện cho cây trồng</label>
               <input
                 type="file"
                 id="file"
-
+                onChange={handleChange}
                 name="file"
-                value={images}
-                onChange={(e) => {
-                  console.log("file",e.target.files[0]);
-                  setImages(e.target.file);
-                }}
-                required
               />
             </div>
             <div className="newPlayListItem">
@@ -95,9 +96,9 @@ export default function NewPlayList() {
               <input
                 type="text"
                 name="playlistName"
-                value={playlistName}
-                placeholder="cat ghep cay trong"
-                onChange={(e) => setPlaylistName(e.target.value)}
+                value={playlist.playlistName}
+                placeholder={playlist.playlistName}
+                onChange={handleChange}
               />
             </div>
 
@@ -105,10 +106,10 @@ export default function NewPlayList() {
               <label>Sơ lược về khóa học</label>
               <input
                 type="text"
-                placeholder="chi tiet 1->3 month ago"
                 name="preview"
-                value={preview}
-                onChange={(e) => setPreview(e.target.value)}
+                value={playlist.preview}
+                placeholder={playlist.preview}
+                onChange={handleChange}
               />
             </div>
 
@@ -117,19 +118,17 @@ export default function NewPlayList() {
               <select
                 className="newPlayListSelect"
                 id="active"
-                // value={categoryId} 
-                // onChange={handleBackground(categoryId)}
-                onChange={(e) => {
-                  console.log("setCategoryId",e.target.value )
-                  setCategoryId(e.target.value);
-                }}
+                name="categoryId"
+                value={playlist.categoryId?._id}
+                placeholder={playlist.categoryId?._id}
+                onChange={handleChange}
               >
                 {category.map((c) => (
                   <option
                     name="categoryId"
                     value={c._id}
+                    defaultValue={c._id}
                     onChange={(e) => {
-                      console.log("setCategoryId",e.target.value )
                       setCategoryId(e.target.value);
                     }}
                   >
@@ -139,7 +138,7 @@ export default function NewPlayList() {
               </select>
             </div>
 
-            <button className="newPlayListButton">Tạo khóa học</button>
+            <button className="newPlayListButton">Cập Nhật</button>
           </form>
         </div>
       </div>

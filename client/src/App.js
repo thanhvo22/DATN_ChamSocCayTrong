@@ -22,6 +22,9 @@ import ProfileUser from './pages/ProfileUser';
 import Category from './pages/admin/category/Category';
 import EditCategory from "./pages/admin/category/EditCategory";
 import NewVideo from './pages/sharers/videos/NewVideo';
+import SharerViewPlayList from "./pages/sharers/playlists/SharerViewPlayList";
+import EditPlayList from "./pages/sharers/playlists/EditPlayList";
+import EditVideo from "./pages/sharers/videos/EditVideo";
 function App() {
   return (
     <Router>
@@ -40,8 +43,11 @@ function App() {
         {/* sharers */}
         <Route path="/sharer/playlists" element={<PlayListsAll />} />
         <Route path="/sharer/playlists/create" element={<NewPlayList />} />
+        <Route path="/sharer/playlists/edit/:playlistId" element={<EditPlayList />} />
+        {/* /sharer/playlists/edit/ */}
         <Route path="/sharer/videos/create/:playlistId" element={<NewVideo />} />
-        <Route path="/sharer/playlists/:id" element={<AdminViewPlayList />} />
+        <Route path="/sharer/videos/edit/:videoId" element={<EditVideo />} />
+        <Route path="/sharer/playlists/:playlistId" element={<SharerViewPlayList />} />
         
         {/* admin */}
         <Route exact path="/admin/profile" element={<AdminProfile />} />
