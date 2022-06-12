@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import id_header from "../../../services/id_header";
+import "./newPlayList.css";
 
 export default function PlayListsAll() {
   const [playlists, setPlayLists] = useState([]);
@@ -38,10 +39,12 @@ export default function PlayListsAll() {
     <div>
       <TopbarUserFinal img={user} />
       <HeaderUser />
-      <h2>Danh sách khóa học của bạn đã chia sẻ</h2>
-      <Link to="/sharer/playlists/create" className="link">
-        <Button variant="contained">Thêm khóa học mới</Button>
-      </Link>
+      <div className="topheader">
+        <h2>Danh sách khóa học của bạn đã chia sẻ</h2>
+        <Link to="/sharer/playlists/create" className="link">
+          <Button variant="contained">Thêm khóa học mới</Button>
+        </Link>
+      </div>
       <div className="posts">
         {playlists &&
           playlists.map((lists) => (

@@ -2,15 +2,25 @@
   flex: 4;
 }
 
-.topheader{
-  padding-left: 50px;
-  ;
-}
 .newPlayListForm {
   display: flex;
   flex-wrap: wrap;
 }
 
+.imgtest{
+
+  width: 600px;
+  height: 450px;
+}
+.imgtest2{
+  width: 480px;
+  height: 300px;
+}
+
+.imgtest3{
+  width: 850px;
+  height: 340px;
+}
 .newPlayListItem {
   width: 400px;
   display: flex;
@@ -19,7 +29,9 @@
   margin-right: 20px;
   font-size: 22px;
 }
-
+.newLabel{
+  font-size: 22px;
+}
 .newPlayListItem > label {
   margin-bottom: 10px;
   font-size: 22px;
@@ -50,6 +62,7 @@
   border-radius: 5px;
   font-size: 19px;
 }
+
 
 .newPlayListButton {
   width: 200px;

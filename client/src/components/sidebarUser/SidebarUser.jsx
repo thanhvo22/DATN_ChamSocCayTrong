@@ -37,6 +37,22 @@ export default function SidebarUser() {
             </Link>
           </ul>
         </div>
+        <div className="sidebarUserMenu">
+          <ul className="sidebarUserList">
+            <Link to="/sharer/playlists/create" className="link">
+              <li className="sidebarUserListItem ">
+                <LineStyle className="sidebarUserIcon" />
+                Tạo mới khóa học
+              </li>
+            </Link>
+            <Link to="/profile" className="link">
+              <li className="sidebarUserListItem">
+                <Timeline className="sidebarUserIcon" />
+                Tạo mới video cho khóa học
+              </li>
+            </Link>
+          </ul>
+        </div>
       </div>
     </div>
   );

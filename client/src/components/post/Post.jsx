@@ -10,19 +10,14 @@ export default function Post({ list }) {
         <div className="postInfo">
           <div className="postCats">
             <span className="postCat">
-              <Link className="link" to="/posts?cat=Music">
-                Music
-              </Link>
+            Đời Sống
             </span>
             <span className="postCat">
-              <Link className="link" to="/posts?cat=Music">
-                Life
-              </Link>
+            Cây Trồng
             </span>
           </div>
-          <span className="postTitle">{list.playlistName}</span>
-          <hr />
-          <span className="postDate">{list.rating}</span>
+          <span className="postDate">Khóa chia sẻ {list.playlistName}</span>
+          <span className="postDate">Đánh Giá: {list.rating} đ</span>
         </div>
         <p className="postDesc">{list.preview}</p>
       </Link>

@@ -14,13 +14,18 @@ import { useJwt } from "react-jwt";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Messenger from "../../pages/messenger/Messenger";
+import Moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 export default function ViewPlayList(playlist) {
   const token = localStorage.getItem("userId");
+  let navigate = useNavigate();
   const { decodedToken, isExpired } = useJwt(
     token,
     process.env.ACCESS_TOKEN_SECRET
   );
+  const date = playlist.playlist.createAt;
+  const dateFormatted = Moment(date).format("DD-MM-YYYY");
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     axios
@@ -31,27 +36,37 @@ export default function ViewPlayList(playlist) {
         setVideos(res.data.videos);
       });
   }, []);
+  const handleDelete = async () => {
+    await axios
+      .delete(
+        `http://localhost:5000/api/v1/playlists/delete/${playlist.playlist._id}`
+      )
+      .then((res) => {
+        navigate("/sharer/playlists")
+        window.location.reload();
+      });
+  };
 
   return (
     <div className="playList">
       {decodedToken?.role === "Admin" ? (
         <div>
           <div className="playListTitleContainer">
-            <h1 className="playListTitle">Edit PlayList</h1>
-          </div>
-          <div>
-            <button className="playListAddButton">Accept </button>
-            <button className="playListAddButton">Refuse</button>
+            <h1 className="playListTitle">View PlayList</h1>
           </div>
         </div>
       ) : decodedToken?.role === "Sharers" ? (
         <div className="playListTitleContainer">
           <h1 className="playListTitle">Thông tin khóa học</h1>
-          <Link to="/sharer/playlists/create">
+          <Link to={"/sharer/videos/create/" + playlist.playlist._id}>
             <button className="playListAddButton">
               Thêm video cho khóa học
             </button>
           </Link>
+
+          <button className="playListAddButton" onClick={handleDelete}>
+            Xóa Khóa Học Này
+          </button>
         </div>
       ) : (
         <div className="playListTitleContainer">
@@ -101,7 +116,7 @@ export default function ViewPlayList(playlist) {
             <div className="playListShowInfo">
               <MailOutline className="playListShowIcon" />
               <span className="playListShowInfoTitle">
-                create at: {playlist.playlist.createAt}
+                create at: {dateFormatted}
               </span>
             </div>
             <div className="playListShowInfo">
@@ -125,7 +140,12 @@ export default function ViewPlayList(playlist) {
                   <Messenger playlistId={playlist.playlist._id} />
                 </div>
               </div>
-            ) : null}
+            ) : (
+              <div>
+                <h4>Thảo Luận</h4>
+                <Messenger playlistId={playlist.playlist._id} />
+              </div>
+            )}
           </div>
         </div>
         {/* edit */}

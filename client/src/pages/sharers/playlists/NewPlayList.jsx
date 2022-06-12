@@ -32,6 +32,10 @@ export default function NewPlayList() {
   let navigate = useNavigate();
   const onFormSubmit = async (event) => {
     event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const file = data.get("file");
+    console.log("file loaded", file);
+    
     await axios
       .post(
         "http://localhost:5000/api/v1/playlists/create",
@@ -40,7 +44,7 @@ export default function NewPlayList() {
           playlistName,
           preview,
           categoryId,
-          images,
+          images:file,
         },
         {
           headers: {
@@ -55,6 +59,14 @@ export default function NewPlayList() {
       });
   };
 
+  const handleBackground =
+    (userId) =>
+    ({ target }) => {
+      let value = target.value;
+      console.log("value", value);
+      return value;
+      // you can use userId and value here.
+    };
   return (
     <div>
       <TopbarUserFinal img={user} />
@@ -67,12 +79,13 @@ export default function NewPlayList() {
               <label>Ảnh đại diện cho cây trồng</label>
               <input
                 type="file"
-                name="images"
+                id="file"
+
+                name="file"
                 value={images}
-                placeholder="cat ghep cay trong"
                 onChange={(e) => {
-                  console.log(e.target.value);
-                  setImages(e.target.value);
+                  console.log("file",e.target.files[0]);
+                  setImages(e.target.file);
                 }}
                 required
               />
@@ -101,15 +114,20 @@ export default function NewPlayList() {
 
             <div className="newPlayListItem">
               <label>Danh Mục Giống Cây Trồng</label>
-              <select className="newPlayListSelect" id="active">
+              <select
+                className="newPlayListSelect"
+                id="active"
+                value={categoryId}
+                onChange={handleBackground(categoryId)}
+              >
                 {category.map((c) => (
                   <option
                     name="categoryId"
                     value={c._id}
-                    onChange={(e) => {
-                      console.log(setCategoryId(e.target.value));
-                      setCategoryId(e.target.value);
-                    }}
+                    // onChange={(e) => {
+                    //   console.log("setCategoryId",e.target.value )
+                    //   setCategoryId(e.target.value);
+                    // }}
                   >
                     {c.name}
                   </option>

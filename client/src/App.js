@@ -21,7 +21,7 @@ import ListSaved from './pages/users/playlistSaved/ListSaved';
 import ProfileUser from './pages/ProfileUser';
 import Category from './pages/admin/category/Category';
 import EditCategory from "./pages/admin/category/EditCategory";
-import NewVideo from './pages/sharers/playlists/NewVideo';
+import NewVideo from './pages/sharers/videos/NewVideo';
 function App() {
   return (
     <Router>
@@ -40,8 +40,9 @@ function App() {
         {/* sharers */}
         <Route path="/sharer/playlists" element={<PlayListsAll />} />
         <Route path="/sharer/playlists/create" element={<NewPlayList />} />
-        <Route path="/sharer/videos/create" element={<NewVideo />} />
+        <Route path="/sharer/videos/create/:playlistId" element={<NewVideo />} />
         <Route path="/sharer/playlists/:id" element={<AdminViewPlayList />} />
+        
         {/* admin */}
         <Route exact path="/admin/profile" element={<AdminProfile />} />
         <Route exact path="/admin/users" element={<AdminUserList />} />
