@@ -6,7 +6,7 @@ const ratingSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Users",
   },
-  playListRating: { 
+  playlistId: { 
     type: Schema.Types.ObjectId,
     ref: "Playlists",
   },

@@ -18,15 +18,15 @@ module.exports.getRateForUser = async (req, res) => {
   res.json(rateForUser);
 };
 
-async function updateRating(playlist_ID) {
-  const list_Rating = await rateModel.find({ playListRating: playlist_ID });
+async function updateRating(playlistId) {
+  const list_Rating = await rateModel.find({ playlistId: playlistId });
   const _rating = list_Rating.reduce((start, end) => {
     return start + end.rating;
   }, 0);
   const total_rating = _rating / list_Rating.length;
   console.log(`total_rating: ${total_rating}`);
   await playListModel.findOneAndUpdate(
-    { _id: playlist_ID },
+    { _id: playlistId },
     {
       rating: total_rating.toFixed(2),
     }
@@ -35,24 +35,21 @@ async function updateRating(playlist_ID) {
 
 module.exports.postCreateRate = async (req, res) => {
   try {
-    const playlist_ID = req.signedCookies.playlist_id;
-    const userId = req.signedCookies.cookie_id;
-    const { rating } = req.body;
+    
+    const { rating,playlistId ,userId} = req.body;
     //check if the user has rated it
     const checkRate = await rateModel.findOne({
       userId,
-      playlist_ID,
+      playlistId,
     });
-    console.log(`check rate: ${checkRate}`);
     if (!checkRate) {
       const rate = await rateModel.create({
-        playListRating: playlist_ID,
+        playlistId,
         userId,
         rating,
       });
-      console.log(`rate: ${rate}`);
       //update rating for playlist
-      updateRating(playlist_ID);
+      await updateRating(playlistId);
       res.json({
         message: "create rate successfully",
         rate
@@ -61,12 +58,12 @@ module.exports.postCreateRate = async (req, res) => {
     //update rating
     const rate = await rateModel.findOneAndUpdate(
       {
-        playListRating: playlist_ID,
+        playlistId,
         userId,
       },
       {rating}
     );
-    updateRating(playlist_ID);
+    await updateRating(playlistId);
     res.json({
       message:`update rating successfully`,
       rate

@@ -3,13 +3,17 @@ const cloudinary = require("../utils/cloudinary");
 
 module.exports.getPlayListForSharer = async (req, res) => {
   const userId = req.header("userId");
-  const playList = await playlistModel.find({ userId: userId }).populate(["userId","categoryId"]);
+  const playList = await playlistModel
+    .find({ userId: userId })
+    .populate(["userId", "categoryId"]);
   res.json(playList);
 };
 
 module.exports.getAllPlayList = async (req, res) => {
   try {
-    const playLists = await playlistModel.find().populate(["userId","categoryId"]);
+    const playLists = await playlistModel
+      .find()
+      .populate(["userId", "categoryId"]);
     return res.json({
       message: "get All play list",
       playLists,
@@ -27,7 +31,9 @@ module.exports.getPlayListID = async (req, res) => {
     res.cookie("playlist_id", id, {
       signed: true,
     });
-    const playList = await playlistModel.findById(id).populate(["userId","categoryId"]);
+    const playList = await playlistModel
+      .findById(id)
+      .populate(["userId", "categoryId"]);
     return res.json({
       message: "get play list",
       playList,
@@ -44,7 +50,7 @@ module.exports.playlistAccept = async (req, res) => {
     const playLists = await playlistModel
       .find()
       .where({ status: "Accept" })
-      .populate(["userId","categoryId"]);
+      .populate(["userId", "categoryId"]);
     return res.json({
       message: "get All play list accept",
       playLists,
@@ -102,23 +108,28 @@ module.exports.postCreatePlayList = async (req, res) => {
 };
 
 module.exports.putPlayList = async (req, res) => {
-  console.log('API Running')
+  console.log("API Running");
   try {
     const id = req.params.id;
+    // let user_cloud = await userModel.findById(_id);
+    // if (user_cloud.cloudinary_id !== undefined) {
+    //   await cloudinary.uploader.destroy(user_cloud?.cloudinary_id);
+    // }
     let path = req.file;
-
-    console.log("path server", path);
+    let newAvatar;
     if (path) {
-      result = await cloudinary.uploader.upload(path?.path);
+      newAvatar = await cloudinary.uploader.upload(path.path);
     }
-    const { playlistName, preview, status } = req.body;
+    const { playlistName, preview, status, categoryId } = req.body;
     const playlist = await playlistModel.findByIdAndUpdate(id, {
       playlistName,
       preview,
       status,
-      images: result?.secure_url || undefined,
-      cloudinary_id: result?.public_id || undefined,
+      categoryId,
+      images: newAvatar?.secure_url ,
+      cloudinary_id: newAvatar?.public_id ,
     });
+    console.log(playlist);
     return res.json({
       message: "edit play list successfully",
       playlist,
