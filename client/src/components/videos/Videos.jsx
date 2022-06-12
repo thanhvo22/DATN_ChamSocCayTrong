@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
+
 
 export default function Videos(v) {
   console.log("video_id", v);
@@ -17,10 +17,23 @@ export default function Videos(v) {
       setVideo(res.data);
     });
   }, []);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   return (
     <Card sx={{ maxWidth: 450 }}>
       {/* <ReactPlayer url={video.linkVideo}/> */}
-
+      
       <iframe
         width="450"
         height="250"
@@ -29,7 +42,9 @@ export default function Videos(v) {
         allow="autoplay; encrypted-media"
         allowfullscreen
         title="video"
+        
       />
+
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {video.nameVideo}

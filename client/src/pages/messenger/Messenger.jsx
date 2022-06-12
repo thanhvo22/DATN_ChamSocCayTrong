@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./messenger.css";
 import Message from "../../components/message/Message";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Messenger(playlistId) {
   console.log("playlistId: ", playlistId);
+  let navigate = useNavigate();
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   useEffect(() => {
@@ -19,6 +21,9 @@ export default function Messenger(playlistId) {
   }, []);
 
   const onSend = async (event) => {
+    if(!localStorage.getItem("_id")){
+      navigate("/login")
+    }
     event.preventDefault();
     await axios
       .post("http://localhost:5000/api/v1/comments/create", {

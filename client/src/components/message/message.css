@@ -3,7 +3,9 @@
   flex-direction: column;
   margin-top: 20px;
 }
-
+.App {
+  font-family: sans-serif;
+}
 .messageTop {
   display: flex;
 }

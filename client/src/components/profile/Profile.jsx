@@ -51,6 +51,7 @@ export default function Profile(user) {
       )
       .then((res) => {
         console.log(res);
+        navigate("/home")
         window.location.reload();
       });
   };
@@ -187,7 +188,7 @@ export default function Profile(user) {
                 <input
                   type="file"
                   id="file"
-                  style={{ display: "none" }}
+                  // style={{ display: "none" }}
                   onChange={handleChange}
                   name="file"
                 />

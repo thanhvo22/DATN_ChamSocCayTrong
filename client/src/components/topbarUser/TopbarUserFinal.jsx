@@ -1,7 +1,8 @@
 import React from "react";
 import { useJwt } from "react-jwt";
 import { Link } from "react-router-dom";
-import "./topbarUser.css";
+import "./css/topbarUser.css"
+
 import { useNavigate } from "react-router-dom";
 
 export default function TopbarUserFinal(img) {
@@ -49,7 +50,7 @@ export default function TopbarUserFinal(img) {
           )}
           <li className="topUserListItem">Hướng Dẫn</li>
           <li className="topUserListItem">
-            <Link className="link" to="/write">
+            <Link className="link" to="/sharer/playlists/create">
               Viết bài
             </Link>
           </li>

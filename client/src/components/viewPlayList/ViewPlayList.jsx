@@ -46,6 +46,22 @@ export default function ViewPlayList(playlist) {
         window.location.reload();
       });
   };
+  const id = localStorage.getItem("_id");
+  const [rating, setRating] = useState(0);
+
+  const onFormSubmit = async (event) => {
+    event.preventDefault();
+    await axios
+      .post(`http://localhost:5000/api/v1/rates/create`, {
+        userId: id,
+        rating,
+        playlistId: playlist.playlist._id,
+      })
+      .then((res) => {
+        console.log("create rating: ", res);
+        navigate("/home");
+      });
+  };
 
   return (
     <div className="playList">
@@ -71,6 +87,9 @@ export default function ViewPlayList(playlist) {
       ) : (
         <div className="playListTitleContainer">
           <h1 className="playListTitle">Thông tin khóa học</h1>
+          <Link to={"/savedlist" + playlist.playlist._id}>
+            <button className="playListAddButton">Lưu khóa học</button>
+          </Link>
         </div>
       )}
       <div className="playListContainer">
@@ -126,14 +145,23 @@ export default function ViewPlayList(playlist) {
               </span>
             </div>
             {decodedToken?.role === "Admin" ? null : decodedToken?.role ===
-              "User" || "Sharers" ? (
+                "User" || "Sharers" ? (
               <div>
                 <div>
                   <Typography component="legend">Đánh Giá Khóa Học</Typography>
-                  <Rating name="customized-10" defaultValue={8} max={10} />
-                  <Link to="/rating/add">
-                    <button className="playListAddButton">Đánh Giá</button>
-                  </Link>
+                  <Rating
+                    name="customized-10"
+                    defaultValue={8}
+                    max={10}
+                    id="rating"
+                    value={rating}
+                    onChange={(e) => {
+                      console.log("rating changed",e.target.value )
+                      setRating(e.target.value);
+                    }}
+                  />
+
+                  <button className="playListAddButton" onClick={onFormSubmit}>Đánh Giá</button>
                 </div>
                 <div>
                   <h4>Thảo Luận</h4>

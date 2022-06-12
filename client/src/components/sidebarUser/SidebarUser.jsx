@@ -45,10 +45,10 @@ export default function SidebarUser() {
                 Tạo mới khóa học
               </li>
             </Link>
-            <Link to="/profile" className="link">
+            <Link to="/sharer/playlists/create  " className="link">
               <li className="sidebarUserListItem">
                 <Timeline className="sidebarUserIcon" />
-                Tạo mới video cho khóa học
+                Tạo video khóa học
               </li>
             </Link>
           </ul>

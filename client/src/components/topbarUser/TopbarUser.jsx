@@ -1,7 +1,7 @@
 import React from "react";
 import { useJwt } from "react-jwt";
 import { Link } from "react-router-dom";
-import "./topbarUser.css";
+import "./css/topbarUser.css";
 
 
 export default function TopbarUser() {
@@ -46,7 +46,7 @@ export default function TopbarUser() {
           )}
           <li className="topUserListItem">Hướng Dẫn</li>
           <li className="topUserListItem">
-            <Link className="link" to="/write">
+            <Link className="link" to="/sharer/playlists/create">
               Viết bài
             </Link>
           </li>
