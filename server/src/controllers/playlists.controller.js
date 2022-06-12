@@ -3,13 +3,13 @@ const cloudinary = require("../utils/cloudinary");
 
 module.exports.getPlayListForSharer = async (req, res) => {
   const userId = req.header("userId");
-  const playList = await playlistModel.find({ userId: userId });
+  const playList = await playlistModel.find({ userId: userId }).populate(["userId","categoryId"]);
   res.json(playList);
 };
 
 module.exports.getAllPlayList = async (req, res) => {
   try {
-    const playLists = await playlistModel.find().populate("userId");
+    const playLists = await playlistModel.find().populate(["userId","categoryId"]);
     return res.json({
       message: "get All play list",
       playLists,
@@ -27,7 +27,7 @@ module.exports.getPlayListID = async (req, res) => {
     res.cookie("playlist_id", id, {
       signed: true,
     });
-    const playList = await playlistModel.findById(id).populate("userId");
+    const playList = await playlistModel.findById(id).populate(["userId","categoryId"]);
     return res.json({
       message: "get play list",
       playList,
@@ -44,7 +44,7 @@ module.exports.playlistAccept = async (req, res) => {
     const playLists = await playlistModel
       .find()
       .where({ status: "Accept" })
-      .populate("userId");
+      .populate(["userId","categoryId"]);
     return res.json({
       message: "get All play list accept",
       playLists,
