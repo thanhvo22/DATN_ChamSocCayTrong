@@ -37,7 +37,8 @@ async function updateRating(playlistId) {
 
 module.exports.postCreateRate = async (req, res) => {
   try {
-    const { rating, playlistId, userId } = req.body;
+    const userId = req.header("userId");
+    const { rating, playlistId } = req.body;
     //check if the user has rated it
     const checkRate = await rateModel.findOne({
       userId,
@@ -51,7 +52,7 @@ module.exports.postCreateRate = async (req, res) => {
       });
       //update rating for playlist
       await updateRating(playlistId);
-      res.json({
+      return res.json({
         message: "create rate successfully",
         rate,
       });
