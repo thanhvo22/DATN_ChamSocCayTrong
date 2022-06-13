@@ -10,14 +10,14 @@ export default function HomeLogin() {
   const [user, setUser] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
-    //   console.log(`res`, res.data.data.images);
+      //   console.log(`res`, res.data.data.images);
       setUser(res.data.data);
     });
-  },[]);
+  }, []);
   return (
     <div>
-      {id? <TopbarUserFinal  img ={user}/> : <TopbarUser/> }
-      
+      {id ? <TopbarUserFinal img={user} /> : <TopbarUser />}
+
       <HeaderUser />
       <div className="home">
         <Posts />

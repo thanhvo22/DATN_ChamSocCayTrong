@@ -36,7 +36,7 @@ export default function AdminPlayLists() {
   }
   
   const handleDelete = async(id) => {
-    await axios.put(`http://localhost:5000/api/v1/playlists/delete/${id}`).then((res) => {
+    await axios.delete(`http://localhost:5000/api/v1/playlists/delete/${id}`).then((res) => {
       window.location.reload();
     });
   }

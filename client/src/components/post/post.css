@@ -19,7 +19,7 @@
 }
 
 .postCat {
-  font-family: "Varela Round", Arial, Helvetica, sans-serif;
+  font-family: "Times New Roman";
   font-weight: 400;
   font-size: 17px;
   color: #be9656;
@@ -30,7 +30,8 @@
 }
 
 .postTitle {
-  font-family: "Josefin Sans", Arial, Helvetica, sans-serif;
+  /* font-family: "Josefin Sans", Arial, Helvetica, sans-serif; */
+  font-family: "Times New Roman";
   font-size: 28px;
   font-weight: 900;
   margin-top: 10px;
@@ -38,8 +39,9 @@
 }
 
 .postDate {
-  font-family: "Lora", serif;
-  font-style: italic;
+  /* font-family: "Lora", serif; */
+  font-family: "Times New Roman";
+  font-style:normal;
   font-size: 26px;
   text-align: center;
   font-weight: 400;
@@ -48,8 +50,9 @@
 }
 
 .postDesc {
-  font-family: "Lora", serif;
-  font-style: italic;
+  /* font-family: "Lora", serif; */
+  font-family: "Times New Roman";
+  font-style: normal;
   font-weight: 400;
   font-size: 22px;
   text-align: center;

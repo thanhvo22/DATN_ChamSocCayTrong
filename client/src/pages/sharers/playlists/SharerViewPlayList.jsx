@@ -13,7 +13,6 @@ export default function SharerViewPlayList() {
   useEffect(() => {
     if(id !== null){
       axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
-        console.log(`res`, res.data.data);
         setUser(res.data.data);
       });
     }
@@ -24,9 +23,7 @@ export default function SharerViewPlayList() {
     let data = await axios.get(
       `http://localhost:5000/api/v1/playlists/${playlistId}`
     );
-    console.log("data", data);
     let list = await data.data.playList;
-    console.log("list", list);
     setPlayList(list);
   }
   useEffect(() => {

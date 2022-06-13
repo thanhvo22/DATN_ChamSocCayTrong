@@ -1,0 +1,12 @@
+.playListDelButton {
+  margin-left: 40px;
+  width: 120px;
+  border: none;
+  padding: 5px;
+  background-color: rgb(190, 35, 35);
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  
+}

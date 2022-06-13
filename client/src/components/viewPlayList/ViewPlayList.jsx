@@ -5,6 +5,7 @@ import {
   PermIdentity,
   StarRate,
 } from "@material-ui/icons";
+import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import "./viewPlayList.css";
 import Videos from "../videos/Videos";
@@ -16,9 +17,23 @@ import Typography from "@mui/material/Typography";
 import Messenger from "../../pages/messenger/Messenger";
 import Moment from "moment";
 import { useNavigate } from "react-router-dom";
+import id_header from "../../services/id_header";
+import Modal from "@mui/material/Modal";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function ViewPlayList(playlist) {
   const token = localStorage.getItem("userId");
+  const [rateForUser, setRateForUser] = useState({});
   let navigate = useNavigate();
   const { decodedToken, isExpired } = useJwt(
     token,
@@ -36,6 +51,19 @@ export default function ViewPlayList(playlist) {
         setVideos(res.data.videos);
       });
   }, []);
+
+  //check if users have rating
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/v1/rates/me/${playlist.playlist._id}`, {
+        headers: id_header(),
+      })
+      .then((res) => {
+        console.log("res rate for user", res.data.rateForUser[0]);
+        setRateForUser(res.data.rateForUser[0]);
+      });
+  }, {});
+
   const handleDelete = async () => {
     await axios
       .delete(
@@ -76,6 +104,11 @@ export default function ViewPlayList(playlist) {
       });
   };
 
+  //DanhgiaLai
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <div className="playList">
       {decodedToken?.role === "Admin" ? (
@@ -101,7 +134,9 @@ export default function ViewPlayList(playlist) {
         <div className="playListTitleContainer">
           <h1 className="playListTitle">Thông tin khóa học</h1>
 
-          <button className="playListAddButton" onClick={onAddSavedList}>Lưu khóa học</button>
+          <button className="playListAddButton" onClick={onAddSavedList}>
+            Lưu khóa học
+          </button>
         </div>
       )}
       <div className="playListContainer">
@@ -159,24 +194,70 @@ export default function ViewPlayList(playlist) {
             {decodedToken?.role === "Admin" ? null : decodedToken?.role ===
                 "User" || "Sharers" ? (
               <div>
-                <div>
-                  <Typography component="legend">Đánh Giá Khóa Học</Typography>
-                  <Rating
-                    name="customized-10"
-                    defaultValue={8}
-                    max={10}
-                    id="rating"
-                    value={rating}
-                    onChange={(e) => {
-                      console.log("rating changed", e.target.value);
-                      setRating(e.target.value);
-                    }}
-                  />
+                {!rateForUser ? (
+                  <div>
+                    <Typography component="legend">
+                      Đánh Giá Khóa Học
+                    </Typography>
+                    <Rating
+                      name="customized-10"
+                      defaultValue={8}
+                      max={10}
+                      id="rating"
+                      value={rating}
+                      onChange={(e) => {
+                        console.log("rating changed", e.target.value);
+                        setRating(e.target.value);
+                      }}
+                    />
 
-                  <button className="playListAddButton" onClick={onFormSubmit}>
-                    Đánh Giá
-                  </button>
-                </div>
+                    <button
+                      className="playListAddButton"
+                      onClick={onFormSubmit}
+                    >
+                      Đánh Giá
+                    </button>
+                  </div>
+                ) : (
+// Đánh giá lại
+                  <div>
+                    <button className="playListAddButton" onClick={handleOpen}>
+                      Đánh giá lại
+                    </button>
+                    <Modal
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      <Box sx={style}>
+                        <div>
+                          <Typography component="legend">
+                            Đánh Giá Khóa Học
+                          </Typography>
+                          <Rating
+                            name="customized-10"
+                            defaultValue={8}
+                            max={10}
+                            id="rating"
+                            value={rating}
+                            onChange={(e) => {
+                              console.log("rating changed", e.target.value);
+                              setRating(e.target.value);
+                            }}
+                          />
+
+                          <button
+                            className="playListAddButton"
+                            onClick={onFormSubmit}
+                          >
+                            Đánh Giá
+                          </button>
+                        </div>
+                      </Box>
+                    </Modal>
+                  </div>
+                )}
                 <div>
                   <h4>Thảo Luận</h4>
                   <Messenger playlistId={playlist.playlist._id} />
