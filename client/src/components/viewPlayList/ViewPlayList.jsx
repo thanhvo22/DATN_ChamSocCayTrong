@@ -63,6 +63,19 @@ export default function ViewPlayList(playlist) {
       });
   };
 
+  const onAddSavedList = async (event) => {
+    event.preventDefault();
+    await axios
+      .post(`http://localhost:5000/api/v1/savedlist/create`, {
+        userId: id,
+        playlistId: playlist.playlist._id,
+      })
+      .then((res) => {
+        console.log("add to savedlist: ", res);
+        navigate("/home");
+      });
+  };
+
   return (
     <div className="playList">
       {decodedToken?.role === "Admin" ? (
@@ -87,9 +100,8 @@ export default function ViewPlayList(playlist) {
       ) : (
         <div className="playListTitleContainer">
           <h1 className="playListTitle">Thông tin khóa học</h1>
-          <Link to={"/savedlist" + playlist.playlist._id}>
-            <button className="playListAddButton">Lưu khóa học</button>
-          </Link>
+
+          <button className="playListAddButton" onClick={onAddSavedList}>Lưu khóa học</button>
         </div>
       )}
       <div className="playListContainer">
@@ -156,12 +168,14 @@ export default function ViewPlayList(playlist) {
                     id="rating"
                     value={rating}
                     onChange={(e) => {
-                      console.log("rating changed",e.target.value )
+                      console.log("rating changed", e.target.value);
                       setRating(e.target.value);
                     }}
                   />
 
-                  <button className="playListAddButton" onClick={onFormSubmit}>Đánh Giá</button>
+                  <button className="playListAddButton" onClick={onFormSubmit}>
+                    Đánh Giá
+                  </button>
                 </div>
                 <div>
                   <h4>Thảo Luận</h4>
