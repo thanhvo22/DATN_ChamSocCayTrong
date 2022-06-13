@@ -22,7 +22,7 @@ const savedListController = {
 
   getSavedListByUser: async (req, res) => {
     try {
-      const {userId} = req.body
+      const userId = req.header("userId");
       const savedList = await savedListModel.find({ userId: userId }).populate(["userId","playlistId"]);
       res.json({ message: `SavedList for User: `, savedList });
     } catch (error) {

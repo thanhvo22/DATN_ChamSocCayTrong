@@ -13,9 +13,11 @@ module.exports.getRateForPlayList = async (req, res) => {
 };
 
 module.exports.getRateForUser = async (req, res) => {
-  const userId = req.signedCookies.cookie_id;
-  const rateForUser = await rateModel.find({ userId });
-  res.json(rateForUser);
+  const userId = req.header("userId");
+  const playlistId = req.params.playlistId
+  const rateForUser = await rateModel.find({ userId, playlistId });
+
+  res.json({ message: "ok", rateForUser });
 };
 
 async function updateRating(playlistId) {
@@ -35,8 +37,7 @@ async function updateRating(playlistId) {
 
 module.exports.postCreateRate = async (req, res) => {
   try {
-    
-    const { rating,playlistId ,userId} = req.body;
+    const { rating, playlistId, userId } = req.body;
     //check if the user has rated it
     const checkRate = await rateModel.findOne({
       userId,
@@ -52,7 +53,7 @@ module.exports.postCreateRate = async (req, res) => {
       await updateRating(playlistId);
       res.json({
         message: "create rate successfully",
-        rate
+        rate,
       });
     }
     //update rating
@@ -61,13 +62,13 @@ module.exports.postCreateRate = async (req, res) => {
         playlistId,
         userId,
       },
-      {rating}
+      { rating }
     );
     await updateRating(playlistId);
     res.json({
-      message:`update rating successfully`,
-      rate
-    })
+      message: `update rating successfully`,
+      rate,
+    });
   } catch (error) {
     res.json({ error });
   }

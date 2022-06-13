@@ -5,19 +5,25 @@ module.exports.getComments = async (req, res) => {
   res.json(comments);
 };
 
+module.exports.getForMe = async (req, res) => {
+  const userId = req.header("userId");
+  const id = req.params.commentId;
+  const comments = await commentModel.find({ userId, _id: id });
+  res.json({ message: "ok", comments });
+};
+
 module.exports.getCommentsForPlaylist = async (req, res) => {
   const playlistId = req.params.playlistId;
-  const comments = await commentModel.find({playlistId}).populate("userId");
+  const comments = await commentModel.find({ playlistId }).populate("userId");
   res.json({
     message: "comments for playlist",
-    comments
-  })
-}
+    comments,
+  });
+};
 
 module.exports.postCreateCmt = async (req, res) => {
   console.log("created new comment");
   try {
-    
     const { comment, userId, playlistId } = req.body;
     const newComment = await commentModel.create({
       userId,
@@ -35,7 +41,6 @@ module.exports.putCmt = async (req, res) => {
   console.log("edit new comment");
   try {
     const id = req.params.id;
-
     const { comment } = req.body;
     const newComment = await commentModel.findByIdAndUpdate(id, {
       comment,
