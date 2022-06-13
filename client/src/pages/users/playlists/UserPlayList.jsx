@@ -11,7 +11,7 @@ export default function UserPlayList() {
   const [user, setUser] = useState([]);
   const [playlist, setPlayList] = useState("");
   useEffect(() => {
-    if(id !== null){
+    if (id !== null) {
       axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
         console.log(`res`, res.data.data);
         setUser(res.data.data);
@@ -19,14 +19,11 @@ export default function UserPlayList() {
     }
   }, []);
   let { playlistId } = useParams();
-  console.log("playlistId: " + playlistId);
   async function getData() {
     let data = await axios.get(
       `http://localhost:5000/api/v1/playlists/${playlistId}`
     );
-    console.log("data", data);
     let list = await data.data.playList;
-    console.log("list", list);
     setPlayList(list);
   }
   useEffect(() => {
@@ -38,11 +35,10 @@ export default function UserPlayList() {
       }
     })();
   }, []);
-  console.log("playlist_: ", playlist);
 
   return (
     <div>
-      {id === null ? <TopbarUser /> : <TopbarUserFinal img={user} /> }
+      {id === null ? <TopbarUser /> : <TopbarUserFinal img={user} />}
 
       <HeaderUser />
       {playlist && <ViewPlayList playlist={playlist} />}

@@ -84,7 +84,7 @@ export default function ViewPlayListSharer(playlist) {
             />
             <div className="playListShowTopTitle">
               <span className="playListShowUsername">
-              Khóa chia sẻ: {playlist.playlist.playlistName}
+                Khóa chia sẻ: {playlist.playlist.playlistName}
               </span>
               <span className="playListShowUserTitle">
                 Tác giả: {playlist.playlist?.userId?.name}
@@ -121,7 +121,7 @@ export default function ViewPlayListSharer(playlist) {
             <div className="playListShowInfo">
               <LocationSearching className="playListShowIcon" />
               <span className="playListShowInfoTitle">
-              Danh mục khóa học: | {playlist.playlist.categoryId?.name}
+                Danh mục khóa học: | {playlist.playlist.categoryId?.name}
               </span>
             </div>
             <div className="playListShowInfo">
@@ -134,27 +134,10 @@ export default function ViewPlayListSharer(playlist) {
               <button className="playListAddButton">Sửa Khóa Học</button>
             </Link>
 
-            {decodedToken?.role === "Admin" ? null : decodedToken?.role ===
-              "User" ? (
-              <div>
-                <div>
-                  <Typography component="legend">Đánh Giá Khóa Học</Typography>
-                  <Rating name="customized-10" defaultValue={8} max={10} />
-                  <Link to="/rating/add">
-                    <button className="playListAddButton">Đánh Giá</button>
-                  </Link>
-                </div>
-                <div>
-                  <h4>Thảo Luận</h4>
-                  <Messenger playlistId={playlist.playlist._id} />
-                </div>
-              </div>
-            ) : (
-              <div>
-                <h4>Thảo Luận</h4>
-                <Messenger playlistId={playlist.playlist._id} />
-              </div>
-            )}
+            <div>
+              <h4>Thảo Luận</h4>
+              <Messenger playlistId={playlist.playlist._id} />
+            </div>
           </div>
         </div>
         {/* edit */}

@@ -64,30 +64,25 @@ export default function ViewPlayList(playlist) {
       });
   }, {});
 
-  const handleDelete = async () => {
-    await axios
-      .delete(
-        `http://localhost:5000/api/v1/playlists/delete/${playlist.playlist._id}`
-      )
-      .then((res) => {
-        navigate("/sharer/playlists");
-        window.location.reload();
-      });
-  };
   const id = localStorage.getItem("_id");
   const [rating, setRating] = useState(0);
 
   const onFormSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .post(`http://localhost:5000/api/v1/rates/create`, {
-        userId: id,
-        rating,
-        playlistId: playlist.playlist._id,
-      })
+      .post(
+        `http://localhost:5000/api/v1/rates/create`,
+        {
+          rating,
+          playlistId: playlist.playlist._id,
+        },
+        {
+          headers: id_header(),
+        }
+      )
       .then((res) => {
         console.log("create rating: ", res);
-        navigate("/home");
+        window.location.reload();
       });
   };
 
@@ -194,7 +189,7 @@ export default function ViewPlayList(playlist) {
             {decodedToken?.role === "Admin" ? null : decodedToken?.role ===
                 "User" || "Sharers" ? (
               <div>
-                {!rateForUser ? (
+                {rateForUser === undefined ? (
                   <div>
                     <Typography component="legend">
                       Đánh Giá Khóa Học
@@ -219,7 +214,7 @@ export default function ViewPlayList(playlist) {
                     </button>
                   </div>
                 ) : (
-// Đánh giá lại
+                  // Đánh giá lại
                   <div>
                     <button className="playListAddButton" onClick={handleOpen}>
                       Đánh giá lại
@@ -242,7 +237,6 @@ export default function ViewPlayList(playlist) {
                             id="rating"
                             value={rating}
                             onChange={(e) => {
-                              console.log("rating changed", e.target.value);
                               setRating(e.target.value);
                             }}
                           />
