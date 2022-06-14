@@ -64,84 +64,84 @@ export default function Profile(user) {
     });
   }
   return (
-    <div className="user">
+    <div className="profile">
       {decodedToken === null ? (
-        <div className="userTitleContainer">
-          <h1 className="userTitle">Thông Tin Cá Nhân</h1>
+        <div className="profileTitleContainer">
+          <h1 className="profileTitle">Thông Tin Cá Nhân</h1>
         </div>
       ) : decodedToken.role === "Admin" ? (
-        <div className="userTitleContainer">
-          <h1 className="userTitle">Profile </h1>
+        <div className="profileTitleContainer">
+          <h1 className="profileTitle">Profile </h1>
         </div>
       ) : (
-        <div className="userTitleContainer">
-          <h1 className="userTitle">Thông Tin Cá Nhân </h1>
+        <div className="profileTitleContainer">
+          <h1 className="profileTitle">Thông Tin Cá Nhân </h1>
         </div>
       )}
-      <div className="userContainer">
-        <div className="userShow">
-          <div className="userShowTop">
-            <img src={user.user.images} alt="" className="userShowImg" />
-            <div className="userShowTopTitle">
-              <span className="userShowUsername">{user.user.name}</span>
+      <div className="profileContainer">
+        <div className="profileShow">
+          <div className="profileShowTop">
+            <img src={user.user.images} alt="" className="profileShowImg" />
+            <div className="profileShowTopTitle">
+              <span className="profileShowUsername">{user.user.name}</span>
             </div>
           </div>
-          <div className="userShowBottom">
-            <span className="userShowTitle">Account Details</span>
-            <div className="userShowInfo">
-              <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">{user.user.user}</span>
+          <div className="profileShowBottom">
+            <span className="profileShowTitle">Account Details</span>
+            <div className="profileShowInfo">
+              <PermIdentity className="profileShowIcon" />
+              <span className="profileShowInfoTitle">{user.user.user}</span>
             </div>
-            <div className="userShowInfo">
-              <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">{dateFormatted}</span>
+            <div className="profileShowInfo">
+              <CalendarToday className="profileShowIcon" />
+              <span className="profileShowInfoTitle">{dateFormatted}</span>
             </div>
-            <span className="userShowTitle">Contact Details</span>
-            <div className="userShowInfo">
-              <StarRate className="userShowIcon" />
-              <span className="userShowInfoTitle">{user.user.typeofUser}</span>
+            <span className="profileShowTitle">Contact Details</span>
+            <div className="profileShowInfo">
+              <StarRate className="profileShowIcon" />
+              <span className="profileShowInfoTitle">{user.user.typeofUser}</span>
             </div>
-            <div className="userShowInfo">
-              <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">{user.user.email}</span>
+            <div className="profileShowInfo">
+              <MailOutline className="profileShowIcon" />
+              <span className="profileShowInfoTitle">{user.user.email}</span>
             </div>
-            <div className="userShowInfo">
-              <LocationSearching className="userShowIcon" />
-              <span className="userShowInfoTitle">{user.user.gender}</span>
+            <div className="profileShowInfo">
+              <LocationSearching className="profileShowIcon" />
+              <span className="profileShowInfoTitle">{user.user.gender}</span>
             </div>
           </div>
         </div>
-        <div className="userUpdate">
-          <span className="userUpdateTitle">Edit</span>
-          <form className="userUpdateForm" onSubmit={onSubmit}>
-            <div className="userUpdateLeft">
-              <div className="userUpdateItem">
+        <div className="profileUpdate">
+          <span className="profileUpdateTitle">Edit</span>
+          <form className="profileUpdateForm" onSubmit={onSubmit}>
+            <div className="profileUpdateLeft">
+              <div className="profileUpdateItem">
                 <label>Full Name</label>
                 <input
                   type="text"
-                  className="userUpdateInput"
+                  className="profileUpdateInput"
                   name="name"
                   value={newUser.name}
                   placeholder={user.user.name}
                   onChange={handleChange}
                 />
               </div>
-              <div className="userUpdateItem">
+              <div className="profileUpdateItem">
                 <label>Email</label>
                 <input
                   type="text"
-                  className="userUpdateInput"
+                  className="profileUpdateInput"
                   placeholder={user.user.email}
                   name="email"
                   value={newUser.email}
                   onChange={handleChange}
                 />
               </div>
-              <div className="userUpdateItem">
+              <div className="profileUpdateItem">
                 <label>Date of Birth</label>
                 <input
                   type="date"
-                  className="userUpdateInput"
+                  className="profileUpdateInput"
                   name="birthDate"
                   // value={user.user.birthDate}
                   onChange={handleChange}
@@ -175,15 +175,15 @@ export default function Profile(user) {
                 </FormControl>
               </div>
             </div>
-            <div className="userUpdateRight">
-              <div className="userUpdateUpload">
+            <div className="profileUpdateRight">
+              <div className="profileUpdateUpload">
                 <img
-                  className="userUpdateImg"
+                  className="profileUpdateImg"
                   src={user.user.images}
                   alt="loi"
                 />
                 <label htmlFor="file">
-                  <Publish className="userUpdateIcon" />
+                  <Publish className="profileUpdateIcon" />
                 </label>
                 <input
                   type="file"
@@ -193,7 +193,7 @@ export default function Profile(user) {
                   name="file"
                 />
               </div>
-              <button className="userUpdateButton">Update</button>
+              <button className="profileUpdateButton">Update</button>
             </div>
           </form>
         </div>

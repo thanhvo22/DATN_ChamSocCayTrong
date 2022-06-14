@@ -5,7 +5,7 @@ import HeaderUser from "../../../components/headerUser/HeaderUser";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import id_header from "../../../services/id_header";
-import Post from "../../../components/post/Post";
+import PostSaved from "../../../components/post/PostSaved";
 export default function ListSaved() {
   const id = localStorage.getItem("_id");
   const [playlists, setPlaylists] = useState([]);
@@ -49,22 +49,23 @@ export default function ListSaved() {
       {user && <TopbarUserFinal img={user} />}
 
       <HeaderUser />
-      <div>
-        <h2>Khóa học đã lưu của bạn</h2>
-        <div className="posts">
-          {playlists &&
-            playlists.map((lists) => (
-              <div>
-                <button
-                  className="playListDelButton"
-                  onClick={() => handleDelete(lists._id)}
-                >
-                  Bỏ lưu
-                </button>
-                <Post list={lists.playlistId} />
-              </div>
-            ))}
-        </div>
+
+      <h2>Khóa học đã lưu của bạn</h2>
+
+      <div className="posts">
+        {playlists &&
+          playlists.map((lists) => (
+            <div>
+              <button
+                className="playListDelButton"
+                onClick={() => handleDelete(lists._id)}
+              >
+                Bỏ lưu
+              </button>
+
+              <PostSaved list={lists.playlistId} />
+            </div>
+          ))}
       </div>
     </div>
   );

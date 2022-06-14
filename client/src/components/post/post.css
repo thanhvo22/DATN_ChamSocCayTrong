@@ -1,15 +1,18 @@
 .post {
-  width: 400px;
+  width: 360px;
+  height: 340px;
   margin: 0px 35px 40px 35px;
   display: flex;
   flex-direction: column;
+  border: 2px solid rgb(214, 209, 209);
+  border-radius: 18px;
 }
 
 .postImg {
-  width: 400px;
-  height: 280px;
+  width: 360px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 7px;
+  border-radius: 18px 18px 0 0;
 }
 
 .postInfo {
@@ -42,7 +45,7 @@
   /* font-family: "Lora", serif; */
   font-family: "Times New Roman";
   font-style:normal;
-  font-size: 26px;
+  font-size: 20px;
   text-align: center;
   font-weight: 400;
   color: #291919;
@@ -54,7 +57,7 @@
   font-family: "Times New Roman";
   font-style: normal;
   font-weight: 400;
-  font-size: 22px;
+  font-size: 16px;
   text-align: center;
   line-height: 24px;
   color: #000000;

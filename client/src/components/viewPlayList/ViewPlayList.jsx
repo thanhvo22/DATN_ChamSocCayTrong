@@ -149,12 +149,12 @@ export default function ViewPlayList(playlist) {
                 {playlist.playlist.playlistName}
               </span>
               <span className="playListShowUserTitle">
-                {playlist.playlist?.userId?.name}
+                Tác giả: {playlist.playlist?.userId?.name}
               </span>
             </div>
           </div>
           <div className="playListShowBottom">
-            <span className="playListShowTitle">PlayList Details</span>
+            <span className="playListShowTitle">Thông tin khóa học</span>
             <div className="playListShowInfo">
               <PermIdentity className="playListShowIcon" />
               <span className="playListShowInfoTitle">

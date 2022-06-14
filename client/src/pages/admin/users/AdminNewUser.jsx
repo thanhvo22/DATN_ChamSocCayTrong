@@ -60,7 +60,7 @@ export default function AdminNewUser() {
       <div className="container">
         <Sidebar />
         <div className="newUser">
-          <h1 className="newUserTitle">New User</h1>
+          <h1 className="newUserTitle">Create User</h1>
           <form className="newUserForm" onSubmit={onFormSubmit}>
             <div className="newUserItem">
               <label>Username</label>

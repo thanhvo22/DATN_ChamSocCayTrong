@@ -1,3 +1,6 @@
+.topheader{
+  padding-top: 20px;
+}
 .posts {
   flex: 9;
   display: flex;

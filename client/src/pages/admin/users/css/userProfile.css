@@ -1,3 +1,8 @@
+.container{
+  display: flex;
+  margin-top: 10px;
+}
+
 .user {
   flex: 4;
   padding: 20px;

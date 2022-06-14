@@ -1,3 +1,11 @@
+.home {
+  display: flex;
+}
+
+.h2Test{
+  padding-top: 10px;
+  padding-left: 30px;
+}
 .playListDelButton {
   margin-left: 40px;
   width: 120px;
@@ -8,5 +16,11 @@
   cursor: pointer;
   color: white;
   font-size: 14px;
-  
+}
+
+.posts{
+  flex: 9;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px;
 }

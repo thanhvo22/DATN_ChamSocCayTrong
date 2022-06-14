@@ -39,16 +39,19 @@
 }
 
 .chatMessageInput {
-  width: 80%;
-  height: 90px;
+  width: 90%;
+  height: 100px;
   padding: 10px;
+  border: 2px solid rgb(110, 100, 100);
+  border-radius: 18px;
 }
 
-.chatSubmitButton {
-  width: 70px;
-  height: 40px;
+
+.chatBoxBottom .chatSubmitButton {
+  width: 140px;
+  height: 50px;
   border: none;
-  border-radius: 5px;
+  border-radius: 18px;
   cursor: pointer;
   background-color: teal;
   color: white;
@@ -56,37 +59,4 @@
 
 .chatOnline {
   flex: 3;
-}
-
-.chatMenuWrapper,
-.chatBoxWrapper,
-.chatOnlineWrapper {
-  padding: 10px;
-  height: 100%;
-}
-
-.noConversationText {
-  position: absolute;
-  top: 10%;
-  font-size: 50px;
-  color: rgb(224, 220, 220);
-  cursor: default;
-}
-
-@media screen and (max-width: 768px) {
-  .chatMenu {
-    flex: 1;
-  }
-
-  .chatMenuInput {
-    display: none;
-  }
-
-  .chatBox{
-    flex: 10;
-  }
-
-  .chatOnline{
-    flex: 1px;
-  }
 }

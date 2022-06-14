@@ -62,7 +62,7 @@ export default function Videos(v) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} >
           <iframe
             width="900"
             height="450"
@@ -73,7 +73,7 @@ export default function Videos(v) {
             title="video"
           />
 
-          <CardContent>
+          <CardContent onClose={handleClose}>
             <Typography gutterBottom variant="h5" component="div">
               {video.nameVideo}
             </Typography>

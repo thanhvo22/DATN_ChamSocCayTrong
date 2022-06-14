@@ -1,15 +1,15 @@
-.user {
+.profile {
   flex: 4;
   padding: 20px;
 }
 
-.userTitleContainer {
+.profileTitleContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.userAddButton {
+.profileAddButton {
   width: 80px;
   border: none;
   padding: 5px;
@@ -20,19 +20,21 @@
   font-size: 16px;
 }
 
-.userContainer {
+.profileContainer {
   display: flex;
+  /* flex: 1; */
   margin-top: 20px;
+  margin-left: 10px;
 }
 
-.userShow {
+.profileShow {
   flex: 1;
   padding: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-.userUpdate {
+.profileUpdate {
   flex: 2;
   padding: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
@@ -40,84 +42,84 @@
   margin-left: 20px;
 }
 
-.userShowTop {
+.profileShowTop {
   display: flex;
   align-items: center;
 }
 
-.userShowImg {
+.profileShowImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.userShowTopTitle {
+.profileShowTopTitle {
   display: flex;
   flex-direction: column;
   margin-left: 20px;
 }
 
-.userShowUsername {
+.profileShowUsername {
   font-weight: 600;
-  font-size: 30px
+  font-size: 26px
 }
 
-.userShowUserTitle {
+.profileShowUserTitle {
   font-weight: 300;
 }
 
-.userShowBottom {
+.profileShowBottom {
   margin-top: 20px;
   font-size: 20px;
 }
 
-.userShowTitle {
+.profileShowTitle {
   font-weight: 600;
   font-size: 20px;
   color: rgb(175, 170, 170);
 }
 
-.userShowInfo {
+.profileShowInfo {
   display: flex;
   align-items: center;
   margin: 20px 0px;
   color: #444;
 }
 
-.userShowIcon {
+.profileShowIcon {
   font-size: 20px !important;
 }
 
-.userShowInfoTitle {
+.profileShowInfoTitle {
   margin-left: 10px;
   font-size: 20px;
 }
 
-.userUpdateTitle {
+.profileUpdateTitle {
   font-size: 24px;
   font-weight: 600;
 }
 
-.userUpdateForm {
+.profileUpdateForm {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
-.userUpdateItem {
+.profileUpdateItem {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
   font-size: 22px;
 }
 
-.userUpdateItem > label {
+.profileUpdateItem > label {
   margin-bottom: 5px;
   font-size: 20px;
 }
 
-.userUpdateInput {
+.profileUpdateInput {
   border: none;
   width: 250px;
   height: 30px;
@@ -125,18 +127,18 @@
   font-size: 20px;
 }
 
-.userUpdateRight {
+.profileUpdateRight {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.userUpdateUpload {
+.profileUpdateUpload {
   display: flex;
   align-items: center;
 }
 
-.userUpdateImg {
+.profileUpdateImg {
   width: 100px;
   height: 100px;
   border-radius: 10px;
@@ -144,11 +146,11 @@
   margin-right: 20px;
 }
 
-.userUpdateIcon {
+.profileUpdateIcon {
   cursor: pointer;
 }
 
-.userUpdateButton {
+.profileUpdateButton {
   border-radius: 5px;
   border: none;
   padding: 5px;
