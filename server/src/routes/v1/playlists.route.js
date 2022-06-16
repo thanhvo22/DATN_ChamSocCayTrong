@@ -3,6 +3,7 @@ const router = express.Router();
 const playlistController = require("../../controllers/playlists.controller");
 const upload = require("../../utils/multer");
 
+router.get("/search", playlistController.search);
 //getplaylist for sharers
 router.get("/for-you", playlistController.getPlayListForSharer);
 router.get("/accept", playlistController.playlistAccept);

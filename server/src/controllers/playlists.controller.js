@@ -1,3 +1,4 @@
+const playlistsModel = require("../models/playlists.model");
 const playlistModel = require("../models/playlists.model");
 const cloudinary = require("../utils/cloudinary");
 
@@ -9,6 +10,18 @@ module.exports.getPlayListForSharer = async (req, res) => {
   res.json(playList);
 };
 
+module.exports.search = async (req, res) => {
+  const { name } = req.query;
+  let matchedPlaylist = await playlistModel
+    .find()
+    .where({ status: "Accept" })
+    .populate(["userId", "categoryId"]);
+  const playlist = await matchedPlaylist.filter((list) => {
+    return list.playlistName.toLowerCase().indexOf(name.toLowerCase()) !== -1;
+  });
+
+  res.json({ message: "OK", playlist });
+};
 module.exports.getAllPlayList = async (req, res) => {
   try {
     const playLists = await playlistModel
@@ -126,8 +139,8 @@ module.exports.putPlayList = async (req, res) => {
       preview,
       status,
       categoryId,
-      images: newAvatar?.secure_url ,
-      cloudinary_id: newAvatar?.public_id ,
+      images: newAvatar?.secure_url,
+      cloudinary_id: newAvatar?.public_id,
     });
     console.log(playlist);
     return res.json({
