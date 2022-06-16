@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-  margin-right: 20px;
+  margin-right: 22px;
   font-size: 22px;
 }
 .newLabel{
@@ -40,11 +40,12 @@
 }
 
 .newPlayListItem > input {
-  height: 20px;
+  
   padding: 10px;
   border: 1px solid gray;
   border-radius: 5px;
   font-size: 20px;
+  height: 50px;
 }
 
 .newPlayListGender > input {

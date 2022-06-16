@@ -44,7 +44,23 @@
 }
 
 .topUserListItem {
+  margin-top: 8px;
   margin-right: 20px;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.topUserListItem1{
+  margin-right: 20px;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.topUserListItem2{
+  margin-top: -21px;
+  margin-right: 5px;
   font-size: 18px;
   font-weight: 300;
   cursor: pointer;
@@ -61,6 +77,7 @@
   object-fit: cover;
   margin-right: 15px;
   cursor: pointer;
+  margin-top: 8px;
 }
 
 .topUserSearchIcon {
