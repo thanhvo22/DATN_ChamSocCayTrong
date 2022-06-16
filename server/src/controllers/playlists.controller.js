@@ -10,6 +10,24 @@ module.exports.getPlayListForSharer = async (req, res) => {
   res.json(playList);
 };
 
+module.exports.getCategoryId = async (req, res) => {
+  const categoryId = req.params.categoryId;
+  try {
+    const playLists = await playlistModel
+      .find({categoryId})
+      .where({ status: "Accept" })
+      .populate(["userId", "categoryId"]);
+    return res.json({
+      message: "get All play list",
+      playLists,
+    });
+  } catch (error) {
+    res.json({
+      message: error,
+    });
+  }
+};
+
 module.exports.search = async (req, res) => {
   const { name } = req.query;
   let matchedPlaylist = await playlistModel
