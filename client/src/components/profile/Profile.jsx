@@ -51,7 +51,7 @@ export default function Profile(user) {
       )
       .then((res) => {
         console.log(res);
-        navigate("/home")
+        navigate("/home");
         window.location.reload();
       });
   };
@@ -87,7 +87,7 @@ export default function Profile(user) {
             </div>
           </div>
           <div className="profileShowBottom">
-            <span className="profileShowTitle">Account Details</span>
+            <span className="profileShowTitle">Chi tiết tài khoản</span>
             <div className="profileShowInfo">
               <PermIdentity className="profileShowIcon" />
               <span className="profileShowInfoTitle">{user.user.user}</span>
@@ -96,10 +96,12 @@ export default function Profile(user) {
               <CalendarToday className="profileShowIcon" />
               <span className="profileShowInfoTitle">{dateFormatted}</span>
             </div>
-            <span className="profileShowTitle">Contact Details</span>
+            <span className="profileShowTitle">Thông tin</span>
             <div className="profileShowInfo">
               <StarRate className="profileShowIcon" />
-              <span className="profileShowInfoTitle">{user.user.typeofUser}</span>
+              <span className="profileShowInfoTitle">
+                {user.user.typeofUser}
+              </span>
             </div>
             <div className="profileShowInfo">
               <MailOutline className="profileShowIcon" />
@@ -112,11 +114,11 @@ export default function Profile(user) {
           </div>
         </div>
         <div className="profileUpdate">
-          <span className="profileUpdateTitle">Edit</span>
+          <span className="profileUpdateTitle">Cập nhật thông tin</span>
           <form className="profileUpdateForm" onSubmit={onSubmit}>
             <div className="profileUpdateLeft">
               <div className="profileUpdateItem">
-                <label>Full Name</label>
+                <label>Họ Tên</label>
                 <input
                   type="text"
                   className="profileUpdateInput"
@@ -127,7 +129,7 @@ export default function Profile(user) {
                 />
               </div>
               <div className="profileUpdateItem">
-                <label>Email</label>
+                <label>Tài khoản Email</label>
                 <input
                   type="text"
                   className="profileUpdateInput"
@@ -138,7 +140,7 @@ export default function Profile(user) {
                 />
               </div>
               <div className="profileUpdateItem">
-                <label>Date of Birth</label>
+                <label>Ngày sinh</label>
                 <input
                   type="date"
                   className="profileUpdateInput"
@@ -150,7 +152,7 @@ export default function Profile(user) {
               <div className="newUserItem">
                 <FormControl>
                   <FormLabel id="demo-row-radio-buttons-group-label">
-                    Gender
+                    Giới tính
                   </FormLabel>
                   <RadioGroup
                     row
@@ -193,7 +195,7 @@ export default function Profile(user) {
                   name="file"
                 />
               </div>
-              <button className="profileUpdateButton">Update</button>
+              <button className="profileUpdateButton">Cập nhật</button>
             </div>
           </form>
         </div>

@@ -1,21 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useJwt } from "react-jwt";
 import { Link } from "react-router-dom";
 import "./css/topbarUser.css";
 // import ImageSearch from "../ImageSearch";
+import axios from "axios";
 
 export default function TopbarUser() {
   const token = localStorage.getItem("userId");
+  
   const { decodedToken, isExpired } = useJwt(
     token,
     process.env.ACCESS_TOKEN_SECRET
   );
-  console.log("decodedToken", decodedToken);
   const logOut = () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("_id");
     window.location.reload();
   };
+
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/v1/category`).then((res) => {
+      console.log("list category", res);
+      setCategory(res.data.data);
+    });
+  }, []);
 
   return (
     <div className="topUser">
@@ -56,7 +65,7 @@ export default function TopbarUser() {
           </li> */}
           <li className="topUserListItem1">
             <div class="group inline-block">
-              <button class="outline-none focus:outline-none border px-3 py-1 bg-white rounded-sm flex items-center min-w-32">
+              <button class="outline-none focus:outline-none px-3 py-1 bg-white rounded-sm flex items-center min-w-32">
                 <span class="pr-1  flex-1">Danh Mục Cây Trồng</span>
                 <span>
                   <svg
@@ -73,12 +82,14 @@ export default function TopbarUser() {
                 class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
   transition duration-150 ease-in-out origin-top min-w-32"
               >
-                <li class="rounded-sm px-3 py-1 hover:bg-gray-100">
-                  Programming
-                </li>
-                <li class="rounded-sm px-3 py-1 hover:bg-gray-100">DevOps</li>
-
-                <li class="rounded-sm px-3 py-1 hover:bg-gray-100">Testing</li>
+                {category &&
+                  category.map((c) => (
+                    <Link className="link" to={"/category/"+c._id} reloadDocument="true">
+                      <li class="rounded-sm px-3 py-1 hover:bg-gray-100">
+                        {c.name}
+                      </li>
+                    </Link>
+                  ))}
               </ul>
             </div>
           </li>

@@ -58,7 +58,7 @@ export default function AdminUserList() {
       });
   };
   const columns = [
-    { field: "_id", headerName: "ID", width: 220 },
+    { field: "_id", headerName: "ID", width: 95 },
     {
       field: "images",
       headerName: "Avt",

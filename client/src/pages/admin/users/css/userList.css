@@ -10,7 +10,7 @@
 .userList {
   flex: 2;
   margin-top: 40px;
-  margin-right: 30px;
+  margin-right: -400px;
 }
 
 .userListUser {
@@ -28,17 +28,17 @@
 
 .userListEdit {
   border: none;
-  border-radius: 10px;
-  padding: 5px 10px;
-  background-color: #3bb077;
+  border-radius: 18px;
+  padding: 0px 5px;
+  background-color: #0fa06f;
   color: white;
   cursor: pointer;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 .userListBlocked{
   border: none;
-  border-radius: 10px;
-  padding: 5px 10px;
+  border-radius: 18px;
+  padding: 0px 5px;
   background-color: #cc0f0f;
   color: white;
   cursor: pointer;

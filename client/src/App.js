@@ -25,6 +25,7 @@ import NewVideo from './pages/sharers/videos/NewVideo';
 import SharerViewPlayList from "./pages/sharers/playlists/SharerViewPlayList";
 import EditPlayList from "./pages/sharers/playlists/EditPlayList";
 import EditVideo from "./pages/sharers/videos/EditVideo";
+import PageWithCategory from "./pages/home/PageWithCategory";
 function App() {
   return (
     <Router>
@@ -35,6 +36,7 @@ function App() {
         <Route path="/index" element={<Index />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/category/:categoryId" element={<PageWithCategory/>} />
         <Route path="/admin" element={<DashboardApp />} />
         {/* users */}
         <Route path="/playlists/:playlistId" element={<UserPlayList />} />
