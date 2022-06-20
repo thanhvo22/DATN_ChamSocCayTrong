@@ -33,7 +33,7 @@ const style = {
 
 export default function ViewPlayList(playlist) {
   const token = localStorage.getItem("userId");
-  const [rateForUser, setRateForUser] = useState({});
+  const [rateForUser, setRateForUser] = useState([]);
   let navigate = useNavigate();
   const { decodedToken, isExpired } = useJwt(
     token,
@@ -62,12 +62,16 @@ export default function ViewPlayList(playlist) {
         console.log("res rate for user", res.data.rateForUser[0]);
         setRateForUser(res.data.rateForUser[0]);
       });
-  }, {});
+  }, []);
 
   const id = localStorage.getItem("_id");
+  console.log("id", id);
   const [rating, setRating] = useState(0);
 
   const onFormSubmit = async (event) => {
+    if(id===null){
+      return navigate("/login");
+    }
     event.preventDefault();
     await axios
       .post(
@@ -171,25 +175,25 @@ export default function ViewPlayList(playlist) {
             <div className="playListShowInfo">
               <StarRate className="playListShowIcon" />
               <span className="playListShowInfoTitle">
-                Rating: {playlist.playlist.rating}{" "}
+                Đánh giá: {playlist.playlist.rating}{" "} đ
               </span>
             </div>
             <div className="playListShowInfo">
               <MailOutline className="playListShowIcon" />
               <span className="playListShowInfoTitle">
-                create at: {dateFormatted}
+                Ngày tạo: {dateFormatted}
               </span>
             </div>
             <div className="playListShowInfo">
               <LocationSearching className="playListShowIcon" />
               <span className="playListShowInfoTitle">
-                Status | {playlist.playlist.status}
+                Trạng thái khóa học | {playlist.playlist.status}
               </span>
             </div>
             {decodedToken?.role === "Admin" ? null : decodedToken?.role ===
                 "User" || "Sharers" ? (
               <div>
-                {rateForUser === undefined ? (
+                {rateForUser == undefined ? (
                   <div>
                     <Typography component="legend">
                       Đánh Giá Khóa Học

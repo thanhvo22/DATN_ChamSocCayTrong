@@ -3,6 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import "../../App.css";
 import Topbar from "../../components/topbar/Topbar";
 import axios from "axios";
+import Chart from "../../components/chart/Chart";
 
 export default function DashboardApp() {
   const id = localStorage.getItem("_id");
@@ -18,7 +19,7 @@ export default function DashboardApp() {
       <Topbar admin={user} />
       <div className="container">
         <Sidebar />
-        <h1> Welcome to admin Home Page</h1>
+        <Chart/>
       </div>
     </div>
   );

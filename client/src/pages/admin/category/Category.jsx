@@ -27,7 +27,7 @@ export default function Category() {
 
   const handleDelete = async (id) => {
     await axios
-      .put(`http://localhost:5000/api/v1/category/delete/${id}`)
+      .delete(`http://localhost:5000/api/v1/category/delete/${id}`)
       .then((res) => {
         window.location.reload();
       });
@@ -66,6 +66,9 @@ export default function Category() {
         <Sidebar />
         <div className="userList">
           <h1>All Category</h1>
+          <Link to="/admin/category/create">
+            <button className="userUpdateButton">Create Category</button>
+          </Link>
           <DataGrid
             rows={category}
             disableSelectionOnClick

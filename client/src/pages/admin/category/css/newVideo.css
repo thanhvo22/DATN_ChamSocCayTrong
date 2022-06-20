@@ -1,0 +1,76 @@
+.newPlayList {
+  flex: 4;
+}
+
+.newPlayListForm {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.imgtest {
+  width: 600px;
+  height: 450px;
+}
+.imgtest2 {
+  width: 480px;
+  height: 300px;
+}
+
+.imgtest3 {
+  width: 850px;
+  height: 340px;
+}
+.newPlayListItem {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-right: 22px;
+  font-size: 22px;
+}
+.newLabel {
+  font-size: 22px;
+}
+.newPlayListItem > label {
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 600;
+  color: rgb(151, 150, 150);
+}
+
+.newPlayListItem > input {
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  font-size: 20px;
+  height: 50px;
+}
+
+.newPlayListGender > input {
+  margin-top: 15px;
+}
+
+.newPlayListGender > label {
+  margin: 10px;
+  font-size: 22px;
+  color: #555;
+}
+
+.newPlayListSelect {
+  height: 40px;
+  border-radius: 5px;
+  font-size: 19px;
+}
+
+.newPlayListButton {
+  width: 200px;
+  border: none;
+  background-color: darkblue;
+  color: white;
+  padding: 7px 10px;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-top: 30px;
+  cursor: pointer;
+  font-size: 20px;
+}

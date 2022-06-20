@@ -45,7 +45,7 @@ export default function Register() {
     <div className="register">
       <div className="registerWrapper">
         <div className="registerLeft">
-          <h3 className="registerLogo">V.V.T Web</h3>
+          <h3 className="registerLogo">Cây Trồng 81</h3>
           <span className="registerDesc">
             Đăng nhập để xem các khóa học hướng dẫn chăm sóc cây trồng, hoặc
             chia sẻ khóa học chăm sóc cây trồng cho mọi người nào!!

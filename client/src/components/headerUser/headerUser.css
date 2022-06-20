@@ -12,13 +12,14 @@
 
 .headerTitleSm {
   position: absolute;
-  top: 30%;
+  top: 38%;
   font-size: 36px;
 }
 
 .headerTitleLg {
+  font-family:'Times New Roman', Times, serif;
   position: absolute;
-  top: 33%;
+  top: 19%;
   font-size: 100px;
 }
 

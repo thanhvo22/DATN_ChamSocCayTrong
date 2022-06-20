@@ -58,7 +58,7 @@ export default function PageWithCategory() {
       {id ? <TopbarUserFinal img={user} /> : <TopbarUser />}
 
       <HeaderUser />
-      <div className="home">
+      <div >
         <div>
           <div className="max-w-sm rounded overflow-hidden my-10 mx-auto">
             <form onSubmit={onSubmit} className="w-full max-w-sm">

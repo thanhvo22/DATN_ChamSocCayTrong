@@ -50,7 +50,7 @@ export default function ListSaved() {
 
       <HeaderUser />
 
-      <h2>Khóa học đã lưu của bạn</h2>
+      <h2 className="h2Test">Khóa học đã lưu của bạn</h2>
 
       <div className="posts">
         {playlists &&

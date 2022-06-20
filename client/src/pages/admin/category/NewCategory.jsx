@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Topbar from "../../../components/topbar/Topbar";
 import Sidebar from "../../../components/sidebar/Sidebar";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-export default function EditCategory() {
+export default function NewCategory() {
   const id = localStorage.getItem("_id");
-  let { categoryId } = useParams();
   const [user, setUser] = useState("");
   const [category, setCategory] = useState([]);
 
@@ -18,22 +16,13 @@ export default function EditCategory() {
     });
   }, []);
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/v1/category/${categoryId}`)
-      .then((res) => {
-        console.log("res category", res);
-        setCategory(res.data.data);
-      });
-  }, []);
-
   //edit category
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .put(`http://localhost:5000/api/v1/category/edit/${categoryId}`, category)
+      .post(`http://localhost:5000/api/v1/category/create`, category)
       .then((res) => {
-        console.log(res);
+        console.log( "category new",res);
         navigate("/admin/category");
       });
   };
@@ -52,11 +41,11 @@ export default function EditCategory() {
         <Sidebar />
         <div className="user">
           <div className="userUpdate">
-            <span className="userUpdateTitle">Edit Category</span>
+            <span className="userUpdateTitle">Create New Category</span>
             <form className="userUpdateForm" onSubmit={onSubmit}>
               <div className="userUpdateLeft">
                 <div className="userUpdateItem">
-                  <label>Category Name</label>
+                  <label>Name Category</label>
                   <input
                     type="text"
                     className="userUpdateInput"
@@ -67,7 +56,7 @@ export default function EditCategory() {
                 </div>
               </div>
 
-              <button className="userUpdateButton">Update</button>
+              <button className="userUpdateButton">Create</button>
             </form>
           </div>
         </div>

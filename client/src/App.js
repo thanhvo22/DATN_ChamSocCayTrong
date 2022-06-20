@@ -26,6 +26,7 @@ import SharerViewPlayList from "./pages/sharers/playlists/SharerViewPlayList";
 import EditPlayList from "./pages/sharers/playlists/EditPlayList";
 import EditVideo from "./pages/sharers/videos/EditVideo";
 import PageWithCategory from "./pages/home/PageWithCategory";
+import NewCategory from "./pages/admin/category/NewCategory";
 function App() {
   return (
     <Router>
@@ -60,6 +61,7 @@ function App() {
         <Route exact path="/admin/playlists/:playlistId" element={<AdminViewPlayList />} />
         <Route exact path="/admin/videos" element={<AdminVideos />} />
         <Route exact path="/admin/category" element={<Category />} />
+        <Route exact path="/admin/category/create" element={<NewCategory />} />
         <Route exact path="/admin/category/:categoryId" element={<EditCategory />} />
       </Routes>
       {/* <div className="others">other pages</div> */}

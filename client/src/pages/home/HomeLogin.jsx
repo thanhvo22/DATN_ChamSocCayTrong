@@ -18,7 +18,7 @@ export default function HomeLogin() {
       {id ? <TopbarUserFinal img={user} /> : <TopbarUser />}
 
       <HeaderUser />
-      <div className="home">
+      <div >
         <Posts />
       </div>
     </div>

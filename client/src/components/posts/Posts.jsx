@@ -27,10 +27,10 @@ export default function Posts() {
         setListSearch(res.data.playlist);
       });
   }, [text]);
-  // console.log("list", listSearch);
+  console.log("text", text);
 
   return (
-    <div>
+    <div >
       <div className="max-w-sm rounded overflow-hidden my-10 mx-auto">
         <form onSubmit={onSubmit} className="w-full max-w-sm">
           <div className="flex items-center border-b border-b-2 border-teal-500 py-2">
@@ -50,7 +50,7 @@ export default function Posts() {
         </form>
       </div>
       <div className="posts">
-        {listSearch
+        {text !==undefined
           ? listSearch.map((lists) => <Post list={lists} />)
           : playlists && playlists.map((lists) => <Post list={lists} />)}
       </div>

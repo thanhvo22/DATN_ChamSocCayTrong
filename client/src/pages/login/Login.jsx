@@ -30,7 +30,7 @@ export default function Login() {
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
-          <h3 className="loginLogo">V.V.T Web</h3>
+          <h3 className="loginLogo">Cây Trồng 81</h3>
           <span className="loginDesc">
             Đăng nhập để xem các khóa học hướng dẫn chăm sóc cây trồng, hoặc
             chia sẻ khóa học chăm sóc cây trồng cho mọi người nào!!
@@ -39,7 +39,7 @@ export default function Login() {
         <div className="loginRight">
           <form className="loginBox" onSubmit={onFormSubmit}>
             <input
-              placeholder="User"
+              placeholder="Nhập tài khoản..."
               type="user"
               required
               minLength="5"
@@ -47,7 +47,7 @@ export default function Login() {
               onChange={(e) => setUser(e.target.value)}
             />
             <input
-              placeholder="Password"
+              placeholder="Nhập mật khẩu ..."
               type="password"
               required
               minLength="4"

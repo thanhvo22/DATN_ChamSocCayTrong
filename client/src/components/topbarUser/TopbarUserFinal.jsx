@@ -30,7 +30,7 @@ export default function TopbarUserFinal(img) {
     <div className="topUser">
       <div className="topUserLeft">
         <Link to="/home" className="link">
-          <span className="logo">V.V.T Web</span>
+          <span className="logo">Cay Trong 81</span>
         </Link>
       </div>
       <div className="topUserCenter">
@@ -111,12 +111,12 @@ export default function TopbarUserFinal(img) {
           <ul className="topUserList">
             <li className="topUserListItem">
               <Link className="link" to="/login">
-                LOGIN
+                Đăng Nhập
               </Link>
             </li>
             <li className="topUserListItem">
               <Link className="link" to="/register">
-                REGISTER
+                Đăng Ký
               </Link>
             </li>
           </ul>

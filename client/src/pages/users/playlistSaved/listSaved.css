@@ -3,8 +3,10 @@
 }
 
 .h2Test{
-  padding-top: 10px;
-  padding-left: 30px;
+  padding-top: 20px;
+  padding-left: 50px;
+  font-size: 26px;
+  text-align: center;
 }
 .playListDelButton {
   margin-left: 40px;

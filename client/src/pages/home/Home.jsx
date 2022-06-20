@@ -7,7 +7,7 @@ export default function Home() {
     <div>
       <TopbarUser />
       <HeaderUser />
-      <div className="home">
+      <div >
         <Posts />
       </div>
     </div>

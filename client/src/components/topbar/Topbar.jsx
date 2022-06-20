@@ -9,8 +9,8 @@ export default function Topbar(admin) {
     <div className="topbar">
       <div className="topbarWrapper">
         <div className="topLeft">
-          <Link to="/" className="link">
-            <span className="logo">V.V.T Web</span>
+          <Link to="/admin" className="link">
+            <span className="logo">Cay Trong 81</span>
           </Link>
         </div>
         
