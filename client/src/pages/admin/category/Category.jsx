@@ -6,13 +6,18 @@ import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 export default function Category() {
   const id = localStorage.getItem("_id");
+  const roles = localStorage.getItem("roles");
+  let navigate = useNavigate();
   const [user, setUser] = useState("");
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
+    if (roles !== "Admin") {
+      return navigate("/");
+    }
     axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
       setUser(res.data.data);
     });

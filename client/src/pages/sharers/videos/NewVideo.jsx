@@ -7,24 +7,25 @@ import SidebarUser from "../../../components/sidebarUser/SidebarUser";
 import { useParams } from "react-router-dom";
 import hd1 from "./img/hd1.jpg";
 import hd2 from "./img/hd2.jpg";
-import hd3 from "./img/hd3.jpg";
 
 export default function NewVideo() {
   const id = localStorage.getItem("_id");
+  const roles = localStorage.getItem("roles");
+  let navigate = useNavigate();
   let playlistId = useParams();
   console.log("playlistId", playlistId);
   const [user, setUser] = useState([]);
   const [nameVideo, setNameVideo] = useState("");
   const [linkVideo, setLinkVideo] = useState("");
   useEffect(() => {
-    if (id !== null) {
+    if (id !== null && roles ==="Sharers") {
       axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
         setUser(res.data.data);
       });
     }
+    else return navigate("/")
   }, []);
 
-  let navigate = useNavigate();
   const onFormSubmit = async (event) => {
     event.preventDefault();
     await axios
@@ -62,6 +63,7 @@ export default function NewVideo() {
                 type="text"
                 id="linkVideo"
                 name="linkVideo"
+                minLength="10"
                 value={linkVideo}
                 onChange={(e) => {
                   setLinkVideo(e.target.value);
@@ -74,8 +76,10 @@ export default function NewVideo() {
               <input
                 type="text"
                 name="nameVideo"
+                minLength="10"
+                required
                 value={nameVideo}
-                placeholder="cat ghep cay trong"
+                placeholder="cắt ghép cây trồng"
                 onChange={(e) => setNameVideo(e.target.value)}
               />
             </div>
@@ -85,14 +89,11 @@ export default function NewVideo() {
             </button>
           </form>
           <p></p>
-          <div>Hướng dẫn nhúng video</div>
+          <h2 className="newLabel">Hướng dẫn nhúng video, trước tiên ta chọn chia sẻ. Tại đây ta chọn sao chép và dán vào đường dẫn video </h2>
           <div className="container">
             <img className="imgtest" src={hd1} alt="loi" />
             <img className="imgtest2" src={hd2} alt="loi" />
           </div>
-          <p>Tại đây ta copy phần đường dẫn video sau src=""</p>
-          <img className="imgtest3" src={hd3} alt="loi" />
-          <div></div>
         </div>
       </div>
     </div>

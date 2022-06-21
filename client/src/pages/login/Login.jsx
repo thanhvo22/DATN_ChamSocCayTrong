@@ -19,6 +19,7 @@ export default function Login() {
       .then((res) => {
         localStorage.setItem("userId", JSON.stringify(res.data.accessToken));
         localStorage.setItem("_id", res.data.userName._id);
+        localStorage.setItem("roles", res.data.userName.typeofUser);
         if (res.data.userName.typeofUser === "Admin") {
           return navigate("/admin");
         }

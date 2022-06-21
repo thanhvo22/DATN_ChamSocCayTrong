@@ -8,8 +8,10 @@ import { useParams } from "react-router-dom";
 
 export default function EditPlayList() {
   const id = localStorage.getItem("_id");
+  const roles = localStorage.getItem("roles");
+  let navigate = useNavigate();
   const playlistId = useParams();
-  console.log("playlistId: ", playlistId);
+  // console.log("playlistId: ", playlistId);
   const [playlist, setPlaylist] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
   const [preview, setPreview] = useState("");
@@ -18,11 +20,12 @@ export default function EditPlayList() {
   const [images, setImages] = useState(null);
   const [user, setUser] = useState([]);
   useEffect(() => {
-    if (id !== null) {
+    if (id !== null && roles ==="Sharers") {
       axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
         setUser(res.data.data);
       });
     }
+    else return navigate("/");
   }, []);
 
   useEffect(() => {
@@ -30,7 +33,7 @@ export default function EditPlayList() {
       setCategory(res.data.data);
     });
   }, []);
-  let navigate = useNavigate();
+  
 
   useEffect(() => {
     axios

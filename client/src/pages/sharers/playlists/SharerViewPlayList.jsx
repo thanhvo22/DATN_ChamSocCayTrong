@@ -6,16 +6,21 @@ import TopbarUserFinal from "../../../components/topbarUser/TopbarUserFinal";
 import axios from "axios";
 import ViewPlayList from "../../../components/viewPlayList/ViewPlayList";
 import ViewPlayListSharer from "../../../components/viewPlayList/ViewPlayListSharer";
+import { useNavigate } from "react-router-dom";
+
 export default function SharerViewPlayList() {
   const id = localStorage.getItem("_id");
+  const roles = localStorage.getItem("roles");
+  let navigate = useNavigate();
   const [user, setUser] = useState([]);
   const [playlist, setPlayList] = useState("");
   useEffect(() => {
-    if(id !== null){
+    if(id !== null && roles ==="Sharers"){
       axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
         setUser(res.data.data);
       });
     }
+    else return navigate("/");
   }, []);
   let { playlistId } = useParams();
   console.log("playlistId: " + playlistId);

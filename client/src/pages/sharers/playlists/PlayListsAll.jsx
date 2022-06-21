@@ -7,18 +7,22 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import id_header from "../../../services/id_header";
 import Moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 export default function PlayListsAll() {
-  const [playlists, setPlayLists] = useState([]);
   const id = localStorage.getItem("_id");
+  const roles = localStorage.getItem("roles");
+  let navigate = useNavigate();
+  const [playlists, setPlayLists] = useState([]);
   const [user, setUser] = useState([]);
   useEffect(() => {
-    if (id !== null) {
+    if (id !== null && roles ==="Sharers") {
       axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
         console.log(`res`, res.data.data);
         setUser(res.data.data);
       });
     }
+    else return navigate("/");
   }, []);
 
   useEffect(() => {

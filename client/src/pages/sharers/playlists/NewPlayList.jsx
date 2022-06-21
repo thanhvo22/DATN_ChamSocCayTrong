@@ -9,6 +9,8 @@ import SidebarUser from "../../../components/sidebarUser/SidebarUser";
 
 export default function NewPlayList() {
   const id = localStorage.getItem("_id");
+  const roles = localStorage.getItem("roles");
+  let navigate = useNavigate();
   const [userId, setUserId] = useState("");
   const [playlistName, setPlaylistName] = useState("");
   const [preview, setPreview] = useState("");
@@ -17,11 +19,12 @@ export default function NewPlayList() {
   const [images, setImages] = useState(null);
   const [user, setUser] = useState([]);
   useEffect(() => {
-    if (id !== null) {
+    if (id !== null && roles ==="Sharers") {
       axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
         setUser(res.data.data);
       });
     }
+    else return navigate("/");
   }, []);
 
   useEffect(() => {
@@ -29,7 +32,7 @@ export default function NewPlayList() {
       setCategory(res.data.data);
     });
   }, []);
-  let navigate = useNavigate();
+  
   const onFormSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

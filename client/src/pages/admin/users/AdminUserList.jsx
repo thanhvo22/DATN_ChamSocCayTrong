@@ -8,12 +8,19 @@ import Sidebar from "../../../components/sidebar/Sidebar";
 import Topbar from "../../../components/topbar/Topbar";
 import axios from "axios";
 import authHeader from "../../../services/auth-header";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminUserList() {
   const id = localStorage.getItem("_id");
+  const roles = localStorage.getItem("roles");
+  const navigate = useNavigate();
+
   const [user, setUser] = useState("");
   const [users, setUsers] = useState([]);
   useEffect(() => {
+    if (roles !== "Admin") {
+      return navigate("/");
+    }
     axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
       //   console.log(`res`, res.data.data.images);
       setUser(res.data.data);

@@ -1,17 +1,25 @@
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Topbar from "../../../components/topbar/Topbar";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./css/userProfile.css";
 import axios from "axios";
 import Profile from "../../../components/profile/Profile";
+import { useNavigate } from "react-router-dom";
+
 export default function User() {
   const id = localStorage.getItem("_id");
-  const [user, setUser] =useState("");
+  const roles = localStorage.getItem("roles");
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState("");
   const [viewUser, setViewUser] = useState("");
   useEffect(() => {
+    if (roles !== "Admin") {
+      return navigate("/");
+    }
     axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
-    //   console.log(`res`, res.data.data.images);
+      //   console.log(`res`, res.data.data.images);
       setUser(res.data.data);
     });
   }, []);
@@ -20,7 +28,7 @@ export default function User() {
     axios.get(`http://localhost:5000/api/v1/users/${userId}`).then((res) => {
       setViewUser(res.data.data);
     });
-  },[]);
+  }, []);
   return (
     <div>
       <Topbar admin={user} />

@@ -90,7 +90,7 @@ export default function Profile(user) {
             <span className="profileShowTitle">Chi tiết tài khoản</span>
             <div className="profileShowInfo">
               <PermIdentity className="profileShowIcon" />
-              <span className="profileShowInfoTitle">{user.user.user}</span>
+              <span className="profileShowInfoTitle">Tên tài khoản:     {user.user.user}</span>
             </div>
             <div className="profileShowInfo">
               <CalendarToday className="profileShowIcon" />
@@ -100,12 +100,12 @@ export default function Profile(user) {
             <div className="profileShowInfo">
               <StarRate className="profileShowIcon" />
               <span className="profileShowInfoTitle">
-                {user.user.typeofUser}
+                Loại tài khoản: {user.user.typeofUser}
               </span>
             </div>
             <div className="profileShowInfo">
               <MailOutline className="profileShowIcon" />
-              <span className="profileShowInfoTitle">{user.user.email}</span>
+              <span className="profileShowInfoTitle">  {user.user.email}</span>
             </div>
             <div className="profileShowInfo">
               <LocationSearching className="profileShowIcon" />
@@ -126,12 +126,13 @@ export default function Profile(user) {
                   value={newUser.name}
                   placeholder={user.user.name}
                   onChange={handleChange}
+                  minLength="5"
                 />
               </div>
               <div className="profileUpdateItem">
                 <label>Tài khoản Email</label>
                 <input
-                  type="text"
+                  type="email"
                   className="profileUpdateInput"
                   placeholder={user.user.email}
                   name="email"

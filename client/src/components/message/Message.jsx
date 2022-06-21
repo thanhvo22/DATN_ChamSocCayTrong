@@ -1,10 +1,10 @@
 import "./message.css";
 import { Avatar, Grid, Paper } from "@material-ui/core";
-import Moment from "moment";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import id_header from "../../services/id_header";
 import Box from "@mui/material/Box";
+import Moment from "moment";
 import Modal from "@mui/material/Modal";
 
 const style = {
@@ -60,7 +60,7 @@ export default function Message(cmt) {
       });
   };
   return (
-    <div style={{ padding: 14 }} className="App">
+    <div style={{ padding: 14 }}>
       <Paper style={{ padding: "40px 20px" }}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
@@ -79,9 +79,31 @@ export default function Message(cmt) {
             <button className="playListAddButton" onClick={handleOpen}>
               Chỉnh sửa
             </button>
-            <button className="playListDelButton" onClick={handleDelete}>
+            <button className="playListDelButton" onClick={handleOpen}>
               Xóa bình luận
             </button>
+            {/* <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+              <div class="bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0">
+                <div class="bg-white px-16 py-14 rounded-md text-center">
+                  <h1 class="text-xl mb-4 font-bold text-slate-500">
+                    Do you Want Delete
+                  </h1>
+                  <button class="bg-red-500 px-4 py-2 rounded-md text-md text-white">
+                    Cancle
+                  </button>
+                  <button class="bg-indigo-500 px-7 py-2 ml-2 rounded-md text-md text-white font-semibold">
+                    Ok
+                  </button>
+                </div>
+              </div>
+            </Box>
+            </Modal> */}
           </>
         )}
       </Paper>
@@ -100,7 +122,7 @@ export default function Message(cmt) {
               value={comment}
             ></textarea>
             <button className="chatSubmitButton" onClick={onSend}>
-            Bình luận
+              Bình luận
             </button>
           </div>
         </Box>

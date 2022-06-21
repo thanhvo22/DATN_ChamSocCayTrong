@@ -5,12 +5,16 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 export default function NewCategory() {
   const id = localStorage.getItem("_id");
+  const roles = localStorage.getItem("roles");
   const [user, setUser] = useState("");
   const [category, setCategory] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (roles !== "Admin") {
+      return navigate("/");
+    }
     axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
       setUser(res.data.data);
     });
@@ -50,6 +54,7 @@ export default function NewCategory() {
                     type="text"
                     className="userUpdateInput"
                     name="name"
+                    minLength="5"
                     value={category.name}
                     onChange={handleChange}
                   />

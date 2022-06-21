@@ -22,7 +22,7 @@ export default function Messenger(playlistId) {
 
   const onSend = async (event) => {
     if (!localStorage.getItem("_id")) {
-      navigate("/login");
+      return navigate("/login");
     }
     event.preventDefault();
     await axios

@@ -23,14 +23,18 @@ export default function AdminNewUser() {
   const [name, setName] = useState("");
   const [typeofUser, setTypeOfUser] = useState("");
 
+  const roles = localStorage.getItem("roles");
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (roles !== "Admin") {
+      return navigate("/");
+    }
     axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
       //   console.log(`res`, res.data.data.images);
       setAdmin(res.data.data);
     });
   });
-
-  let navigate = useNavigate();
   const onFormSubmit = async (event) => {
     event.preventDefault();
     await axios

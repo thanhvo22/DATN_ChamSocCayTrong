@@ -11,18 +11,20 @@ import hd3 from "./img/hd3.jpg";
 
 export default function EditVideo() {
   const id = localStorage.getItem("_id");
+  const roles = localStorage.getItem("roles");
   let videoId = useParams();
-  console.log("videoId", videoId);
+  let navigate = useNavigate();
   const [user, setUser] = useState([]);
   const [video, setVideo] = useState([]);
   const [nameVideo, setNameVideo] = useState("");
   const [linkVideo, setLinkVideo] = useState("");
   useEffect(() => {
-    if (id !== null) {
+    if (id !== null && roles === "Sharers") {
       axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
         setUser(res.data.data);
       });
     }
+    else return navigate("/");
   }, []);
   useEffect(()=>{
     axios.get(`http://localhost:5000/api/v1/videos/${videoId.videoId}`).then((res) => {
@@ -31,7 +33,6 @@ export default function EditVideo() {
     })
   },[])
 
-  let navigate = useNavigate();
   function handleChange(evt) {
     const value = evt.target.value;
     console.log("value", value);

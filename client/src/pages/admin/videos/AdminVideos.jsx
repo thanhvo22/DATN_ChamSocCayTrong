@@ -8,10 +8,18 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 export default function AdminVideos() {
   const id = localStorage.getItem("_id");
+  const roles = localStorage.getItem("roles");
+  const navigate = useNavigate();
+
   const [user, setUser] = useState("");
   useEffect(() => {
+    if (roles !== "Admin") {
+      return navigate("/");
+    }
     axios.get(`http://localhost:5000/api/v1/users/${id}`).then((res) => {
       setUser(res.data.data);
     });
@@ -30,7 +38,6 @@ export default function AdminVideos() {
       .then((res) => {
         window.location.reload();
       });
-    
   };
 
   return (
@@ -42,7 +49,7 @@ export default function AdminVideos() {
         <div>
           {videos.map((v) => (
             <div>
-              <Card sx={{ maxWidth: 500 }} >
+              <Card sx={{ maxWidth: 500 }}>
                 <iframe
                   width="500"
                   height="300"
@@ -66,10 +73,11 @@ export default function AdminVideos() {
                 </CardContent>
                 <CardActions>
                   <Button size="small">Accept Video</Button>
-                  <Button onClick={() => handleDelete(v._id)} size="small">Delete Video</Button>
+                  <Button onClick={() => handleDelete(v._id)} size="small">
+                    Delete Video
+                  </Button>
                 </CardActions>
               </Card>
-            
             </div>
           ))}
         </div>
