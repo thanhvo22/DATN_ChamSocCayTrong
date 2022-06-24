@@ -49,7 +49,7 @@ module.exports.postCreateUser = async (req, res) => {
   let path = req.file;
   console.log("path", path);
   let result;
-  if (path) {
+  if (path!== undefined) {
     result = await cloudinary.uploader.upload(path?.path);
   }
   console.log("result: ", result);

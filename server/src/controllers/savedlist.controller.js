@@ -1,5 +1,5 @@
 const savedListModel = require("../models/savedList.model");
-
+const playlistModel = require("../models/playlists.model");
 const savedListController = {
   getAllSavedLists: async (req, res) => {
     try {
@@ -32,8 +32,14 @@ const savedListController = {
 
   createSavedListByUser: async (req, res) => {
     try {
-      
       const {userId, playlistId} = req.body;
+      const checkList = await savedListModel.findOne({playlistId,userId });
+      if(checkList){
+        return res.json({
+          message: "list da ton tai roi bro",
+          data: checkList
+        })
+      }
       const savedList = await savedListModel.create({
         userId,
         playlistId,

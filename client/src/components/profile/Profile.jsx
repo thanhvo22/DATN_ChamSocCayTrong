@@ -194,6 +194,7 @@ export default function Profile(user) {
                   // style={{ display: "none" }}
                   onChange={handleChange}
                   name="file"
+                  required
                 />
               </div>
               <button className="profileUpdateButton">Cập nhật</button>

@@ -3,12 +3,19 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Topbar from "../../../components/topbar/Topbar";
 import axios from "axios";
 import authHeader from "../../../services/auth-header";
 import { useNavigate } from "react-router-dom";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 export default function AdminUserList() {
   const id = localStorage.getItem("_id");
@@ -17,6 +24,19 @@ export default function AdminUserList() {
 
   const [user, setUser] = useState("");
   const [users, setUsers] = useState([]);
+  //using dialog delete
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   useEffect(() => {
     if (roles !== "Admin") {
       return navigate("/");
@@ -126,10 +146,43 @@ export default function AdminUserList() {
             >
               Blocked
             </button>
+            {/* <Dialog
+              fullScreen={fullScreen}
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="responsive-dialog-title"
+            >
+              <DialogTitle id="responsive-dialog-title">
+                {"Xác Nhận Xóa????"}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Bạn có chắc là muốn xóa người dùng này????
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button autoFocus onClick={handleClose}>
+                  Từ Chối
+                </Button>
+                <Button
+                  onClick={() => {
+                    console.log("userid", params.row);
+                    // handleDelete(userId);
+                  }}
+                  autoFocus
+                >
+                  Đồng Ý
+                </Button>
+              </DialogActions>
+            </Dialog> */}
 
             <DeleteOutline
               className="userListDelete"
-              onClick={() => handleDelete(userId)}
+              onClick={() => {
+                // console.log("userid", userId);
+                handleDelete(userId);
+              }}
+              // onClick={handleClickOpen}
             />
           </>
         );

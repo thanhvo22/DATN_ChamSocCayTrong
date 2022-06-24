@@ -27,11 +27,13 @@ module.exports.postCreateVideo = async (req, res) => {
     const playlistId = req.params.playlistID;
 
     const { userId,nameVideo, linkVideo } = req.body;
+    const newLinkVideo = linkVideo.replace("https://youtu.be/", "https://www.youtube.com/embed/");
+
     const video = await videoModel.create({
       userId,
       playlistId,
       nameVideo,
-      linkVideo,
+      linkVideo: newLinkVideo,
     });
 
     return res.json({
@@ -49,17 +51,12 @@ module.exports.putVideo = async (req, res) => {
   try {
     const id = req.params.id;
     const { nameVideo, linkVideo } = req.body;
+    const newLinkVideo = linkVideo.replace("https://youtu.be/", "https://www.youtube.com/embed/");
     const video = await videoModel.findByIdAndUpdate(id, {
       nameVideo,
-      linkVideo,
+      linkVideo: newLinkVideo,
     });
 
-    await playlistModel.findOneAndUpdate(
-      { id: playlistId, "videos.video_id": id },
-      {
-        video_id: video.id,
-      }
-    );
     return res.json({
       message: "edit video successfully",
       playlist,

@@ -6,7 +6,7 @@ import TopbarUserFinal from "../../../components/topbarUser/TopbarUserFinal";
 import SidebarUser from "../../../components/sidebarUser/SidebarUser";
 import { useParams } from "react-router-dom";
 import hd1 from "./img/hd1.jpg";
-import hd2 from "./img/hd2.jpg";
+import anh2 from "./img/anh2.png";
 
 export default function NewVideo() {
   const id = localStorage.getItem("_id");
@@ -92,7 +92,7 @@ export default function NewVideo() {
           <h2 className="newLabel">Hướng dẫn nhúng video, trước tiên ta chọn chia sẻ. Tại đây ta chọn sao chép và dán vào đường dẫn video </h2>
           <div className="container">
             <img className="imgtest" src={hd1} alt="loi" />
-            <img className="imgtest2" src={hd2} alt="loi" />
+            <img className="imgtest2" src={anh2} alt="loi" />
           </div>
         </div>
       </div>

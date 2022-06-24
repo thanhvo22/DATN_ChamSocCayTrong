@@ -13,6 +13,7 @@ const videoRoute = require("./routes/v1/video.route");
 const commentRoute = require("./routes/v1/comment.route");
 const rateRoute = require("./routes/v1/rating.route");
 const savedListRoute = require("./routes/v1/savedList.route");
+const statisticRoute = require("./routes/v1/statistic.route");
 const verifyToken = require("./middlewares/auth.middleware");
 const adminAuthentication = require("./middlewares/adminAuthentication");
 
@@ -38,5 +39,6 @@ app.use("/api/v1/videos", videoRoute);
 app.use("/api/v1/comments", commentRoute);
 app.use("/api/v1/rates", rateRoute);
 app.use("/api/v1/savedlist", savedListRoute);
+app.use("/api/v1/statistic", statisticRoute);
 
 module.exports = app;

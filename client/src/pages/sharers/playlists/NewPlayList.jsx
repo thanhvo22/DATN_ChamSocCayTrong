@@ -99,7 +99,9 @@ export default function NewPlayList() {
                 type="text"
                 name="playlistName"
                 value={playlistName}
-                placeholder="cat ghep cay trong"
+                placeholder="Cắt ghép cây trồng"
+                required
+                min="8"
                 onChange={(e) => setPlaylistName(e.target.value)}
               />
             </div>
@@ -108,9 +110,11 @@ export default function NewPlayList() {
               <label>Sơ lược về khóa học</label>
               <input
                 type="text"
-                placeholder="chi tiet 1->3 month ago"
+                placeholder="Chăm sóc từ nhỏ tới cây lớn 3 năm..."
                 name="preview"
                 value={preview}
+                required
+                min="8"
                 onChange={(e) => setPreview(e.target.value)}
               />
             </div>

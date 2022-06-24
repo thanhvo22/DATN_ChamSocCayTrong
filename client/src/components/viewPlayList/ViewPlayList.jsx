@@ -91,6 +91,9 @@ export default function ViewPlayList(playlist) {
   };
 
   const onAddSavedList = async (event) => {
+    if(id===null){
+      return navigate("/login");
+    }
     event.preventDefault();
     await axios
       .post(`http://localhost:5000/api/v1/savedlist/create`, {

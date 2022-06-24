@@ -1,5 +1,8 @@
-const playlistsModel = require("../models/playlists.model");
+// const playlistsModel = require("../models/playlists.model");
 const playlistModel = require("../models/playlists.model");
+const savedListModel = require("../models/savedList.model");
+const videoModel = require("../models/video.model");
+
 const cloudinary = require("../utils/cloudinary");
 
 module.exports.getPlayListForSharer = async (req, res) => {
@@ -174,6 +177,9 @@ module.exports.putPlayList = async (req, res) => {
 module.exports.deletePlayList = async (req, res) => {
   const id = req.params.id;
   await playlistModel.findByIdAndRemove(id);
+  await savedListModel.findOneAndRemove({playlistId : id});
+  await videoModel.deleteMany({playlistId:id});
+
   return res.json({
     message: "delete playlist success fully",
   });

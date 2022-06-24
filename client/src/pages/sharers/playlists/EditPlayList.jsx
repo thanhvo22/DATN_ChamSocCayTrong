@@ -92,6 +92,7 @@ export default function EditPlayList() {
                 id="file"
                 onChange={handleChange}
                 name="file"
+                required
               />
             </div>
             <div className="newPlayListItem">
@@ -101,6 +102,7 @@ export default function EditPlayList() {
                 name="playlistName"
                 value={playlist.playlistName}
                 placeholder={playlist.playlistName}
+                min="10"
                 onChange={handleChange}
               />
             </div>
@@ -113,6 +115,7 @@ export default function EditPlayList() {
                 value={playlist.preview}
                 placeholder={playlist.preview}
                 onChange={handleChange}
+                min="10"
               />
             </div>
 
